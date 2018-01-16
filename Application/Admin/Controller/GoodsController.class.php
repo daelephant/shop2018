@@ -50,9 +50,12 @@ class GoodsController extends Controller
 		
 		// 取出所有的会员级别
 		$mlModel = D('member_level');
-		$mlData = $mlModel->select();
-		
-		// 设置页面信息
+        //$mlModel = new \Admin\Model\MemberLevelModel();
+        $mlData = $mlModel->select();
+
+
+
+        // 设置页面信息
 		$this->assign(array(
 			'mlData' => $mlData,
 			'_page_title' => '添加新商品',
