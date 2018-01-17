@@ -133,12 +133,13 @@ UM.getEditor('goods_desc', {
 
 /******** 切换的代码 *******/
 $("#tabbar-div p span").click(function(){
+    //对着五个按钮绑定click事件
 	// 点击的第几个按钮
-	var i = $(this).index();
+	var i = $(this).index();//jquery自带的方法代表第几个按钮。$(this)是当前。当前是第几个？获取第几个，jquery自带index方法，
 	// 先隐藏所有的table
-	$(".tab_table").hide();
+	$(".tab_table").hide();//$(".tab_table")代表选中了这五个table
 	// 显示第i个table
-	$(".tab_table").eq(i).show();
+	$(".tab_table").eq(i).show();//先选中全部table，再选定第i个（eq(i)）
 	// 先取消原按钮的选中状态
 	$(".tab-front").removeClass("tab-front").addClass("tab-back");
 	// 设置当前按钮选中
