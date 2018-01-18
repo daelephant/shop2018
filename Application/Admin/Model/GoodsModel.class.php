@@ -105,7 +105,9 @@ class GoodsModel extends Model
 		}
 		/**************** 处理LOGO *******************/
 		// 判断有没有选择图片
-		if($_FILES['logo']['error'] == 0)
+        //var_dump($_FILES['logo']);exit();
+        //$_FILES['logo']['error'] === 0，应该用全等判断，默认不更改logo此处为null，也会进入循环，导致误删除logo。
+		if($_FILES['logo']['error'] === 0)
 		{
 			$ret = uploadOne('logo', 'Goods', array(
 				array(700, 700),
