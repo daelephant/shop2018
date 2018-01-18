@@ -30,8 +30,18 @@
                 </tr>
                 <tr>
                     <td class="label">LOGO：</td>
-                    <td><input type="file" name="logo" size="60" /></td>
+                    <td><input type="file" name="logo" id="goods_logo" size="60" />
+                        <div id="goods_logo_dv"><img src="" alt="" id="goods_logo_im" width="160" height="160"/></div>
+                    </td>
                 </tr>
+                <!--上传图片预先展示功能  注意填写的都是id的名字-->
+                <script type="text/javascript">
+                    $(function(){
+                        new uploadPreview({UpBtn:"goods_logo",DivShow:"goods_logo_dv",ImgShow:"goods_logo_im"});//id值
+                    });
+                </script>
+                <!--上传图片预先展示功能  注意填写的都是id的名字-->
+
                 <tr>
                     <td class="label">市场售价：</td>
                     <td>
@@ -126,10 +136,14 @@ $("#tabbar-div p span").click(function(){
 	$(this).removeClass("tab-back").addClass("tab-front");
 });
 
-// 添加一张
+// 添加一张（商品相册）
+var p_num = 1;//相册计数器
+// 增加一个
 $("#btn_add_pic").click(function(){
-	var file = '<li><input type="file" name="pic[]" /></li>';
+	var file = '<li> <span  style="pointer; float: left" onclick="$(this).parent().remove()">[-]</span><input type="file" name="pic[]" id="goods_pics_'+p_num+'"/><div id="goods_pics_dv_'+p_num+'"> <img src="" alt="" width="160" height="160" id="goods_pics_im_'+p_num+'"></div></li>';
 	$("#ul_pic_list").append(file);
+    new uploadPreview({UpBtn:"goods_pics_"+p_num,DivShow:"goods_pics_dv_"+p_num,ImgShow:"goods_pics_im_"+p_num});
+    p_num++;//每增加一个相册，计数器的值都要累加
 });
 </script>
 
