@@ -9,6 +9,8 @@ class GoodsModel extends Model
 	protected $updateFields = 'id,goods_name,market_price,shop_price,is_on_sale,goods_desc,brand_id';
 	//定义验证规则
 	protected $_validate = array(
+        //array(验证字段1,验证规则,错误提示,[验证条件,附加规则,验证时间]),
+        //验证条件（可选）0 存在字段就验证（默认）、1 必须验证 、2 值不为空的时候验证
 		array('goods_name', 'require', '商品名称不能为空！', 1),
 		array('market_price', 'currency', '市场价格必须是货币类型！', 1),
 		array('shop_price', 'currency', '本店价格必须是货币类型！', 1),
