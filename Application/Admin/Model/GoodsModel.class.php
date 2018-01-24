@@ -4,13 +4,15 @@ use Think\Model;
 class GoodsModel extends Model 
 {
 	// 添加时调用create方法允许接收的字段
-	protected $insertFields = 'goods_name,market_price,shop_price,is_on_sale,goods_desc,brand_id';
+	protected $insertFields = 'goods_name,market_price,shop_price,is_on_sale,goods_desc,brand_id,cat_id';
 	// 修改时调用create方法允许接收的字段
-	protected $updateFields = 'id,goods_name,market_price,shop_price,is_on_sale,goods_desc,brand_id';
+	protected $updateFields = 'id,goods_name,market_price,shop_price,is_on_sale,goods_desc,brand_id,cat_id';
 	//定义验证规则
 	protected $_validate = array(
         //array(验证字段1,验证规则,错误提示,[验证条件,附加规则,验证时间]),
         //验证条件（可选）0 存在字段就验证（默认）、1 必须验证 、2 值不为空的时候验证
+
+		array('cat_id', 'require', '必须选择主分类！', 1),
 		array('goods_name', 'require', '商品名称不能为空！', 1),
 		array('market_price', 'currency', '市场价格必须是货币类型！', 1),
 		array('shop_price', 'currency', '本店价格必须是货币类型！', 1),
@@ -197,6 +199,21 @@ class GoodsModel extends Model
 		$brandId = I('get.brand_id');
 		if($brandId)
 			$where['a.brand_id'] = array('eq', $brandId);
+		//主分类的搜索
+        $catId = I('get.cat_id'); //先接受传的当前分类id
+        //判断一下有没有这个分类
+        if($catId){
+            //考虑到子分类也应该搜索出来
+            //先取出所有子分类的id
+            $catModel = new \Admin\Model\CategoryModel();
+            $children = $catModel->getChildren($catId);
+            //把$catId和子分类放到同一个数组中
+            $children[] = $catId;
+            //搜索出所有这些分类下的商品
+            $where['a.cat_id'] = array('IN',$children);
+        }
+
+
 		
 		
 		/*************** 翻页 ****************/
@@ -232,9 +249,10 @@ class GoodsModel extends Model
 		 * SELECT a.*,b.brand_name FROM p39_goods a LEFT JOIN p39_brand b ON a.brand_id=b.id
 		 */
 		$data = $this->order("$orderby $orderway")                    // 排序
-		->field('a.*,b.brand_name')
+		->field('a.*,b.brand_name,c.cat_name')
 		->alias('a')
-		->join('LEFT JOIN __BRAND__ b ON a.brand_id=b.id')
+		->join('LEFT JOIN __BRAND__ b ON a.brand_id=b.id 
+		        LEFT JOIN __CATEGORY__ c on a.cat_id=c.id')
 		->where($where)                                               // 搜索
 		->limit($pageObj->firstRow.','.$pageObj->listRows)            // 翻页
 		->select();

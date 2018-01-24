@@ -38,6 +38,19 @@
         <form enctype="multipart/form-data" action="/index.php/Admin/Goods/add.html" method="post">
         	<!-- 基本信息 -->
             <table width="90%" class="tab_table" align="center">
+                <tr>
+                    <td class="label">主分类：</td>
+                    <td>
+                        <select name="cat_id">
+                            <option value="0">选择分类</option>
+                            <?php foreach($catData as $k=>$v): ?>
+                            <option value="<?php echo $v['id']; ?>"><?php echo str_repeat('-',8*$v['level']).$v['cat_name'];?></option>
+                            <?php endforeach; ?>
+                        </select>
+                        <!--必填项标志-->
+                        <span class="require-field">*</span>
+                    </td>
+                </tr>
             	<tr>
                     <td class="label">所在品牌：</td>
                     <td>

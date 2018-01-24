@@ -6,6 +6,7 @@
 <link href="/Public/Admin/Styles/general.css" rel="stylesheet" type="text/css" />
 <link href="/Public/Admin/Styles/main.css" rel="stylesheet" type="text/css" />
 <script type="text/javascript" src="/Public/umeditor1_2_2-utf8-php/third-party/jquery.min.js"></script>
+<script type="text/javascript" src="/Public/uploadPreview/uploadPreview.js"></script>
 </head>
 <body>
 <h1>
@@ -35,10 +36,23 @@
         </p>
     </div>
     <div id="tabbody-div">
-        <form enctype="multipart/form-data" action="/index.php/Admin/Goods/edit/id/5.html" method="post">
+        <form enctype="multipart/form-data" action="/index.php/Admin/Goods/edit/id/6.html" method="post">
         	<input type="hidden" name="id" value="<?php echo $data['id']; ?>" />
         	<!-- 基本信息 -->
             <table width="90%" class="tab_table" align="center">
+                <tr>
+                    <td class="label">主分类：</td>
+                    <td>
+                        <select name="cat_id">
+                            <option value="0">选择分类</option>
+                            <?php foreach($catData as $k=>$v): if($v['id'] == $data['cat_id']) $select = 'selected=selected'; else $select = ''; ?>
+                            <option <?php echo $select; ?> value="<?php echo $v['id']; ?>"><?php echo str_repeat('-',8*$v['level']).$v['cat_name'];?></option>
+                            <?php endforeach; ?>
+                        </select>
+                        <!--必填项标志-->
+                        <span class="require-field">*</span>
+                    </td>
+                </tr>
             	<tr>
                     <td class="label">所在品牌：</td>
                     <td>

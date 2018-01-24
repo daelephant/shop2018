@@ -52,11 +52,15 @@ class GoodsController extends Controller
 		$mlModel = D('member_level');
         //$mlModel = new \Admin\Model\MemberLevelModel();
         $mlData = $mlModel->select();
+        //取出所有的分类做下拉框
+        $catModel = new \Admin\Model\CategoryModel();
+        $catData = $catModel->getTree();
 
 
 
         // 设置页面信息
 		$this->assign(array(
+		    'catData' => $catData,
 			'mlData' => $mlData,
 			'_page_title' => '添加新商品',
 			'_page_btn_name' => '商品列表',
@@ -91,6 +95,10 @@ class GoodsController extends Controller
 		// 取出所有的会员级别
 		$mlModel = D('member_level');
 		$mlData = $mlModel->select();
+
+        //取出所有的分类做下拉框
+        $catModel = new \Admin\Model\CategoryModel();
+        $catData = $catModel->getTree();
 		
 		// 取出这件商品已经设置好的会员价格
 		$mpModel = D('member_price');
@@ -115,6 +123,7 @@ class GoodsController extends Controller
 		
 		// 设置页面信息
 		$this->assign(array(
+		    'catData' =>$catData,
 			'mlData' => $mlData,
 			'mpData' => $_mpData,
 			'gpData' => $gpData,
@@ -146,9 +155,12 @@ class GoodsController extends Controller
 		//	'data' => $data['data'],
 		//	'page' => $data['page'],
 		//));
-		
+        //取出所有的分类做下拉框
+        $catModel = new \Admin\Model\CategoryModel();
+        $catData = $catModel->getTree();
 		// 设置页面信息
 		$this->assign(array(
+		    'catData' => $catData,
 			'_page_title' => '商品列表',
 			'_page_btn_name' => '添加新商品',
 			'_page_btn_link' => U('add'),

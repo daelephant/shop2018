@@ -66,10 +66,12 @@ CREATE TABLE IF NOT EXISTS `p2018_goods` (
   `big_logo` varchar(150) NOT NULL DEFAULT '' COMMENT '大图',
   `mbig_logo` varchar(150) NOT NULL DEFAULT '' COMMENT '更大图',
   `brand_id` mediumint(8) unsigned NOT NULL DEFAULT '0' COMMENT '品牌id',
+  `cat_id` mediumint(8) unsigned NOT NULL DEFAULT '0' COMMENT '主分类id',
   PRIMARY KEY (`id`),
   KEY `shop_price` (`shop_price`),
   KEY `addtime` (`addtime`),
   KEY `brand_id` (`brand_id`),
+  KEY `cat_id` (`cat_id`),
   KEY `is_on_sale` (`is_on_sale`)
 ) ENGINE=InnoDB  DEFAULT CHARSET=utf8 COMMENT='商品' AUTO_INCREMENT=4 ;
 
