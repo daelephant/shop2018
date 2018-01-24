@@ -28,7 +28,7 @@ class CategoryModel extends Model
         //循环所有的分类查找子分类
         foreach ($data as $k => $v){
             if ($v['parent_id'] == $catId){
-                $_ret = $v['id'];
+                $_ret[] = $v['id'];//记得向数组添加元素，要加[],否则返回是字符串。
                 //再找这个$v的子分类
                 $this->_getChildren($data,$v['id']);
             }
@@ -52,12 +52,12 @@ class CategoryModel extends Model
         }
         return $_ret;
     }
-    /*删除方法一：*/
+    /*删除方法一：传统逻辑找到子分类紧接着删除*/
     protected function _before_delete($options)
     {
         //先找出所有子分类的ID
         $children = $this->getChildren($options['where']['id']);
-        //var_dump($children);exit();
+        //var_dump($children);exit();//array(6) { [0]=> string(2) "16" [1]=> string(2) "22" [2]=> string(2) "17" [3]=> string(2) "18" [4]=> string(2) "19" [5]=> string(2) "20" }
         if($children){
             $children = implode(',',$children);//把数组转化成字符串。以，分割
             //删除这些子分类
@@ -74,7 +74,7 @@ class CategoryModel extends Model
     //{
     //        //先找出所有子分类的ID
     //        $children = $this->getChildren($options['where']['id']);
-    //        var_dump($children);exit();
+    //        //var_dump($children);exit();
     //        $children[] = $options['where']['id'];//把要删除的id添加到子类的数组中，方便下一步整体删除
     //        //再填回拼装成TP识别的数据形式：$options['where']['id']
     //        $options['where']['id'] = array(

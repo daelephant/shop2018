@@ -155,6 +155,7 @@ INSERT INTO `p2018_member_price` (`price`, `level_id`, `goods_id`) VALUES
 ('333.00', 2, 2),
 ('444.00', 4, 2);
 
+truncate TABLE p2018_category;
 INSERT INTO `p2018_category` (`id`, `cat_name`, `parent_id`) VALUES
 (1, '家用电器', 0),
 (2, '手机、数码、京东通信', 0),
