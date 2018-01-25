@@ -249,12 +249,15 @@ class GoodsModel extends Model
 		 * SELECT a.*,b.brand_name FROM p39_goods a LEFT JOIN p39_brand b ON a.brand_id=b.id
 		 */
 		$data = $this->order("$orderby $orderway")                    // 排序
-		->field('a.*,b.brand_name,c.cat_name')
+		->field('a.*,b.brand_name,c.cat_name,GROUP_CONCAT(e.cat_name SEPARATOR "<br/>" ) ext_cat_name')
 		->alias('a')
 		->join('LEFT JOIN __BRAND__ b ON a.brand_id=b.id 
-		        LEFT JOIN __CATEGORY__ c on a.cat_id=c.id')
+		        LEFT JOIN __CATEGORY__ c on a.cat_id=c.id
+		        LEFT JOIN __GOODS_CAT__ d on a.id=d.goods_id
+		        LEFT JOIN __CATEGORY__ e on d.cat_id=e.id')
 		->where($where)                                               // 搜索
 		->limit($pageObj->firstRow.','.$pageObj->listRows)            // 翻页
+        ->group('a.id')
 		->select();
 		
 		/************** 返回数据 ******************/
@@ -269,6 +272,25 @@ class GoodsModel extends Model
 	 */
 	protected function _after_insert($data, $option)
 	{
+        /**************** 处理扩展分类 *******************/
+        $ecid = I('post.ext_cat_id');//从表单中接收数据
+        //var_dump($ecid);exit;
+        if($ecid){
+            //$gcModel =D('goods_cat');
+            $gcModel = new \Think\Model();
+            //var_dump($gcModel);exit;
+            //循环：
+            foreach ($ecid as $k=>$v){
+                if (empty($v))
+                    continue;//扩展分类为空，跳过
+                $gcModel->table('__GOODS_CAT__')->add(array(
+                    'cat_id'=>$v,
+                    'goods_id'=>$data['id'],
+                ));
+
+            }
+            //var_dump($res);exit;
+        }
 		/************ 处理相册图片 *****************/
 		if(isset($_FILES['pic']))
 		{

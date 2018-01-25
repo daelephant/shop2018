@@ -22,6 +22,7 @@ class GoodsController extends Controller
 		if(IS_POST)
 		{
 			set_time_limit(0);
+			//var_dump($_POST);exit;
 			//var_dump($pics);
 			//var_dump($_FILES);die;
 			$model = D('goods');
