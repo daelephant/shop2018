@@ -22,6 +22,8 @@
 
 <style>
 #ul_pic_list li{margin:5px;list-style-type:none;}
+    #cat_list{background: #EEE;margin: 0;}
+    #cat_list li{margin: 5px;}
 </style>
 
 <div class="tab-div">
@@ -39,6 +41,7 @@
         	<!-- 基本信息 -->
             <table width="90%" class="tab_table" align="center">
                 <tr>
+
                     <td class="label">主分类：</td>
                     <td>
                         <select name="cat_id">
@@ -49,6 +52,22 @@
                         </select>
                         <!--必填项标志-->
                         <span class="require-field">*</span>
+                    </td>
+                </tr>
+                <tr>
+                    <!--比较简单的js直接onclick就行，克隆第一个下拉框。复杂的需要绑定事件-->
+                    <td class="label">扩展分类：<input onclick="$('#cat_list').append($('#cat_list').find('li').eq(0).clone());" type="button" id="btn_add_cat" value="添加一个" /></td>
+                    <td >
+                        <ul id="cat_list">
+                            <li>
+                                <select name="ext_cat_id[]">
+                                    <option value="0">选择分类</option>
+                                    <?php foreach($catData as $k=>$v): ?>
+                                    <option value="<?php echo $v['id']; ?>"><?php echo str_repeat('-',8*$v['level']).$v['cat_name'];?></option>
+                                    <?php endforeach; ?>
+                                </select>
+                            </li>
+                        </ul>
                     </td>
                 </tr>
             	<tr>

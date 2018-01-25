@@ -18,9 +18,11 @@ class GoodsController extends Controller
 	// 显示和处理表单
 	public function add()
 	{
-   		// 判断用户是否提交了表单
+   		//// 判断用户是否提交了表单
+        //var_dump($_POST);exit;
 		if(IS_POST)
 		{
+
 			set_time_limit(0);
 			//var_dump($pics);
 			//var_dump($_FILES);die;

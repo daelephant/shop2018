@@ -269,6 +269,24 @@ class GoodsModel extends Model
 	 */
 	protected function _after_insert($data, $option)
 	{
+
+		/************ 处理扩展分类 *****************/
+		$eid = I('post.ext_cat_id');
+		if($eid){
+		    //$gcModel1 = D('goods_cat');//\Think\Model
+            $gcModel = new \Think\Model();
+            //var_dump($gcModel2);
+            //var_dump($gcModel1);exit;//object(Think\Model)
+
+		    foreach ($eid as $k=>$v){
+		        if(empty($v))
+		            continue;
+		        $gcModel->add(array(
+		            'cat_id'=>$v,
+                    'goods_id'=>$data['id'],
+                ));
+            }
+        }
 		/************ 处理相册图片 *****************/
 		if(isset($_FILES['pic']))
 		{
