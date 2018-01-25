@@ -48,6 +48,30 @@ class GoodsModel extends Model
 	protected function _before_update(&$data, $option)
 	{
 		$id = $option['where']['id'];  // 要修改的商品的ID
+
+        /**************** 处理扩展分类 *******************/
+        $ecid = I('post.ext_cat_id');//从表单中接收数据
+        $gcModel = new \Think\Model();
+        //先删除源分类数据
+        $gcModel->table('__GOODS_CAT__')->where(array(
+            'goods_id' => array('eq',$id),
+        ))->delete();
+        //var_dump($ecid);exit;
+        if($ecid){
+            //$gcModel =D('goods_cat');
+            //var_dump($gcModel);exit;
+            //循环：
+            foreach ($ecid as $k=>$v){
+                if (empty($v))
+                    continue;//扩展分类为空，跳过
+                $gcModel->table('__GOODS_CAT__')->add(array(
+                    'cat_id'=>$v,
+                    'goods_id'=>$id,
+                ));
+
+            }
+            //var_dump($res);exit;
+        }
 		/************ 处理相册图片 *****************/
 		if(isset($_FILES['pic']))
 		{
@@ -137,6 +161,12 @@ class GoodsModel extends Model
 	protected function _before_delete($option)
 	{
 		$id = $option['where']['id'];   // 要删除的商品的ID
+
+        /************* 删除扩展分类 ******************/
+        $gcModel = D('goods_cat');
+        $gcModel->where(array(
+            'goods_id' => array('eq', $id),
+        ))->delete();
 		/************** 删除相册中的图片 ********************/
 		// 先从相册表中取出相册所在硬盘的路径
 		$gpModel = D('goods_pic');
