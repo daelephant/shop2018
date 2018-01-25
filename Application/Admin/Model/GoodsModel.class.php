@@ -200,17 +200,25 @@ class GoodsModel extends Model
 		if($brandId)
 			$where['a.brand_id'] = array('eq', $brandId);
 		//主分类的搜索
-        $catId = I('get.cat_id'); //先接受传的当前分类id
-        //判断一下有没有这个分类
-        if($catId){
-            //考虑到子分类也应该搜索出来
-            //先取出所有子分类的id
-            $catModel = new \Admin\Model\CategoryModel();
-            $children = $catModel->getChildren($catId);
-            //把$catId和子分类放到同一个数组中
-            $children[] = $catId;
-            //搜索出所有这些分类下的商品
-            $where['a.cat_id'] = array('IN',$children);
+
+        //$catId = I('get.cat_id'); //先接受传的当前分类id
+        ////判断一下有没有这个分类
+        //if($catId){
+         //   //考虑到子分类也应该搜索出来
+         //   //先取出所有子分类的id
+         //   $catModel = new \Admin\Model\CategoryModel();
+         //   $children = $catModel->getChildren($catId);
+         //   //把$catId和子分类放到同一个数组中
+         //   $children[] = $catId;
+         //   //搜索出所有这些分类下的商品
+         //   $where['a.cat_id'] = array('IN',$children);
+        //}
+        $catId = I('get.cat_id');
+        if ($catId){
+            //先查询出这个分类ID下所有的商品ID
+            $gids = $this->getGoodsIdByCatId($catId);
+            //应用到取数据的where上
+            $where['a.id'] = array('in',$gids);
         }
 
 
@@ -266,7 +274,41 @@ class GoodsModel extends Model
 			'page' => $pageString,  // 翻页字符串
 		);
 	}
-	
+
+    /**
+     * 取出一个分类下所有商品的ID【即考虑主分类也考虑了扩展分类】
+     */
+    public function getGoodsIdByCatId($catId){
+        //先取出所有子分类的Id
+        $catModel = new \Admin\Model\CategoryModel();
+        $children = $catModel->getChildren($catId);
+        //和子分类放一起
+        $children[] = $catId;
+        /*************取出主分类或扩展分类在这些分类中的商品*****************************/
+        //取出主分类下的商品ID
+        $gids = $this->field('id')->where(array(
+            'cat_id'=>array('in',$children),//主分类下的商品
+        ))->select();
+        //取出扩展分类下的商品的ID
+        $gcModel = D('goods_cat');
+        $gids1 = $gcModel->field('DISTINCT goods_id id')->where(array(
+            'cat_id'=>array('IN',$children)
+        ))->select();
+        //把主分类的ID和扩展分类下的商品ID合并成一个二维数组【两个都不为空时合并，否则取出不为空的数组】
+        if($gids && $gids1)
+            $gids = array_merge($gids,$gids1);
+        elseif ($gids1)
+            $gids = $gids1;
+        //二维数组转一维数组
+        $id = array();
+        foreach ($gids as $k=>$v){
+            if(!in_array($v['id'],$id))
+                $id[] = $v['id'];
+        }
+        return $id;
+
+    }
+
 	/**
 	 * 商品添加之后会调用这个方法，其中$data['id']就是新添加的商品的ID
 	 */
