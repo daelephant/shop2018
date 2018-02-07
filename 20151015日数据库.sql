@@ -184,3 +184,62 @@ INSERT INTO `p2018_category` (`id`, `cat_name`, `parent_id`) VALUES
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
+
+-- --------------------------------------------------------
+
+--
+-- 表的结构 `p2018_type`
+--
+
+CREATE TABLE IF NOT EXISTS `p2018_type` (
+  `id` mediumint(8) unsigned NOT NULL AUTO_INCREMENT COMMENT 'Id',
+  `type_name` varchar(30) NOT NULL COMMENT '类型名称',
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 COMMENT='类型' AUTO_INCREMENT=5 ;
+
+--
+-- 转存表中的数据 `p2018_type`
+--
+
+INSERT INTO `p2018_type` (`id`, `type_name`) VALUES
+(1, '手机'),
+(2, '服装'),
+(3, '书');
+
+/*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT *8/;
+/*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
+/*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
+ */
+ -- --------------------------------------------------------
+
+--
+-- 表的结构 `p2018_attribute`
+--
+
+CREATE TABLE IF NOT EXISTS `p2018_attribute` (
+  `id` mediumint(8) unsigned NOT NULL AUTO_INCREMENT COMMENT 'Id',
+  `attr_name` varchar(30) NOT NULL COMMENT '属性名称',
+  `attr_type` enum('唯一','可选') NOT NULL COMMENT '属性类型',
+  `attr_option_values` varchar(300) NOT NULL DEFAULT '' COMMENT '属性可选值',
+  `type_id` mediumint(8) unsigned NOT NULL COMMENT '所属类型Id',
+  PRIMARY KEY (`id`),
+  KEY `type_id` (`type_id`)
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 COMMENT='属性表' AUTO_INCREMENT=11 ;
+
+--
+-- 转存表中的数据 `p2018_attribute`
+--
+
+INSERT INTO `p2018_attribute` (`id`, `attr_name`, `attr_type`, `attr_option_values`, `type_id`) VALUES
+(1, '颜色', '可选', '白色,黑色,绿色,紫色,蓝色,金色,银色,粉色,富士白', 1),
+(3, '出版社', '唯一', '人民大学出版社,清华大学出版社,工业大学出版社', 3),
+(4, '出厂日期', '唯一', '', 1),
+(5, '操作系统', '可选', 'ios,android,windows', 1),
+(6, '页数', '唯一', '', 3),
+(7, '作者', '唯一', '', 3),
+(8, '材质', '唯一', '', 2),
+(9, '尺码', '可选', 'M,XL,XXL,XXXL,XXXXL', 2),
+(10, '屏幕尺寸', '唯一', '', 1);
+
+-- --------------------------------------------------------
+
