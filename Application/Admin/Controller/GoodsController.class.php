@@ -24,6 +24,7 @@ class GoodsController extends Controller
 		{
 
 			set_time_limit(0);
+			//var_dump($_POST);exit;
 			//var_dump($pics);
 			//var_dump($_FILES);die;
 			$model = D('goods');
@@ -122,13 +123,20 @@ class GoodsController extends Controller
 		$gpData = $gpModel->field('id,mid_pic')->where(array(
 			'goods_id' => array('eq', $id),
 		))->select();
-		
+
+		//取出扩展分类ID
+        $gcModel = D('goods_cat');
+        $gcData = $gcModel->field('cat_id')->where(array(
+            'goods_id'=>array('eq',$id),
+        ))->select();
+
 		// 设置页面信息
 		$this->assign(array(
 		    'catData' =>$catData,
 			'mlData' => $mlData,
 			'mpData' => $_mpData,
 			'gpData' => $gpData,
+			'gcData' => $gcData,
 			'_page_title' => '修改商品',
 			'_page_btn_name' => '商品列表',
 			'_page_btn_link' => U('lst'),

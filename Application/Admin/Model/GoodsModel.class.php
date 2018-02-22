@@ -48,6 +48,30 @@ class GoodsModel extends Model
 	protected function _before_update(&$data, $option)
 	{
 		$id = $option['where']['id'];  // 要修改的商品的ID
+
+        /**************** 处理扩展分类 *******************/
+        $ecid = I('post.ext_cat_id');//从表单中接收数据
+        $gcModel = new \Think\Model();
+        //先删除源分类数据
+        $gcModel->table('__GOODS_CAT__')->where(array(
+            'goods_id' => array('eq',$id),
+        ))->delete();
+        //var_dump($ecid);exit;
+        if($ecid){
+            //$gcModel =D('goods_cat');
+            //var_dump($gcModel);exit;
+            //循环：
+            foreach ($ecid as $k=>$v){
+                if (empty($v))
+                    continue;//扩展分类为空，跳过
+                $gcModel->table('__GOODS_CAT__')->add(array(
+                    'cat_id'=>$v,
+                    'goods_id'=>$id,
+                ));
+
+            }
+            //var_dump($res);exit;
+        }
 		/************ 处理相册图片 *****************/
 		if(isset($_FILES['pic']))
 		{
@@ -137,6 +161,12 @@ class GoodsModel extends Model
 	protected function _before_delete($option)
 	{
 		$id = $option['where']['id'];   // 要删除的商品的ID
+
+        /************* 删除扩展分类 ******************/
+        $gcModel = D('goods_cat');
+        $gcModel->where(array(
+            'goods_id' => array('eq', $id),
+        ))->delete();
 		/************** 删除相册中的图片 ********************/
 		// 先从相册表中取出相册所在硬盘的路径
 		$gpModel = D('goods_pic');
@@ -200,17 +230,25 @@ class GoodsModel extends Model
 		if($brandId)
 			$where['a.brand_id'] = array('eq', $brandId);
 		//主分类的搜索
-        $catId = I('get.cat_id'); //先接受传的当前分类id
-        //判断一下有没有这个分类
-        if($catId){
-            //考虑到子分类也应该搜索出来
-            //先取出所有子分类的id
-            $catModel = new \Admin\Model\CategoryModel();
-            $children = $catModel->getChildren($catId);
-            //把$catId和子分类放到同一个数组中
-            $children[] = $catId;
-            //搜索出所有这些分类下的商品
-            $where['a.cat_id'] = array('IN',$children);
+
+        //$catId = I('get.cat_id'); //先接受传的当前分类id
+        ////判断一下有没有这个分类
+        //if($catId){
+         //   //考虑到子分类也应该搜索出来
+         //   //先取出所有子分类的id
+         //   $catModel = new \Admin\Model\CategoryModel();
+         //   $children = $catModel->getChildren($catId);
+         //   //把$catId和子分类放到同一个数组中
+         //   $children[] = $catId;
+         //   //搜索出所有这些分类下的商品
+         //   $where['a.cat_id'] = array('IN',$children);
+        //}
+        $catId = I('get.cat_id');
+        if ($catId){
+            //先查询出这个分类ID下所有的商品ID
+            $gids = $this->getGoodsIdByCatId($catId);
+            //应用到取数据的where上
+            $where['a.id'] = array('in',$gids);
         }
 
 
@@ -249,12 +287,15 @@ class GoodsModel extends Model
 		 * SELECT a.*,b.brand_name FROM p39_goods a LEFT JOIN p39_brand b ON a.brand_id=b.id
 		 */
 		$data = $this->order("$orderby $orderway")                    // 排序
-		->field('a.*,b.brand_name,c.cat_name')
+		->field('a.*,b.brand_name,c.cat_name,GROUP_CONCAT(e.cat_name SEPARATOR "<br/>" ) ext_cat_name')
 		->alias('a')
 		->join('LEFT JOIN __BRAND__ b ON a.brand_id=b.id 
-		        LEFT JOIN __CATEGORY__ c on a.cat_id=c.id')
+		        LEFT JOIN __CATEGORY__ c on a.cat_id=c.id
+		        LEFT JOIN __GOODS_CAT__ d on a.id=d.goods_id
+		        LEFT JOIN __CATEGORY__ e on d.cat_id=e.id')
 		->where($where)                                               // 搜索
 		->limit($pageObj->firstRow.','.$pageObj->listRows)            // 翻页
+        ->group('a.id')
 		->select();
 		
 		/************** 返回数据 ******************/
@@ -263,29 +304,64 @@ class GoodsModel extends Model
 			'page' => $pageString,  // 翻页字符串
 		);
 	}
-	
+
+    /**
+     * 取出一个分类下所有商品的ID【即考虑主分类也考虑了扩展分类】
+     */
+    public function getGoodsIdByCatId($catId){
+        //先取出所有子分类的Id
+        $catModel = new \Admin\Model\CategoryModel();
+        $children = $catModel->getChildren($catId);
+        //和子分类放一起
+        $children[] = $catId;
+        /*************取出主分类或扩展分类在这些分类中的商品*****************************/
+        //取出主分类下的商品ID
+        $gids = $this->field('id')->where(array(
+            'cat_id'=>array('in',$children),//主分类下的商品
+        ))->select();
+        //取出扩展分类下的商品的ID
+        $gcModel = D('goods_cat');
+        $gids1 = $gcModel->field('DISTINCT goods_id id')->where(array(
+            'cat_id'=>array('IN',$children)
+        ))->select();
+        //把主分类的ID和扩展分类下的商品ID合并成一个二维数组【两个都不为空时合并，否则取出不为空的数组】
+        if($gids && $gids1)
+            $gids = array_merge($gids,$gids1);
+        elseif ($gids1)
+            $gids = $gids1;
+        //二维数组转一维数组
+        $id = array();
+        foreach ($gids as $k=>$v){
+            if(!in_array($v['id'],$id))
+                $id[] = $v['id'];
+        }
+        return $id;
+
+    }
+
 	/**
 	 * 商品添加之后会调用这个方法，其中$data['id']就是新添加的商品的ID
 	 */
 	protected function _after_insert($data, $option)
 	{
-
-		/************ 处理扩展分类 *****************/
-		$eid = I('post.ext_cat_id');
-		if($eid){
-		    //$gcModel1 = D('goods_cat');//\Think\Model
+        /**************** 处理扩展分类 *******************/
+        $ecid = I('post.ext_cat_id');//从表单中接收数据
+        //var_dump($ecid);exit;
+        if($ecid){
+            //$gcModel =D('goods_cat');
             $gcModel = new \Think\Model();
-            //var_dump($gcModel2);
-            //var_dump($gcModel1);exit;//object(Think\Model)
-
-		    foreach ($eid as $k=>$v){
-		        if(empty($v))
-		            continue;
-		        $gcModel->add(array(
-		            'cat_id'=>$v,
+            //var_dump($gcModel);exit;
+            //循环：
+            foreach ($ecid as $k=>$v){
+                if (empty($v))
+                    continue;//扩展分类为空，跳过
+                $gcModel->table('__GOODS_CAT__')->add(array(
+                    'cat_id'=>$v,
                     'goods_id'=>$data['id'],
                 ));
+
             }
+            //var_dump($res);exit;
         }
 		/************ 处理相册图片 *****************/
 		if(isset($_FILES['pic']))
