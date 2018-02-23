@@ -83,6 +83,59 @@ INSERT INTO `p2018_goods` (`id`, `goods_name`, `market_price`, `shop_price`, `go
 (2, '新的联想商品', '123.00', '321.00', '', '是', '否', '2015-10-15 14:48:03', '', '', '', '', '', 0),
 (3, '测试相册', '111.00', '222.00', '', '是', '否', '2015-10-15 16:05:05', '', '', '', '', '', 0);
 
+
+-- --------------------------------------------------------
+
+--
+-- 表的结构 `p2018_goods_attr`
+--
+
+CREATE TABLE IF NOT EXISTS `p2018_goods_attr` (
+  `id` mediumint(8) unsigned NOT NULL AUTO_INCREMENT COMMENT 'Id',
+  `attr_value` varchar(150) NOT NULL DEFAULT '' COMMENT '属性值',
+  `attr_id` mediumint(8) unsigned NOT NULL COMMENT '属性Id',
+  `goods_id` mediumint(8) unsigned NOT NULL COMMENT '商品Id',
+  PRIMARY KEY (`id`),
+  KEY `goods_id` (`goods_id`),
+  KEY `attr_id` (`attr_id`)
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 COMMENT='商品属性' AUTO_INCREMENT=20 ;
+
+--
+-- 转存表中的数据 `p2018_goods_attr`
+--
+
+INSERT INTO `p2018_goods_attr` (`id`, `attr_value`, `attr_id`, `goods_id`) VALUES
+(1, '白色', 1, 7),
+(2, '黑色', 1, 7),
+(3, '绿色', 1, 7),
+(4, '2015-10-01', 4, 7),
+(5, 'ios', 5, 7),
+(6, 'android', 5, 7),
+(7, '富士白', 1, 8),
+(10, '2015-10-01', 4, 8),
+(11, 'ios', 5, 8),
+(12, 'windows', 5, 8),
+(13, '14寸', 10, 8),
+(15, '蓝色', 1, 8),
+(16, 'android', 5, 8),
+(18, '金色', 1, 8),
+(19, '富士白', 1, 8);
+
+-- --------------------------------------------------------
+-- --------------------------------------------------------
+
+--
+-- 表的结构 `p2018_goods_number`
+--
+
+CREATE TABLE IF NOT EXISTS `p2018_goods_number` (
+  `goods_id` mediumint(8) unsigned NOT NULL COMMENT '商品Id',
+  `goods_number` mediumint(8) unsigned NOT NULL DEFAULT '0' COMMENT '库存量',
+  `goods_attr_id` varchar(150) NOT NULL COMMENT '商品属性表的ID,如果有多个，就用程序拼成字符串存到这个字段中',
+  KEY `goods_id` (`goods_id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT='库存量';
+
+-- --------------------------------------------------------
 -- --------------------------------------------------------
 
 --
@@ -242,4 +295,5 @@ INSERT INTO `p2018_attribute` (`id`, `attr_name`, `attr_type`, `attr_option_valu
 (10, '屏幕尺寸', '唯一', '', 1);
 
 -- --------------------------------------------------------
+ALTER TABLE  `p2018_goods` ADD  `type_id` MEDIUMINT UNSIGNED NOT NULL DEFAULT  '0' COMMENT  '类型Id'
 
