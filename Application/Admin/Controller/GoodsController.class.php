@@ -3,6 +3,16 @@ namespace Admin\Controller;
 use Think\Controller;
 class GoodsController extends Controller 
 {
+    //处理获取属性的AJAX请求
+    public function ajaxGetAttr(){
+        $typeId = I('get.type_id');
+        $attrModel = new \Admin\Model\AttributeModel();
+        $attrData = $attrModel->where(array(
+            'type_id' => array('eq',$typeId)
+        ))->select();
+        echo json_encode($attrData);
+    }
+
 	// 处理AJAX删除图片的请求
 	public function ajaxDelPic()
 	{
