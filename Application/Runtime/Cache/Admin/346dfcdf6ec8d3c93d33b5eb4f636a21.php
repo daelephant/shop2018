@@ -138,7 +138,10 @@
             </table>
             <!-- 商品属性 -->
             <table style="display:none;" width="90%" class="tab_table" align="center">
-            	<tr><td></td></tr>
+            	<tr><td>
+                    商品类型：<?php buildSelect('Type','type_id','id','type_name') ?>
+
+                </td></tr>
             </table>
             <!-- 商品相册 -->
             <table style="display:none;" width="100%" class="tab_table" align="center">
@@ -196,6 +199,13 @@ $("#btn_add_pic").click(function(){
     new uploadPreview({UpBtn:"goods_pics_"+p_num,DivShow:"goods_pics_dv_"+p_num,ImgShow:"goods_pics_im_"+p_num});
     p_num++;//每增加一个相册，计数器的值都要累加
 });
+
+//选择类型获取属性的Ajax
+    $("select[name=type_id]").change(function () {
+        // 获取当前选中的类型id
+        var typeId = $(this).val();
+        alert(typeId);
+    });
 </script>
 
 
