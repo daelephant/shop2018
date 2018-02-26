@@ -3,6 +3,19 @@ namespace Admin\Controller;
 use Think\Controller;
 class GoodsController extends Controller 
 {
+    //处理ajax删除属性
+    public function ajaxDelAttr(){
+        $goodsId = addslashes(I('get.goods_id'));
+        $gaid = addslashes(I('get.gaid'));
+        $gaModel = D('goods_attr');
+        $gaModel->delete($gaid);
+        //删除相关库存量数据
+        $gnModel = D('goods_number');
+        $gnModel->where(array(
+            'goods_id' => array('EXP',"=$goodsId AND FIND_IN_SET($gaid,attr_list)"),
+        ))->delete();
+    }
+
     //处理获取属性的AJAX请求
     public function ajaxGetAttr(){
         $typeId = I('get.type_id');
@@ -90,6 +103,7 @@ class GoodsController extends Controller
 		$model = D('goods');
 		if(IS_POST)
 		{
+		    //var_dump($_POST);exit;
 			if($model->create(I('post.'), 2))
 			{
 				if(FALSE !== $model->save())  // save()的返回值是，如果失败返回false,如果成功返回受影响的条数【如果修改后和修改前相同就会返回0】
@@ -141,18 +155,39 @@ class GoodsController extends Controller
         ))->select();
 
         //取出这件商品已经设置了的属性值
-        $gaModel = D('goods_attr');
-        $gaData = $gaModel->alias('a')
-            ->field('a.*,b.attr_name,b.attr_type')
-            ->join('LEFT JOIN __ATTRIBUTE__ b ON a.attr_id=b.id ')
-            ->where(array(
-                'a.goods_id' => array('eq',$id),
-            ))->select();
+        //$gaModel = D('goods_attr');
+        //$gaData = $gaModel->alias('a')
+        //    ->field('a.*,b.attr_name,b.attr_type')
+        //    ->join('LEFT JOIN __ATTRIBUTE__ b ON a.attr_id=b.id ')
+        //    ->where(array(
+        //        'a.goods_id' => array('eq',$id),
+        //    ))->select();
         //var_dump($gaData);exit;
+
+        //取出当前类型下所有的属性,第一版
+ /*       $attrModel = D('Attribute');
+        $attrData = $attrModel->alias('a')
+            ->field('a.*')
+            ->where(array(
+                'a.type_id' => array('eq',$data['type_id']),
+            ))->select();*/
+
+        //取出当前类型下所有的属性,第二版
+        $attrModel = D('Attribute');
+        $attrData = $attrModel->alias('a')
+            ->field('a.id attr_id,a.attr_name,a.attr_type,a.attr_option_values,b.attr_value,b.id')
+            ->join('LEFT JOIN __GOODS_ATTR__ b ON (a.id=b.attr_id AND b.goods_id='.$id.')')
+            ->where(array(
+                'a.type_id' => array('eq',$data['type_id']),
+            ))->select();
+        //var_dump($attrData);exit;
+
+
 
 		// 设置页面信息
 		$this->assign(array(
-		    'gaData' => $gaData,
+		    'gaData' => $attrData,
+            //'attrData'=>$attrData,
 		    'catData' =>$catData,
 			'mlData' => $mlData,
 			'mpData' => $_mpData,

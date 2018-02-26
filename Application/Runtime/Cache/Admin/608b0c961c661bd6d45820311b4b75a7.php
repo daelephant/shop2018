@@ -152,21 +152,24 @@
                 </td></tr>
                 <tr>
                     <td><ul id="attr_list">
-                     <?php foreach($gaData as $k=>$v): ?>
+                        <!--循环所有原属性值-->
+                     <?php
+ $attrId = array(); foreach($gaData as $k=>$v): if(in_array($v['attr_id'],$attrId)) $opt = '-'; else { $opt = '+'; $attrId[] = $v['attr_id']; } ?>
                         <li>
+                            <input type="hidden" name="goods_attr_id[]" value="<?php echo $v['id']; ?>" />
                             <?php if($v['attr_type'] == '可选'):?>
-                                <a onclick="addNewAttr(this);" href="#">[+]</a>
+                                <a onclick="addNewAttr(this);" href="#">[<?php echo $opt; ?>]</a>
                             <?php endif; ?>
                             <?php echo $v['attr_name']; ?> :
                             <?php if($v['attr_option_values']): $attr = explode(',',$v['attr_option_values']); ?>
-                            <option>
+                            <select name="attr_value[<?php echo $v['attr_id'] ?>][]">
                                 <option value="">请选择</option>
                                 <?php foreach($attr as $k1=>$v1): if($v1 == $v['attr_value']) $select = 'selected="selected"'; else $select = ''; ?>
                                 <option <?php echo $select; ?> value="<?php echo $v1; ?>"><?php echo $v1; ?></option>
                                 <?php endforeach; ?>
                             </select>
                             <?php else: ?>
-                                <input type="text" name="" value="<?php echo $v['attr_value']; ?>"/>
+                                <input type="text" name="attr_value[<?php echo $v['attr_id']; ?>][]" value="<?php echo $v['attr_value']; ?>"/>
                             <?php endif;?>
                         </li>
                      <?php endforeach; ?>
@@ -324,8 +327,15 @@ function addNewAttr(a) {
     if($(a).text() == '[+]')
     {
         var newLi = li.clone();
+        //去掉选中状态
+        newLi.find("option:selected").removeAttr("selected");
+
+        //把克隆出来的隐藏域里的ID清空
+        newLi.find("input[name='goods_attr_id[]']").val("");
+
         // + 变 -
         newLi.find("a").text('[-]');
+        //新的放在li后面
         li.after(newLi);
     }
     else

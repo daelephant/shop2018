@@ -49,6 +49,27 @@ class GoodsModel extends Model
 	{
 		$id = $option['where']['id'];  // 要修改的商品的ID
 
+        /****************修改商品属性********************************/
+        $gaid = I('post.goods_attr_id');
+        $attrValue = I('post.attr_value');
+        $gaModel = D('goods_attr');
+        $_i=0;//循环次数
+        foreach ($attrValue as $k=>$v){
+            foreach ($v as $k1=>$v1){
+                if($gaid[$_i] == '')
+                    $gaModel->add(array(
+                        'goods_id' => $id,
+                        'attr_id' => $k,
+                        'attr_value' => $v1,
+                    ));
+                else
+                    $gaModel->where(array(
+                        'id' => array('eq',$gaid[$_i]),
+                    ))->setField('attr_value',$v1);
+                $_i++;
+            }
+        }
+
         /**************** 处理扩展分类 *******************/
         $ecid = I('post.ext_cat_id');//从表单中接收数据
         $gcModel = new \Think\Model();
