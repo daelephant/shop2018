@@ -151,7 +151,26 @@
 
                 </td></tr>
                 <tr>
-                    <td><ul id="attr_list"></ul></td>
+                    <td><ul id="attr_list">
+                     <?php foreach($gaData as $k=>$v): ?>
+                        <li>
+                            <?php if($v['attr_type'] == '可选'):?>
+                                <a onclick="addNewAttr(this);" href="#">[+]</a>
+                            <?php endif; ?>
+                            <?php echo $v['attr_name']; ?> :
+                            <?php if($v['attr_option_values']): $attr = explode(',',$v['attr_option_values']); ?>
+                            <option>
+                                <option value="">请选择</option>
+                                <?php foreach($attr as $k1=>$v1): if($v1 == $v['attr_value']) $select = 'selected="selected"'; else $select = ''; ?>
+                                <option <?php echo $select; ?> value="<?php echo $v1; ?>"><?php echo $v1; ?></option>
+                                <?php endforeach; ?>
+                            </select>
+                            <?php else: ?>
+                                <input type="text" name="" value="<?php echo $v['attr_value']; ?>"/>
+                            <?php endif;?>
+                        </li>
+                     <?php endforeach; ?>
+                    </ul></td>
                 </tr>
             </table>
             <!-- 商品相册 -->
