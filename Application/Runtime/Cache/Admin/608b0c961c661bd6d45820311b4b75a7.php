@@ -339,7 +339,29 @@ function addNewAttr(a) {
         li.after(newLi);
     }
     else
-        li.remove();
+    {
+        //先获得这个属性值的id
+        var gaid = li.find("input[name='goods_attr_id[]']").val();
+        //如果没有ID就直接删除，如果有ID说明是旧的属性值，需要ajax删除
+        if(gaid == '')
+            li.remove();
+        else
+        {
+            if (confirm('如果删除了这个属性，那么相关的库存量数据也会被一起删除，确定要删除么？')){
+                $.ajax({
+                    url:"<?php echo U('ajaxDelAttr?goods_id='.$data['id'],'',FALSE) ; ?>/gaid/"+gaid,//请求地址
+                    data:"",//携带数据
+                    dataType:"json",//返回数据格式
+                    type:"GET",//请求类型
+                    success:function (dataMsg) {
+                        //再把页面中的记录删掉
+                        li.remove();
+                    }
+                });
+            }
+        }
+
+    }
 }
 </script>
 

@@ -56,6 +56,11 @@ class GoodsModel extends Model
         $_i=0;//循环次数
         foreach ($attrValue as $k=>$v){
             foreach ($v as $k1=>$v1){
+                //这里，replace into 也可以实现同样的功能
+                //replace into : 如果记录存在就修改，记录不存在就添加。以主键字段来判断一条记录是否存在
+                /*replace into的具体代码，如下*/
+                //$gaModel->execute('REPLACE INTO p2018_goods_attr VALUES("'.$gaid[$_i].'","'.$v1.'","'.$k.'","'.$id.'");');
+                //找这个属性值是否有id
                 if($gaid[$_i] == '')
                     $gaModel->add(array(
                         'goods_id' => $id,
