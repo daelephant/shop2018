@@ -3,6 +3,76 @@ namespace Admin\Controller;
 use Think\Controller;
 class GoodsController extends Controller 
 {
+    //以下的方法大多数是按时间和项目发展倒序。即最新的方法在最上面
+
+    /*
+     * 库存量页面
+     *
+     * */
+    public function goods_number(){
+        header('Content-Type:text/html;chartset=utf8');
+        //接收商品id
+        $id = I('get.id');
+
+        //处理表单
+        if(IS_POST){
+            //var_dump($_POST);exit;
+            $gaid = I('post.goods_attr_id');
+            $gn = I('post.goods_number');
+            $gnModel = D('goods_number');
+            //先计算商品属性id和库存量的比例
+            $gaidCount = count($gaid);
+            $gnCount = count($gn);
+            $rate = $gaidCount/$gnCount;
+
+            //循环库存量
+            $_i = 0;//取第几个商品属性id
+            foreach($gn as $k=> $v){
+                $_goodsAttrId = array();//把下面取出来的Id放到这里
+                //后来从商品属性ID数组中取出$rate个，循环一次取一个
+                for($i=0;$i<$rate;$i++){
+                    $_goodsAttrId[] = $gaid[$_i];
+                    $_i++;
+                }
+                //把取出来的商品属性ID转化成为字符串
+                $_goodsAttrId = (string)implode(',',$_goodsAttrId);
+                $gnModel->add(array(
+                    'goods_id'=>$id,
+                    'goods_attr_id' => $_goodsAttrId,
+                    'goods_number' => $v,
+                ));
+            }
+
+        }
+
+        //根据商品ID取出这件商品所有可选属性的值
+        $gaModel = D('goods_attr');
+        $gaData = $gaModel->alias('a')
+            ->field('a.*,b.attr_name')
+            ->join('LEFT JOIN __ATTRIBUTE__ b on a.attr_id=b.id')
+            ->where(array(
+                'a.goods_id' => array('eq',$id),
+                'b.attr_type'=> array('eq','可选'),
+            ))->select();
+        //处理这个二维数组：转化成三维：把属性相同的放到一起
+        $_gaData = array();
+        foreach ($gaData as $k=>$v){
+            $_gaData[$v['attr_name']][] = $v;
+        }
+        //var_dump($_gaData);exit;
+        $this->assign(array(
+            'gaData' => $_gaData,
+        ));
+        // 设置页面信息
+        $this->assign(array(
+            '_page_title' => '库存量',
+            '_page_btn_name' => '返回列表',
+            '_page_btn_link' => U('lst'),
+        ));
+        // 1.显示表单
+        $this->display();
+    }
+
     //处理ajax删除属性
     public function ajaxDelAttr(){
         $goodsId = addslashes(I('get.goods_id'));
