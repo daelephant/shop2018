@@ -17,6 +17,10 @@ class GoodsController extends Controller
 
         //处理表单
         if(IS_POST){
+            //先删除原库存
+            $gnModel->where(array(
+                'goods_id' => array('eq',$id),
+            ))->delete();
             //var_dump($_POST);exit;
             $gaid = I('post.goods_attr_id');
             $gn = I('post.goods_number');
@@ -44,7 +48,8 @@ class GoodsController extends Controller
                     'goods_number' => $v,
                 ));
             }
-
+            $this->success('设置成功！',U('goods_number?id='.I('get.id')));
+            exit;
         }
 
         //根据商品ID取出这件商品所有可选属性的值
