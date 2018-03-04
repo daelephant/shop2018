@@ -13,13 +13,13 @@ class GoodsController extends Controller
         header('Content-Type:text/html;chartset=utf8');
         //接收商品id
         $id = I('get.id');
+        $gnModel = D('goods_number');
 
         //处理表单
         if(IS_POST){
             //var_dump($_POST);exit;
             $gaid = I('post.goods_attr_id');
             $gn = I('post.goods_number');
-            $gnModel = D('goods_number');
             //先计算商品属性id和库存量的比例
             $gaidCount = count($gaid);
             $gnCount = count($gn);
@@ -34,6 +34,8 @@ class GoodsController extends Controller
                     $_goodsAttrId[] = $gaid[$_i];
                     $_i++;
                 }
+                //先升序排列，SORT_NUMERIC指的是以数字的算法来排序
+                sort($_goodsAttrId,SORT_NUMERIC);//以数字的形式排序
                 //把取出来的商品属性ID转化成为字符串
                 $_goodsAttrId = (string)implode(',',$_goodsAttrId);
                 $gnModel->add(array(
@@ -59,9 +61,17 @@ class GoodsController extends Controller
         foreach ($gaData as $k=>$v){
             $_gaData[$v['attr_name']][] = $v;
         }
+
+        //先取出这件商品已经设置过的库存量
+        $gnData = $gnModel->where(array(
+            'goods_id'=>$id,
+        ))->select();
+        //var_dump($gnData);
+
         //var_dump($_gaData);exit;
         $this->assign(array(
             'gaData' => $_gaData,
+            'gnData' => $gnData,
         ));
         // 设置页面信息
         $this->assign(array(

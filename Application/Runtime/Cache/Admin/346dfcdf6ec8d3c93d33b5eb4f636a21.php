@@ -139,7 +139,7 @@
             <!-- 商品属性 -->
             <table style="display:none;" width="90%" class="tab_table" align="center">
             	<tr><td>
-                    商品类型：<?php buildSelect('Type','type_id','id','type_name') ?>
+                    商品类型：<?php buildSelect('Type','type_id','id','type_name'); ?>
 
                 </td></tr>
                 <tr>

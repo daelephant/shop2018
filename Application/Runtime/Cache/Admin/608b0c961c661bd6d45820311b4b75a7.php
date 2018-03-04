@@ -38,7 +38,7 @@
         </p>
     </div>
     <div id="tabbody-div">
-        <form enctype="multipart/form-data" action="/index.php/Admin/Goods/edit/id/14.html" method="post">
+        <form enctype="multipart/form-data" action="/index.php/Admin/Goods/edit/id/10.html" method="post">
         	<input type="hidden" name="id" value="<?php echo $data['id']; ?>" />
         	<!-- 基本信息 -->
             <table width="90%" class="tab_table" align="center">
