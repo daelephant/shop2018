@@ -297,3 +297,193 @@ INSERT INTO `p2018_attribute` (`id`, `attr_name`, `attr_type`, `attr_option_valu
 -- --------------------------------------------------------
 ALTER TABLE  `p2018_goods` ADD  `type_id` MEDIUMINT UNSIGNED NOT NULL DEFAULT  '0' COMMENT  '类型Id'
 
+
+
+--
+-- 表的结构 `p2018_privilege`
+--
+
+CREATE TABLE IF NOT EXISTS `privilege` (
+  `id` mediumint(8) unsigned NOT NULL AUTO_INCREMENT COMMENT 'Id',
+  `pri_name` varchar(30) NOT NULL COMMENT '权限名称',
+  `module_name` varchar(30) NOT NULL DEFAULT '' COMMENT '模块名称',
+  `controller_name` varchar(30) NOT NULL DEFAULT '' COMMENT '控制器名称',
+  `action_name` varchar(30) NOT NULL DEFAULT '' COMMENT '方法名称',
+  `parent_id` mediumint(8) unsigned NOT NULL DEFAULT '0' COMMENT '上级权限Id',
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 COMMENT='权限' AUTO_INCREMENT=39 ;
+
+--
+-- 转存表中的数据 `p2018_privilege`
+--
+
+INSERT INTO `p2018_privilege` (`id`, `pri_name`, `module_name`, `controller_name`, `action_name`, `parent_id`) VALUES
+(1, '商品模块', '', '', '', 0),
+(2, '商品列表', 'Admin', 'Goods', 'lst', 1),
+(3, '添加商品', 'Admin', 'Goods', 'add', 2),
+(4, '修改商品', 'Admin', 'Goods', 'edit', 2),
+(5, '删除商品', 'Admin', 'Goods', 'delete', 2),
+(6, '分类列表', 'Admin', 'Category', 'lst', 1),
+(7, '添加分类', 'Admin', 'Category', 'add', 6),
+(8, '修改分类', 'Admin', 'Category', 'edit', 6),
+(9, '删除分类', 'Admin', 'Category', 'delete', 6),
+(10, 'RBAC', '', '', '', 0),
+(11, '权限列表', 'Admin', 'Privilege', 'lst', 10),
+(12, '添加权限', 'Privilege', 'Admin', 'add', 11),
+(13, '修改权限', 'Admin', 'Privilege', 'edit', 11),
+(14, '删除权限', 'Admin', 'Privilege', 'delete', 11),
+(15, '角色列表', 'Admin', 'Role', 'lst', 10),
+(16, '添加角色', 'Admin', 'Role', 'add', 15),
+(17, '修改角色', 'Admin', 'Role', 'edit', 15),
+(18, '删除角色', 'Admin', 'Role', 'delete', 15),
+(19, '管理员列表', 'Admin', 'Admin', 'lst', 10),
+(20, '添加管理员', 'Admin', 'Admin', 'add', 19),
+(21, '修改管理员', 'Admin', 'Admin', 'edit', 19),
+(22, '删除管理员', 'Admin', 'Admin', 'delete', 19),
+(23, '类型列表', 'Admin', 'Type', 'lst', 1),
+(24, '添加类型', 'Admin', 'Type', 'add', 23),
+(25, '修改类型', 'Admin', 'Type', 'edit', 23),
+(26, '删除类型', 'Admin', 'Type', 'delete', 23),
+(27, '属性列表', 'Admin', 'Attribute', 'lst', 23),
+(28, '添加属性', 'Admin', 'Attribute', 'add', 27),
+(29, '修改属性', 'Admin', 'Attribute', 'edit', 27),
+(30, '删除属性', 'Admin', 'Attribute', 'delete', 27),
+(31, 'ajax删除商品属性', 'Admin', 'Goods', 'ajaxDelGoodsAttr', 4),
+(32, 'ajax删除商品相册图片', 'Admin', 'Goods', 'ajaxDelImage', 4),
+(33, '会员管理', '', '', '', 0),
+(34, '会员级别列表', 'Admin', 'MemberLevel', 'lst', 33),
+(35, '添加会员级别', 'Admin', 'MemberLevel', 'add', 34),
+(36, '修改会员级别', 'Admin', 'MemberLevel', 'edit', 34),
+(37, '删除会员级别', 'Admin', 'MemberLevel', 'delete', 34),
+(38, '品牌列表', 'Admin', 'Brand', 'lst', 1);
+
+-- --------------------------------------------------------
+
+--
+-- 表的结构 `p2018_role`
+--
+
+CREATE TABLE IF NOT EXISTS `p2018_role` (
+  `id` mediumint(8) unsigned NOT NULL AUTO_INCREMENT COMMENT 'Id',
+  `role_name` varchar(30) NOT NULL COMMENT '角色名称',
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 COMMENT='角色' AUTO_INCREMENT=3 ;
+
+--
+-- 转存表中的数据 `p2018_role`
+--
+
+INSERT INTO `p2018_role` (`id`, `role_name`) VALUES
+(1, '商品模块管理员'),
+(2, 'RBAC管理员');
+
+-- --------------------------------------------------------
+
+--
+-- 表的结构 `p2018_role_pri`
+--
+
+CREATE TABLE IF NOT EXISTS `p2018_role_pri` (
+  `pri_id` mediumint(8) unsigned NOT NULL COMMENT '权限id',
+  `role_id` mediumint(8) unsigned NOT NULL COMMENT '角色id',
+  KEY `pri_id` (`pri_id`),
+  KEY `role_id` (`role_id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT='角色权限';
+
+--
+-- 转存表中的数据 `p2018_role_pri`
+--
+
+INSERT INTO `p2018_role_pri` (`pri_id`, `role_id`) VALUES
+(10, 2),
+(11, 2),
+(12, 2),
+(13, 2),
+(14, 2),
+(15, 2),
+(16, 2),
+(17, 2),
+(18, 2),
+(19, 2),
+(20, 2),
+(21, 2),
+(22, 2),
+(1, 1),
+(2, 1),
+(3, 1),
+(4, 1),
+(31, 1),
+(32, 1),
+(5, 1),
+(6, 1),
+(7, 1),
+(8, 1),
+(9, 1),
+(23, 1),
+(24, 1),
+(25, 1),
+(26, 1),
+(27, 1),
+(28, 1),
+(29, 1),
+(30, 1),
+(38, 1),
+(10, 1),
+(11, 1),
+(12, 1),
+(13, 1),
+(14, 1),
+(15, 1),
+(16, 1),
+(17, 1),
+(18, 1),
+(19, 1),
+(20, 1),
+(21, 1),
+(22, 1);
+
+-- --------------------------------------------------------
+-- --------------------------------------------------------
+
+--
+-- 表的结构 `p2018_admin`
+--
+
+CREATE TABLE IF NOT EXISTS `p2018_admin` (
+  `id` mediumint(8) unsigned NOT NULL AUTO_INCREMENT COMMENT 'Id',
+  `username` varchar(30) NOT NULL COMMENT '用户名',
+  `password` char(32) NOT NULL COMMENT '密码',
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 COMMENT='管理员' AUTO_INCREMENT=5 ;
+
+--
+-- 转存表中的数据 `p2018_admin`
+--
+
+INSERT INTO `p2018_admin` (`id`, `username`, `password`) VALUES
+(1, 'root', '21232f297a57a5a743894a0e4a801fc3'),
+(3, 'goods', '59da8bd04473ac6711d74cd91dbe903d'),
+(4, 'rbac', 'eae22f4f89a3e1a049b3992d107229d1');
+
+-- --------------------------------------------------------
+
+--
+-- 表的结构 `p2018_admin_role`
+--
+
+CREATE TABLE IF NOT EXISTS `p2018_admin_role` (
+  `admin_id` mediumint(8) unsigned NOT NULL COMMENT '管理员id',
+  `role_id` mediumint(8) unsigned NOT NULL COMMENT '角色id',
+  KEY `admin_id` (`admin_id`),
+  KEY `role_id` (`role_id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT='管理员角色';
+
+--
+-- 转存表中的数据 `p2018_admin_role`
+--
+
+INSERT INTO `p2018_admin_role` (`admin_id`, `role_id`) VALUES
+(3, 1),
+(4, 2);
+
+-- --------------------------------------------------------
