@@ -303,7 +303,7 @@ ALTER TABLE  `p2018_goods` ADD  `type_id` MEDIUMINT UNSIGNED NOT NULL DEFAULT  '
 -- 表的结构 `p2018_privilege`
 --
 
-CREATE TABLE IF NOT EXISTS `privilege` (
+CREATE TABLE IF NOT EXISTS `p2018_privilege` (
   `id` mediumint(8) unsigned NOT NULL AUTO_INCREMENT COMMENT 'Id',
   `pri_name` varchar(30) NOT NULL COMMENT '权限名称',
   `module_name` varchar(30) NOT NULL DEFAULT '' COMMENT '模块名称',
@@ -311,7 +311,7 @@ CREATE TABLE IF NOT EXISTS `privilege` (
   `action_name` varchar(30) NOT NULL DEFAULT '' COMMENT '方法名称',
   `parent_id` mediumint(8) unsigned NOT NULL DEFAULT '0' COMMENT '上级权限Id',
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB  DEFAULT CHARSET=utf8 COMMENT='权限' AUTO_INCREMENT=39 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 COMMENT='权限';
 
 --
 -- 转存表中的数据 `p2018_privilege`
@@ -367,7 +367,7 @@ CREATE TABLE IF NOT EXISTS `p2018_role` (
   `id` mediumint(8) unsigned NOT NULL AUTO_INCREMENT COMMENT 'Id',
   `role_name` varchar(30) NOT NULL COMMENT '角色名称',
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB  DEFAULT CHARSET=utf8 COMMENT='角色' AUTO_INCREMENT=3 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 COMMENT='角色';
 
 --
 -- 转存表中的数据 `p2018_role`
@@ -454,7 +454,7 @@ CREATE TABLE IF NOT EXISTS `p2018_admin` (
   `username` varchar(30) NOT NULL COMMENT '用户名',
   `password` char(32) NOT NULL COMMENT '密码',
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB  DEFAULT CHARSET=utf8 COMMENT='管理员' AUTO_INCREMENT=5 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 COMMENT='管理员';
 
 --
 -- 转存表中的数据 `p2018_admin`
