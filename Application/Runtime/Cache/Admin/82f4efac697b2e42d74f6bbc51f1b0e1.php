@@ -20,44 +20,25 @@
 
 <!--  内容  -->
 
-
 <div class="main-div">
-    <form name="main_form" method="POST" action="/index.php/Admin/Privilege/edit/id/37.html" enctype="multipart/form-data" >
-    	<input type="hidden" name="id" value="<?php echo $data['id']; ?>" />
+    <form name="main_form" method="POST" action="/index.php/Admin/Admin/add.html" enctype="multipart/form-data">
         <table cellspacing="1" cellpadding="3" width="100%">
-			<tr>
-				<td class="label">上级权限：</td>
-				<td>
-					<select name="parent_id">
-						<option value="0">顶级权限</option>
-						<?php foreach ($parentData as $k => $v): ?> 
-						<?php if($v['id'] == $data['id'] || in_array($v['id'], $children)) continue ; ?> 
-						<option <?php if($v['id'] == $data['parent_id']): ?>selected="selected"<?php endif; ?> value="<?php echo $v['id']; ?>"><?php echo str_repeat('-', 8*$v['level']).$v['pri_name']; ?></option>
-						<?php endforeach; ?>					</select>
-				</td>
-			</tr>
             <tr>
-                <td class="label">权限名称：</td>
+                <td class="label">用户名：</td>
                 <td>
-                    <input  type="text" name="pri_name" value="<?php echo $data['pri_name']; ?>" />
+                    <input  type="text" name="username" value="" />
                 </td>
             </tr>
             <tr>
-                <td class="label">模块名称：</td>
+                <td class="label">密码：</td>
                 <td>
-                    <input  type="text" name="module_name" value="<?php echo $data['module_name']; ?>" />
+                    <input type="password" size="25" name="password" />
                 </td>
             </tr>
             <tr>
-                <td class="label">控制器名称：</td>
+                <td class="label">确认密码：</td>
                 <td>
-                    <input  type="text" name="controller_name" value="<?php echo $data['controller_name']; ?>" />
-                </td>
-            </tr>
-            <tr>
-                <td class="label">方法名称：</td>
-                <td>
-                    <input  type="text" name="action_name" value="<?php echo $data['action_name']; ?>" />
+                    <input type="password" size="25" name="cpassword" />
                 </td>
             </tr>
             <tr>
