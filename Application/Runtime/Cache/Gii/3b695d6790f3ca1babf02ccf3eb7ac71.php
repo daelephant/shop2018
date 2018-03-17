@@ -9,7 +9,7 @@
 </head>
 <body>
 <div class="main-div">
-    <form name="main_form" method="POST" action="/index.php/Gii">
+    <form name="main_form" method="POST" action="/index.php/Gii/Index/index.html">
         <table cellspacing="1" cellpadding="3" width="100%">
             <tr>
                 <td class="label">生成类型：</td>
