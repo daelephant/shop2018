@@ -22,7 +22,7 @@
 
 
 <div class="main-div">
-    <form name="main_form" method="POST" action="/index.php/Admin/Role/edit/id/3.html" enctype="multipart/form-data" >
+    <form name="main_form" method="POST" action="/index.php/Admin/Role/edit/id/2/p/1.html" enctype="multipart/form-data" >
     	<input type="hidden" name="id" value="<?php echo $data['id']; ?>" />
         <table cellspacing="1" cellpadding="3" width="100%">
             <tr>
@@ -34,7 +34,7 @@
             <tr>
                 <td class="label">权限列表：</td>
                 <td>
-                    <?php foreach($priData as $k=>$v): if(strpos(','.$rpData.',',','.$v['id'].',') !== FALSE) $check = 'checked="checked"'; else $check = '1'; ?>
+                    <?php foreach($priData as $k=>$v): if(strpos(','.$rpData.',',','.$v['id'].',') !== FALSE) $check = 'checked="checked"'; else $check = ''; ?>
                     <?php echo str_repeat('-',8*$v['level']); ?>
                     <input <?php echo $check; ?> level_id="<?php echo $v['level']; ?>" type="checkbox" name="pri_id[]" value="<?php echo $v['id'] ?>" />
                     <?php echo $v['pri_name']; ?><br>

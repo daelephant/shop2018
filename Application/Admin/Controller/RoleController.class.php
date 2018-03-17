@@ -38,6 +38,7 @@ class RoleController extends Controller
     	if(IS_POST)
     	{
     		$model = D('Role');
+    		//// 指定更新数据操作状态Model::MODEL_UPDATE（或者2）当没有指定的时候，系统根据数据源是否包含主键数据来自动判断
     		if($model->create(I('post.'), 2))
     		{
     			if($model->save() !== FALSE)
@@ -61,9 +62,10 @@ class RoleController extends Controller
         $rpData = $rpModel->field('GROUP_CONCAT(pri_id) pri_id')->where(array(
             'role_id'=>array('eq',$id),
         ))->find();
+        //dump($rpData);exit;array(1) ["pri_id"] => string(89) "1,2,3,4,31,32,5,6,7,8,9,23,24,25,26,27,28,29,30,38,10,11,12,13,14,15,16,17,18,19,20,21,22"
 		// 设置页面中的信息
 		$this->assign(array(
-		    'rpData' => $rpData,
+		    'rpData' => $rpData['pri_id'],
 		    'priData' => $priData,
 			'_page_title' => '修改角色',
 			'_page_btn_name' => '角色列表',

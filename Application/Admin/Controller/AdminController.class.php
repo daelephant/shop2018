@@ -19,8 +19,12 @@ class AdminController extends Controller
     		$this->error($model->getError());
     	}
 
+    	$roleModel = D('Role');
+    	$roleData = $roleModel->select();
+
 		// 设置页面中的信息
 		$this->assign(array(
+		    'roleData' => $roleData,
 			'_page_title' => '添加管理员',
 			'_page_btn_name' => '管理员列表',
 			'_page_btn_link' => U('lst'),
