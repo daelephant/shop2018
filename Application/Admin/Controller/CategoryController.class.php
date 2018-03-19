@@ -1,7 +1,6 @@
 <?php
 namespace Admin\Controller;
-use Think\Controller;
-class CategoryController extends Controller
+class CategoryController extends BaseController
 {
 	// 列表页
 	// 商品列表页

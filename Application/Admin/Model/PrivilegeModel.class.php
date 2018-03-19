@@ -35,6 +35,71 @@ class PrivilegeModel extends Model
 		}
 		return $ret;
 	}
+
+    /**
+     * @param $id
+     * @return array
+     * 检查当前的管理员是否有权限访问这个界面
+     */
+    public function chkPri(){
+        //获取当前管理员正要访问的模型名称、控制器名称、方法名称
+        //tp中正有带三个常量
+        //MODULE_NAME,CONTROLLER_NAME,ACTION_NAME
+        $adminId = session('id');
+        //如果是超级管理员直接返回TRUE
+        if ($adminId == 1)
+            return TRUE;
+        $arModel = D('admin_role');
+        $has = $arModel->alias('a')
+            ->join('LEFT JOIN __ROLE_PRI__ ON a.role_id=b.role_id
+            LEFT JOIN __PRIVILEGE__ c ON b.pri_id=c.id')
+            ->where(array(
+                'a.admin_id' => array('eq',$adminId),
+                'c.module_name' => array('eq',MODULE_NAME),
+                'c.controller_name' => array('eq',CONTROLLER_NAME),
+                'c.action_name' => array('eq',ACTION_NAME),
+            ))->count();
+        return ($has > 0);
+    }
+
+    /**
+     * @param $id
+     * @return array
+     * 获取当前管理员所拥有的前两级的权限
+     */
+    public function getBtns(){
+        /*************先取出当前管理员所拥有的所有的权限***/
+        $adminId = session('id');
+        if ($adminId == 1){
+            $priModel = D('Privilege');
+            $priData = $priModel->select();
+        }else{
+            //取出当前管理员所在角色 所拥有的权限
+            $arModel = D('admin_role');
+            $priData = $arModel->alias('a')
+                ->field('DISTINCT c.id,c.pri_name,c.module_name,c.controller_name,c.action_name,c.parent_id ')
+                ->join('LEFT JOIN __ROLE_PRI__ b ON a.role_id=b.role_id')
+                ->where(array(
+                    'a.admin_id' => array('eq',$adminId),
+                ))->select();
+        }
+        /*********从所有的权限中挑出前两级的 权限*********/
+        $btns = array();//前两级的权限
+        foreach ($priData as $k => $v){
+            if ($v['parent_id'] == 0){
+                //再找这个顶级权限的子级
+                foreach ($priData as $k1=>$v1){
+                    if ($v1['parent_id'] == $v['id']){
+                        $v['children'][] = $v1;
+                    }
+                }
+                $btns[] = $v;
+            }
+        }
+        return $btns;
+
+    }
+
 	public function getChildren($id)
 	{
 		$data = $this->select();
