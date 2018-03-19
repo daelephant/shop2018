@@ -1,7 +1,6 @@
 <?php
 namespace Admin\Controller;
-use Think\Controller;
-class GoodsController extends Controller 
+class GoodsController extends BaseController
 {
     //以下的方法大多数是按时间和项目发展倒序。即最新的方法在最上面
 
