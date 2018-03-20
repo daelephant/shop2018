@@ -83,4 +83,33 @@ class CategoryModel extends Model
     //        );
     //}
 
+    /**
+     * 前台：获取导航条上的数据
+     *
+     */
+    public function getNavData(){
+        //取出所有的分类
+        $all = $this->select();
+        $ret = array();//一维数组是顶级分类
+        //循环出所有的分类找出顶级分类
+        foreach ($all as $k=>$v){
+            if ($v['parent_id'] == 0){
+                //循环出所有的分类，找出这个顶级分类的子分类
+                foreach ($all as $k1=>$v1){
+                    if ($v1['parent_id'] == $v['id']){
+                        //循环所有的分类找出这个二级分类的子分类
+                        foreach ($all as $k2=>$v2){
+                            if ($v2['parent_id'] == $v1['id']){
+                                $v1['children'][] = $v2;
+                            }
+                        }
+                        $v['children'][] = $v1;
+                    }
+                }
+                $ret[] = $v;
+            }
+        }
+        return $ret;
+    }
+
 }
