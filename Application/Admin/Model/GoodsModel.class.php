@@ -4,9 +4,9 @@ use Think\Model;
 class GoodsModel extends Model 
 {
 	// 添加时调用create方法允许接收的字段
-	protected $insertFields = 'goods_name,market_price,shop_price,is_on_sale,goods_desc,brand_id,cat_id,type_id';
+	protected $insertFields = 'goods_name,market_price,shop_price,is_on_sale,goods_desc,brand_id,cat_id,type_id,promote_price,promote_start_date,promote_end_date,is_new,is_best,is_hot,sort_num';
 	// 修改时调用create方法允许接收的字段
-	protected $updateFields = 'id,goods_name,market_price,shop_price,is_on_sale,goods_desc,brand_id,cat_id,type_id';
+	protected $updateFields = 'id,goods_name,market_price,shop_price,is_on_sale,goods_desc,brand_id,cat_id,type_id,promote_price,promote_start_date,promote_end_date,is_new,is_best,is_hot,sort_num';
 	//定义验证规则
 	protected $_validate = array(
         //array(验证字段1,验证规则,错误提示,[验证条件,附加规则,验证时间]),
@@ -474,6 +474,35 @@ class GoodsModel extends Model
 			}
 		}
 	}
+
+    /**
+     * 取出当前正在促销的商品
+     */
+    public function getPromoteGoods($limit = 5){
+        $today = date('Y-m-d H:i');
+        return $this->field('id,goods_name,mid_logo,promote_price')
+            ->where(array(
+                'is_on_sale' => array('eq','是'),
+                'promote_price' => array('gt',0),
+                'promote_start_date' => array('elt',$today),
+                'promote_end_date' => array('egt',$today),
+            ))->limit($limit)->select();
+    }
+
+    /**
+     * 取出当前正在促销的商品
+     * $recType: is_hot|is_best|is_new
+     */
+    public function getRecGoods($recType,$limit = 5){
+        //$today = date('Y-m-d H:i');
+        return $this->field('id,goods_name,mid_logo,shop_price')
+            ->where(array(
+                'is_on_sale' => array('eq','是'),
+                "$recType" => array('eq','是'),
+            ))->limit($limit)->order('sort_num ASC')->select();
+    }
+
+
 }
 
 

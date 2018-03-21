@@ -7,8 +7,20 @@ class IndexController extends NavController {
         //每个页面都要用到导航条，写父类控制器
         //$catModel = D('Admin/Category');
         //$catData = $catModel->getNavData();
+
+        //取出疯狂抢购的商品
+        $goodsModel = D('Admin/Goods');
+        $goods1 = $goodsModel->getPromoteGoods();
+
+        $goods2 = $goodsModel->getRecGoods('is_new');//新品
+        $goods3 = $goodsModel->getRecGoods('is_hot');//热卖
+        $goods4 = $goodsModel->getRecGoods('is_best');//精品
         //设置页面信息
         $this->assign(array(
+            'goods1' => $goods1,
+            'goods2' => $goods2,
+            'goods3' => $goods3,
+            'goods4' => $goods4,
             '_show_nav' => 1,
             '_page_title' => '首页',
             '_page_keywords' => '首页',

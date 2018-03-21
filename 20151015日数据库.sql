@@ -487,3 +487,12 @@ INSERT INTO `p2018_admin_role` (`admin_id`, `role_id`) VALUES
 (4, 2);
 
 -- --------------------------------------------------------
+
+ALTER TABLE p2018_goods ADD `promote_price` decimal(10,2) NOT NULL DEFAULT '0.00' COMMENT '促销价格';
+ALTER TABLE p2018_goods ADD `promote_start_date` datetime NOT NULL COMMENT '促销开始时间';
+ALTER TABLE p2018_goods ADD `promote_end_date` datetime NOT NULL COMMENT '促销结束时间';
+ALTER TABLE p2018_goods ADD `is_new` enum('是','否') NOT NULL DEFAULT '否' COMMENT '是否新品';
+ALTER TABLE p2018_goods ADD `is_hot` enum('是','否') NOT NULL DEFAULT '否' COMMENT '是否热卖';
+ALTER TABLE p2018_goods ADD `is_best` enum('是','否') NOT NULL DEFAULT '否' COMMENT '是否精品';
+
+___________________________________________________________________
