@@ -495,4 +495,6 @@ ALTER TABLE p2018_goods ADD `is_new` enum('是','否') NOT NULL DEFAULT '否' CO
 ALTER TABLE p2018_goods ADD `is_hot` enum('是','否') NOT NULL DEFAULT '否' COMMENT '是否热卖';
 ALTER TABLE p2018_goods ADD `is_best` enum('是','否') NOT NULL DEFAULT '否' COMMENT '是否精品';
 
+ALTER TABLE p2018_goods ADD `sort_num` tinyint(3) unsigned NOT NULL DEFAULT '100' COMMENT '排序的数字';
+
 ___________________________________________________________________
