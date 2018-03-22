@@ -38,7 +38,7 @@
         </p>
     </div>
     <div id="tabbody-div">
-        <form enctype="multipart/form-data" action="/index.php/Admin/Goods/edit/id/4.html" method="post">
+        <form enctype="multipart/form-data" action="/index.php/Admin/Goods/edit/id/1.html" method="post">
         	<input type="hidden" name="id" value="<?php echo $data['id']; ?>" />
         	<!-- 基本信息 -->
             <table width="90%" class="tab_table" align="center">
@@ -150,6 +150,13 @@
                     <td>
                         <input type="radio" name="is_hot" value="是" <?php if($data['is_hot'] == '是') echo 'checked="checked"'; ?> /> 是
                         <input type="radio" name="is_hot" value="否" <?php if($data['is_hot'] == '否') echo 'checked="checked"'; ?> /> 否
+                    </td>
+                </tr>
+                <tr>
+                    <td class="label">推荐到楼层：</td>
+                    <td>
+                        <input type="radio" name="is_floor" value="是" <?php if($data['is_floor'] == '是') echo 'checked="checked"'; ?> /> 是
+                        <input type="radio" name="is_floor" value="否" <?php if($data['is_floor'] == '否') echo 'checked="checked"'; ?> /> 否
                     </td>
                 </tr>
                 <tr>

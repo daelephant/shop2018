@@ -22,7 +22,7 @@
 
 
 <div class="main-div">
-    <form name="main_form" method="POST" action="/index.php/Admin/Category/edit/id/1.html" >
+    <form name="main_form" method="POST" action="/index.php/Admin/Category/edit/id/16.html" >
     	<input type="hidden" name="id" value="<?php echo $data['id']; ?>" />
 		<input type="hidden" name="old_logo" value="<?php echo $data['logo']; ?>" />
         <table cellspacing="1" cellpadding="3" width="100%">
@@ -43,7 +43,13 @@
                     <input size="60"  type="text" name="cat_name" value="<?php echo $data['cat_name']; ?>" />
                 </td>
             </tr>
-
+            <tr>
+                <td class="label">推荐到楼层：</td>
+                <td>
+                    <input type="radio" name="is_floor" value="是" <?php if($data['is_floor'] == '是') echo 'checked="checked"'; ?> /> 是
+                    <input type="radio" name="is_floor" value="否" <?php if($data['is_floor'] == '否') echo 'checked="checked"'; ?> /> 否
+                </td>
+            </tr>
             <tr>
                 <td colspan="99" align="center">
                     <input type="submit" class="button" value=" 确定 " />
