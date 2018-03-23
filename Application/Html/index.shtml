@@ -443,9 +443,23 @@
                 <ul>
                                         <li>
                         <dl>
+                            <dt><a href="/index.php/Home/Index/goods/id/12.html"><img   src='http://www.2018.com/Public/Uploads/Goods/2018-01-25/thumb_2_5a694afb8d9dc.png' /></a></dt>
+                            <dd><a href="/index.php/Home/Index/goods/id/12.html">666</a></dd>
+                            <dd><span>售价：</span><strong>5.00元</strong></dd>
+                        </dl>
+                    </li>
+                                        <li>
+                        <dl>
                             <dt><a href="/index.php/Home/Index/goods/id/7.html"><img   src='http://www.2018.com/Public/Uploads/Goods/2018-01-25/thumb_2_5a69441fcee90.png' /></a></dt>
                             <dd><a href="/index.php/Home/Index/goods/id/7.html">elephant</a></dd>
                             <dd><span>售价：</span><strong>9999.00元</strong></dd>
+                        </dl>
+                    </li>
+                                        <li>
+                        <dl>
+                            <dt><a href="/index.php/Home/Index/goods/id/8.html"><img   src='http://www.2018.com/Public/Uploads/' /></a></dt>
+                            <dd><a href="/index.php/Home/Index/goods/id/8.html">111</a></dd>
+                            <dd><span>售价：</span><strong>0.00元</strong></dd>
                         </dl>
                     </li>
                                         <li>
@@ -511,6 +525,13 @@
             <!-- 新品上架 start-->
             <div class="new none">
                 <ul>
+                                        <li>
+                        <dl>
+                            <dt><a href="/index.php/Home/Index/goods/id/12.html"><img   src='http://www.2018.com/Public/Uploads/Goods/2018-01-25/thumb_2_5a694afb8d9dc.png' /></a></dt>
+                            <dd><a href="/index.php/Home/Index/goods/id/12.html">666</a></dd>
+                            <dd><span>售价：</span><strong>5.00元</strong></dd>
+                        </dl>
+                    </li>
                                         <li>
                         <dl>
                             <dt><a href="/index.php/Home/Index/goods/id/7.html"><img   src='http://www.2018.com/Public/Uploads/Goods/2018-01-25/thumb_2_5a69441fcee90.png' /></a></dt>

@@ -122,6 +122,21 @@ class CategoryModel extends Model
     }
 
     /**
+     * 取出一个分类所有上级分类
+     */
+    public function parentPath($catId){
+        static $ret = array();//递归函数中。请记住static的作用：仅在第一次调用函数的时候对变量进行初始化，并且保留变量值。其后每一次执行完都会保留 $ret 的值,不再进行初始化，相当于直接忽略了 static $ret = array(); 这一句。
+        $info = $this->field('id,cat_name,parent_id')->find($catId);
+        $ret[] = $info;
+        //如果还有上级再取上级信息
+        if($info['parent_id'] > 0)
+            $this->parentPath($info['parent_id']);
+        return $ret;
+        //dump($ret);exit();
+
+    }
+
+    /**
      * 获取前台首页楼层中的数据
      */
     public function floorData(){

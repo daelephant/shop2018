@@ -1,11 +1,11 @@
-<?php if (!defined('THINK_PATH')) exit();?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en">
 <head>
     <meta http-equiv="Content-Type" content="text/html;charset=UTF-8">
-    <title><?php echo $_page_title; ?></title>
+    <title>商品详情页</title>
     <!--百度搜录SEO-->
-    <meta name="keywords" content="<?php echo $_page_keywords; ?>" />
-    <meta name="description" content="<?php echo $_page_description; ?>" />
+    <meta name="keywords" content="特价商品详情页..." />
+    <meta name="description" content="特卖商品详情页..." />
 
     <!--引入公共的css-->
     <link rel="stylesheet" href="/Public/Home/style/base.css" type="text/css">
@@ -154,32 +154,128 @@
     <!-- 导航条部分 start -->
     <div class="nav w1210 bc mt10">
         <!--  商品分类部分 start-->
-        <div class="category fl <?php if($_show_nav == 0) echo 'cat1'; ?>">
-            <div class="cat_hd <?php if($_show_nav == 0) echo 'off'; ?>">  <!-- 注意，首页在此div上只需要添加cat_hd类，非首页，默认收缩分类时添加上off类，并将cat_bd设置为不显示(加上类none即可)，鼠标滑过时展开菜单则将off类换成on类 -->
+        <div class="category fl cat1">
+            <div class="cat_hd off">  <!-- 注意，首页在此div上只需要添加cat_hd类，非首页，默认收缩分类时添加上off类，并将cat_bd设置为不显示(加上类none即可)，鼠标滑过时展开菜单则将off类换成on类 -->
                 <h2>全部商品分类</h2>
                 <em></em>
             </div>
 
-            <div class="cat_bd <?php if($_show_nav == 0) echo 'none'; ?>">
-                <?php foreach($catData as $k=>$v): ?>
-                    <div class="cat <?php if($k==0) echo 'item1'; ?>">
-                    <h3><a href=""><?php echo $v['cat_name']; ?></a> <b></b></h3>
+            <div class="cat_bd none">
+                                    <div class="cat item1">
+                    <h3><a href="">家用电器</a> <b></b></h3>
                     <div class="cat_detail none">
-                        <?php foreach($v['children'] as $k1=>$v1): ?>
-                        <dl <?php if($k1==0) echo 'class="dl_1st"';?>>
-                            <dt><a href=""><?php echo $v1['cat_name']; ?></a></dt>
+                                                <dl class="dl_1st">
+                            <dt><a href="">大家电</a></dt>
                             <dd>
-                                <?php foreach($v1['children'] as $k2=>$v2): ?>
-                                <a href=""><?php echo $v2['cat_name']; ?></a>
-                                <?php endforeach; ?>
-                            </dd>
+                                                                <a href="">冰箱0</a>
+                                                            </dd>
                         </dl>
-                        <?php endforeach; ?>
-
+                                                <dl >
+                            <dt><a href="">生活电器</a></dt>
+                            <dd>
+                                                            </dd>
+                        </dl>
+                                                <dl >
+                            <dt><a href="">厨房电器</a></dt>
+                            <dd>
+                                                            </dd>
+                        </dl>
+                                                <dl >
+                            <dt><a href="">个护健康</a></dt>
+                            <dd>
+                                                            </dd>
+                        </dl>
+                                                <dl >
+                            <dt><a href="">五金家装</a></dt>
+                            <dd>
+                                                            </dd>
+                        </dl>
+                        
                     </div>
                 </div>
-                <?php endforeach; ?>
-            </div>
+                                    <div class="cat ">
+                    <h3><a href="">电脑、办公</a> <b></b></h3>
+                    <div class="cat_detail none">
+                        
+                    </div>
+                </div>
+                                    <div class="cat ">
+                    <h3><a href="">家居、家具、家装、厨具</a> <b></b></h3>
+                    <div class="cat_detail none">
+                                                <dl class="dl_1st">
+                            <dt><a href="">tataMI</a></dt>
+                            <dd>
+                                                            </dd>
+                        </dl>
+                                                <dl >
+                            <dt><a href="">飘窗</a></dt>
+                            <dd>
+                                                            </dd>
+                        </dl>
+                        
+                    </div>
+                </div>
+                                    <div class="cat ">
+                    <h3><a href="">男装、女装、内衣、珠宝</a> <b></b></h3>
+                    <div class="cat_detail none">
+                        
+                    </div>
+                </div>
+                                    <div class="cat ">
+                    <h3><a href="">个护化妆</a> <b></b></h3>
+                    <div class="cat_detail none">
+                        
+                    </div>
+                </div>
+                                    <div class="cat ">
+                    <h3><a href="">运动户外</a> <b></b></h3>
+                    <div class="cat_detail none">
+                        
+                    </div>
+                </div>
+                                    <div class="cat ">
+                    <h3><a href="">汽车、汽车用品</a> <b></b></h3>
+                    <div class="cat_detail none">
+                        
+                    </div>
+                </div>
+                                    <div class="cat ">
+                    <h3><a href="">母婴、玩具乐器</a> <b></b></h3>
+                    <div class="cat_detail none">
+                        
+                    </div>
+                </div>
+                                    <div class="cat ">
+                    <h3><a href="">食品、酒类、生鲜、特产</a> <b></b></h3>
+                    <div class="cat_detail none">
+                        
+                    </div>
+                </div>
+                                    <div class="cat ">
+                    <h3><a href="">营养保健</a> <b></b></h3>
+                    <div class="cat_detail none">
+                        
+                    </div>
+                </div>
+                                    <div class="cat ">
+                    <h3><a href="">图书、音像、电子书</a> <b></b></h3>
+                    <div class="cat_detail none">
+                        
+                    </div>
+                </div>
+                                    <div class="cat ">
+                    <h3><a href="">彩票、旅行、充值、票务</a> <b></b></h3>
+                    <div class="cat_detail none">
+                        
+                    </div>
+                </div>
+                                    <div class="cat ">
+                    <h3><a href="">理财、众筹、白条、保险</a> <b></b></h3>
+                    <div class="cat_detail none">
+                        
+                    </div>
+                </div>
+                            </div>
 
         </div>
         <!--  商品分类部分 end-->
@@ -208,11 +304,8 @@
     <div class="breadcrumb">
         <h2>当前位置：
             <a href="">首页</a> >
-            <?php
- $count = count($catPath); for($i=$count-1;$i>=0;$i--): ?>
-            <a href=""><?php echo $catPath[$i]['cat_name']; ?></a> >
-            <?php endfor; ?>
-            <?php echo $info['goods_name']; ?></h2>
+                        <a href="">家用电器</a> >
+                        elephant</h2>
     </div>
     <!-- 面包屑导航 end -->
 
@@ -329,7 +422,7 @@
             <div class="preview fl">
                 <div class="midpic">
                     <a href="/Public/Home/images/preview_l1.jpg" class="jqzoom" rel="gal1">   <!-- 第一幅图片的大图 class 和 rel属性不能更改 -->
-                        <?php showImage($info['big_logo']); ?>              <!-- 第一幅图片的中图 -->
+                        <img   src='http://www.2018.com/Public/Uploads/Goods/2018-01-25/thumb_1_5a69441fcee90.png' />              <!-- 第一幅图片的中图 -->
                     </a>
                 </div>
 
@@ -794,11 +887,10 @@
 </div>
 <!-- 底部导航 end -->
 <script>
-    <?php $config = C('IMAGE_CONFIG'); ?>
-    var viewPath = '<?php echo $config['viewPath'];?>';
+        var viewPath = 'http://www.2018.com/Public/Uploads/';
     //记录浏览历史
     $.ajax({
-        url : "<?php echo U('Index/displayHistory?id='.$info['id']);?>",
+        url : "/index.php/Home/Index/displayHistory/id/7.html",
         //data : "",
         dataType : "json",
         type : "GET",
@@ -808,7 +900,7 @@
             //先拼HTML字符串
             var html = "";
             $(dataMsg).each(function (k,v) {
-                html += '<dl><dt><a href="<?php echo U('goods','',FALSE); ?>/id/'+v.id+'"><img src="'+viewPath+v.mid_logo+'" /></a></dt><dd><a href="<?php echo U('goods','',FALSE); ?>/id/'+v.id+'">'+v.goods_name+'</a></dd></dl>';
+                html += '<dl><dt><a href="/index.php/Home/Index/goods/id/'+v.id+'"><img src="'+viewPath+v.mid_logo+'" /></a></dt><dd><a href="/index.php/Home/Index/goods/id/'+v.id+'">'+v.goods_name+'</a></dd></dl>';
             });
             //放到页面中
             $("#display_history").html(html);

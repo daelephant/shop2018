@@ -25,7 +25,18 @@
 <div class="main w1210 mt10 bc">
     <!-- 面包屑导航 start -->
     <div class="breadcrumb">
-        <h2>当前位置：<a href="">首页</a> > <a href="">电脑、办公</a> > <a href="">笔记本</a> > ThinkPad X230(23063T4）12.5英寸笔记本</h2>
+        <h2>当前位置：
+            <a href="">首页</a> >
+            <?php
+            /**
+            *数组倒序：方法二：先反转数组再foreach，反转数组函数：array_reverse($catPath);
+            */
+            //方法一：倒着循环输出
+            $count = count($catPath);
+            for($i=$count-1;$i>=0;$i--): ?>
+            <a href=""><?php echo $catPath[$i]['cat_name']; ?></a> >
+            <?php endfor; ?>
+            <?php echo $info['goods_name']; ?></h2>
     </div>
     <!-- 面包屑导航 end -->
 
@@ -124,18 +135,8 @@
 
         <!-- 最近浏览 start -->
         <div class="viewd leftbar mt10">
-            <h2><a href="">清空</a><strong>最近浏览过的商品</strong></h2>
-            <div class="leftbar_wrap">
-                <dl>
-                    <dt><a href=""><img src="__PUBLIC__/Home/images/hpG4.jpg" alt="" /></a></dt>
-                    <dd><a href="">惠普G4-1332TX 14英寸笔记...</a></dd>
-                </dl>
-
-                <dl class="last">
-                    <dt><a href=""><img src="__PUBLIC__/Home/images/crazy4.jpg" alt="" /></a></dt>
-                    <dd><a href="">直降200元！TCL正1.5匹空调</a></dd>
-                </dl>
-            </div>
+            <h2><a href="">清空</a><strong>最近浏览过的商品:</strong></h2>
+            <div class="leftbar_wrap" id="display_history"></div>
         </div>
         <!-- 最近浏览 end -->
 
@@ -152,7 +153,7 @@
             <div class="preview fl">
                 <div class="midpic">
                     <a href="__PUBLIC__/Home/images/preview_l1.jpg" class="jqzoom" rel="gal1">   <!-- 第一幅图片的大图 class 和 rel属性不能更改 -->
-                        <img src="__PUBLIC__/Home/images/preview_m1.jpg" alt="" />               <!-- 第一幅图片的中图 -->
+                        <?php showImage($info['big_logo']); ?>              <!-- 第一幅图片的中图 -->
                     </a>
                 </div>
 
@@ -553,3 +554,25 @@
 
 <!--引入帮助文件-->
 <include file="Common/help" />
+<script>
+    <?php $config = C('IMAGE_CONFIG'); ?>
+    var viewPath = '<?php echo $config['viewPath'];?>';
+    //记录浏览历史
+    $.ajax({
+        url : "<?php echo U('Index/displayHistory?id='.$info['id']);?>",
+        //data : "",
+        dataType : "json",
+        type : "GET",
+        success : function(dataMsg) {
+            console.log(dataMsg);
+            //循环服务器返回的浏览历史数据放到页面中
+            //先拼HTML字符串
+            var html = "";
+            $(dataMsg).each(function (k,v) {
+                html += '<dl><dt><a href="<?php echo U('goods','',FALSE); ?>/id/'+v.id+'"><img src="'+viewPath+v.mid_logo+'" /></a></dt><dd><a href="<?php echo U('goods','',FALSE); ?>/id/'+v.id+'">'+v.goods_name+'</a></dd></dl>';
+            });
+            //放到页面中
+            $("#display_history").html(html);
+        }
+    });
+</script>
