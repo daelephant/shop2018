@@ -505,7 +505,7 @@
     <div class="sidebar fl ml10">
         <!-- 品牌旗舰店 start -->
         <div class="brand">
-            <h2><a href="">更多品牌&nbsp;></a><strong>品牌旗舰店</strong></h2>
+            <h2><a href="">更多品牌&nbsp;></a><strong>品牌旗舰店:</strong></h2>
             <div class="sidebar_wrap">
                 <ul>
                     <?php foreach($v['brand'] as $k=>$v): ?>

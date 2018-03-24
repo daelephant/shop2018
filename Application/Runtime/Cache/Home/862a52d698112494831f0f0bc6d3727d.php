@@ -206,7 +206,13 @@
 <div class="main w1210 mt10 bc">
     <!-- 面包屑导航 start -->
     <div class="breadcrumb">
-        <h2>当前位置：<a href="">首页</a> > <a href="">电脑、办公</a> > <a href="">笔记本</a> > ThinkPad X230(23063T4）12.5英寸笔记本</h2>
+        <h2>当前位置：
+            <a href="">首页</a> >
+            <?php
+ $count = count($catPath); for($i=$count-1;$i>=0;$i--): ?>
+            <a href=""><?php echo $catPath[$i]['cat_name']; ?></a> >
+            <?php endfor; ?>
+            <?php echo $info['goods_name']; ?></h2>
     </div>
     <!-- 面包屑导航 end -->
 
@@ -305,18 +311,8 @@
 
         <!-- 最近浏览 start -->
         <div class="viewd leftbar mt10">
-            <h2><a href="">清空</a><strong>最近浏览过的商品</strong></h2>
-            <div class="leftbar_wrap">
-                <dl>
-                    <dt><a href=""><img src="/Public/Home/images/hpG4.jpg" alt="" /></a></dt>
-                    <dd><a href="">惠普G4-1332TX 14英寸笔记...</a></dd>
-                </dl>
-
-                <dl class="last">
-                    <dt><a href=""><img src="/Public/Home/images/crazy4.jpg" alt="" /></a></dt>
-                    <dd><a href="">直降200元！TCL正1.5匹空调</a></dd>
-                </dl>
-            </div>
+            <h2><a href="">清空</a><strong>最近浏览过的商品:</strong></h2>
+            <div class="leftbar_wrap" id="display_history"></div>
         </div>
         <!-- 最近浏览 end -->
 
@@ -327,13 +323,13 @@
     <div class="goods_content fl mt10 ml10">
         <!-- 商品概要信息 start -->
         <div class="summary">
-            <h3><strong>ThinkPad X230(23063T4）12.5英寸笔记本（i5-3230M 8GB 500G HD4000 指纹蓝牙 WIN8PRC 一年质保）</strong></h3>
+            <h3><strong><?php echo $info['goods_name']; ?></strong></h3>
 
             <!-- 图片预览区域 start -->
             <div class="preview fl">
                 <div class="midpic">
-                    <a href="/Public/Home/images/preview_l1.jpg" class="jqzoom" rel="gal1">   <!-- 第一幅图片的大图 class 和 rel属性不能更改 -->
-                        <img src="/Public/Home/images/preview_m1.jpg" alt="" />               <!-- 第一幅图片的中图 -->
+                    <a href="<?php echo $viewPath.$info['mbig_logo']; ?>" class="jqzoom" rel="gal1">   <!-- 第一幅图片的大图 class 和 rel属性不能更改 -->
+                        <?php showImage($info['big_logo']); ?>              <!-- 第一幅图片的中图 -->
                     </a>
                 </div>
 
@@ -344,47 +340,16 @@
                     <a href="javascript:;" id="forward" class="on"></a>
                     <div class="smallpic_wrap">
                         <ul>
+                            <!--第一个是logo小图-->
                             <li class="cur">
-                                <a class="zoomThumbActive" href="javascript:void(0);" rel="{gallery: 'gal1', smallimage: '/Public/Home/images/preview_m1.jpg',largeimage: '/Public/Home/images/preview_l1.jpg'}"><img src="/Public/Home/images/preview_s1.jpg"></a>
+                                <a class="zoomThumbActive" href="javascript:void(0);" rel="{gallery: 'gal1', smallimage: '<?php echo $viewPath.$info['big_logo']; ?>',largeimage: '<?php echo $viewPath.$info['mbig_logo']; ?>'}"><?php showImage($info['sm_logo']); ?></a>
                             </li>
+                            <!--循环的输出相册中的图片-->
+                            <?php foreach($gpData as $k=>$v): ?>
                             <li>
-                                <a href="javascript:void(0);" rel="{gallery: 'gal1', smallimage: '/Public/Home/images/preview_m2.jpg',largeimage: '/Public/Home/images/preview_l2.jpg'}"><img src="/Public/Home/images/preview_s2.jpg"></a>
+                                <a href="javascript:void(0);" rel="{gallery: 'gal1', smallimage: '<?php echo $viewPath.$v['mid_pic']; ?>',largeimage: '<?php echo $viewPath.$v['big_pic']; ?>'}"><?php showImage($v['sm_pic']); ?></a>
                             </li>
-                            <li>
-                                <a href="javascript:void(0);"
-                                   rel="{gallery: 'gal1', smallimage: '/Public/Home/images/preview_m3.jpg',largeimage: '/Public/Home/images/preview_l3.jpg'}">
-                                    <img src="/Public/Home/images/preview_s3.jpg"></a>
-                            </li>
-                            <li>
-                                <a href="javascript:void(0);"
-                                   rel="{gallery: 'gal1', smallimage: '/Public/Home/images/preview_m4.jpg',largeimage: '/Public/Home/images/preview_l4.jpg'}">
-                                    <img src="/Public/Home/images/preview_s4.jpg"></a>
-                            </li>
-                            <li>
-                                <a href="javascript:void(0);"
-                                   rel="{gallery: 'gal1', smallimage: '/Public/Home/images/preview_m5.jpg',largeimage: '/Public/Home/images/preview_l5.jpg'}">
-                                    <img src="/Public/Home/images/preview_s5.jpg"></a>
-                            </li>
-                            <li>
-                                <a href="javascript:void(0);"
-                                   rel="{gallery: 'gal1', smallimage: '/Public/Home/images/preview_m6.jpg',largeimage: '/Public/Home/images/preview_l6.jpg'}">
-                                    <img src="/Public/Home/images/preview_s6.jpg"></a>
-                            </li>
-                            <li>
-                                <a href="javascript:void(0);"
-                                   rel="{gallery: 'gal1', smallimage: '/Public/Home/images/preview_m7.jpg',largeimage: '/Public/Home/images/preview_l7.jpg'}">
-                                    <img src="/Public/Home/images/preview_s7.jpg"></a>
-                            </li>
-                            <li>
-                                <a href="javascript:void(0);"
-                                   rel="{gallery: 'gal1', smallimage: '/Public/Home/images/preview_m8.jpg',largeimage: '/Public/Home/images/preview_l8.jpg'}">
-                                    <img src="/Public/Home/images/preview_s8.jpg"></a>
-                            </li>
-                            <li>
-                                <a href="javascript:void(0);"
-                                   rel="{gallery: 'gal1', smallimage: '/Public/Home/images/preview_m9.jpg',largeimage: '/Public/Home/images/preview_l9.jpg'}">
-                                    <img src="/Public/Home/images/preview_s9.jpg"></a>
-                            </li>
+                            <?php endforeach; ?>
                         </ul>
                     </div>
 
@@ -395,10 +360,22 @@
             <!-- 商品基本信息区域 start -->
             <div class="goodsinfo fl ml10">
                 <ul>
-                    <li><span>商品编号： </span>971344</li>
-                    <li class="market_price"><span>定价：</span><em>￥6399.00</em></li>
-                    <li class="shop_price"><span>本店价：</span> <strong>￥6299.00</strong> <a href="">(降价通知)</a></li>
-                    <li><span>上架时间：</span>2012-09-12</li>
+                    <li><span>商品编号： </span><?php echo $info['id']; ?></li>
+                    <li class="market_price"><span>定价：</span><em>￥<?php echo $info['market_price']; ?></em></li>
+                    <li class="shop_price"><span>本店价：</span> <strong>￥<?php echo $info['shop_price']; ?></strong> <a href="">(降价通知)</a></li>
+                    <li class="shop_price"><span>会员价格：</span>
+                        <p>
+                            <table border="1" cellpadding="5" cellspacing="5" width="30%">
+                                <?php foreach($mpData as $k=>$v): ?>
+                                    <tr>
+                                        <td><?php echo $v['level_name']; ?></td>
+                                        <td>￥<?php echo $v['price']; ?>元</td>
+                                    </tr>
+                                <?php endforeach; ?>
+                            </table>
+                        </p>
+                    </li>
+                    <li><span>上架时间：</span><?php echo $info['addtime']; ?></li>
                     <li class="star"><span>商品评分：</span> <strong></strong><a href="">(已有21人评价)</a></li> <!-- 此处的星级切换css即可 默认为5星 star4 表示4星 star3 表示3星 star2表示2星 star1表示1星 -->
                 </ul>
                 <form action="" method="post" class="choose">
@@ -797,6 +774,30 @@
     </div>
 </div>
 <!-- 底部导航 end -->
+<script>
+
+    var viewPath = '<?php echo $viewPath; ?>';
+    console.log(viewPath);
+    //记录浏览历史
+    $.ajax({
+        url : "<?php echo U('Index/displayHistory?id='.$info['id']);?>",
+        //data : "",
+        dataType : "json",
+        type : "GET",
+        success : function(dataMsg) {
+            //console.log(dataMsg);
+            //循环服务器返回的浏览历史数据放到页面中
+            //先拼HTML字符串
+            var html = "";
+            $(dataMsg).each(function (k,v) {
+                html += '<dl><dt><a href="<?php echo U('goods','',FALSE); ?>/id/'+v.id+'"><img src="'+viewPath+v.mid_logo+'" /></a></dt><dd><a href="<?php echo U('goods','',FALSE); ?>/id/'+v.id+'">'+v.goods_name+'</a></dd></dl>';
+            });
+            //放到页面中
+            $("#display_history").html(html);
+        }
+    });
+</script>
+
 
 <div style="clear:both;"></div>
 <!-- 底部版权 start -->
