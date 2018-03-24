@@ -23,6 +23,7 @@ class IndexController extends NavController {
         //取出首页楼层的数据
         $catModel = D('Admin/Category');
         $floorData = $catModel->floorData();
+        //dump($floorData);
         //设置页面信息
         $this->assign(array(
             'goods1' => $goods1,

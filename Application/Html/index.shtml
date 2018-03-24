@@ -150,7 +150,7 @@
                                                 <dl class="dl_1st">
                             <dt><a href="">大家电</a></dt>
                             <dd>
-                                                                <a href="">冰箱0</a>
+                                                                <a href="">冰箱</a>
                                                             </dd>
                         </dl>
                                                 <dl >
@@ -177,6 +177,17 @@
                     </div>
                 </div>
                                     <div class="cat ">
+                    <h3><a href="">手机、数码、京东通信</a> <b></b></h3>
+                    <div class="cat_detail none">
+                                                <dl class="dl_1st">
+                            <dt><a href="">iphone</a></dt>
+                            <dd>
+                                                            </dd>
+                        </dl>
+                        
+                    </div>
+                </div>
+                                    <div class="cat ">
                     <h3><a href="">电脑、办公</a> <b></b></h3>
                     <div class="cat_detail none">
                         
@@ -185,16 +196,6 @@
                                     <div class="cat ">
                     <h3><a href="">家居、家具、家装、厨具</a> <b></b></h3>
                     <div class="cat_detail none">
-                                                <dl class="dl_1st">
-                            <dt><a href="">tataMI</a></dt>
-                            <dd>
-                                                            </dd>
-                        </dl>
-                                                <dl >
-                            <dt><a href="">飘窗</a></dt>
-                            <dd>
-                                                            </dd>
-                        </dl>
                         
                     </div>
                 </div>
@@ -248,12 +249,6 @@
                 </div>
                                     <div class="cat ">
                     <h3><a href="">彩票、旅行、充值、票务</a> <b></b></h3>
-                    <div class="cat_detail none">
-                        
-                    </div>
-                </div>
-                                    <div class="cat ">
-                    <h3><a href="">理财、众筹、白条、保险</a> <b></b></h3>
                     <div class="cat_detail none">
                         
                     </div>
@@ -429,9 +424,9 @@
                 <ul>
                                         <li>
                         <dl>
-                            <dt><a href="/index.php/Home/Index/goods/id/7.html"><img   src='http://www.2018.com/Public/Uploads/Goods/2018-01-25/thumb_2_5a69441fcee90.png' /></a></dt>
-                            <dd><a href="/index.php/Home/Index/goods/id/7.html">elephant</a></dd>
-                            <dd><span>售价：</span><strong>9999.00元</strong></dd>
+                            <dt><a href="/index.php/Home/Index/goods/id/7.html"><img   src='http://www.2018.com/Public/Uploads/' /></a></dt>
+                            <dd><a href="/index.php/Home/Index/goods/id/7.html">嗯嗯嗯</a></dd>
+                            <dd><span>售价：</span><strong>5666.00元</strong></dd>
                         </dl>
                     </li>
                                     </ul>
@@ -443,23 +438,30 @@
                 <ul>
                                         <li>
                         <dl>
-                            <dt><a href="/index.php/Home/Index/goods/id/7.html"><img   src='http://www.2018.com/Public/Uploads/Goods/2018-01-25/thumb_2_5a69441fcee90.png' /></a></dt>
-                            <dd><a href="/index.php/Home/Index/goods/id/7.html">elephant</a></dd>
-                            <dd><span>售价：</span><strong>9999.00元</strong></dd>
+                            <dt><a href="/index.php/Home/Index/goods/id/4.html"><img   src='http://www.2018.com/Public/Uploads/Goods/2018-01-24/thumb_2_5a688f023e577.png' /></a></dt>
+                            <dd><a href="/index.php/Home/Index/goods/id/4.html">mijia牙刷</a></dd>
+                            <dd><span>售价：</span><strong>299.00元</strong></dd>
                         </dl>
                     </li>
                                         <li>
                         <dl>
-                            <dt><a href="/index.php/Home/Index/goods/id/10.html"><img   src='http://www.2018.com/Public/Uploads/Goods/2018-01-25/thumb_2_5a69a64b405d1.png' /></a></dt>
-                            <dd><a href="/index.php/Home/Index/goods/id/10.html">444</a></dd>
+                            <dt><a href="/index.php/Home/Index/goods/id/5.html"><img   src='http://www.2018.com/Public/Uploads/Goods/2018-01-25/thumb_2_5a6919729799f.png' /></a></dt>
+                            <dd><a href="/index.php/Home/Index/goods/id/5.html">mijia冰箱</a></dd>
+                            <dd><span>售价：</span><strong>2344.00元</strong></dd>
+                        </dl>
+                    </li>
+                                        <li>
+                        <dl>
+                            <dt><a href="/index.php/Home/Index/goods/id/8.html"><img   src='http://www.2018.com/Public/Uploads/' /></a></dt>
+                            <dd><a href="/index.php/Home/Index/goods/id/8.html">嗯嗯嗯</a></dd>
                             <dd><span>售价：</span><strong>0.00元</strong></dd>
                         </dl>
                     </li>
                                         <li>
                         <dl>
-                            <dt><a href="/index.php/Home/Index/goods/id/14.html"><img   src='http://www.2018.com/Public/Uploads/Goods/2018-02-25/thumb_2_5a926a1205683.png' /></a></dt>
-                            <dd><a href="/index.php/Home/Index/goods/id/14.html">mix2s</a></dd>
-                            <dd><span>售价：</span><strong>3200.00元</strong></dd>
+                            <dt><a href="/index.php/Home/Index/goods/id/10.html"><img   src='http://www.2018.com/Public/Uploads/Goods/2018-03-04/thumb_2_5a9b247b58960.jpg' /></a></dt>
+                            <dd><a href="/index.php/Home/Index/goods/id/10.html">iphonex</a></dd>
+                            <dd><span>售价：</span><strong>0.00元</strong></dd>
                         </dl>
                     </li>
                                     </ul>
@@ -471,37 +473,37 @@
                 <ul>
                                         <li>
                         <dl>
-                            <dt><a href="/index.php/Home/Index/goods/id/12.html"><img   src='http://www.2018.com/Public/Uploads/Goods/2018-01-25/thumb_2_5a694afb8d9dc.png' /></a></dt>
-                            <dd><a href="/index.php/Home/Index/goods/id/12.html">666</a></dd>
-                            <dd><span>售价：</span><strong>5.00元</strong></dd>
+                            <dt><a href="/index.php/Home/Index/goods/id/4.html"><img   src='http://www.2018.com/Public/Uploads/Goods/2018-01-24/thumb_2_5a688f023e577.png' /></a></dt>
+                            <dd><a href="/index.php/Home/Index/goods/id/4.html">mijia牙刷</a></dd>
+                            <dd><span>售价：</span><strong>299.00元</strong></dd>
                         </dl>
                     </li>
                                         <li>
                         <dl>
-                            <dt><a href="/index.php/Home/Index/goods/id/7.html"><img   src='http://www.2018.com/Public/Uploads/Goods/2018-01-25/thumb_2_5a69441fcee90.png' /></a></dt>
-                            <dd><a href="/index.php/Home/Index/goods/id/7.html">elephant</a></dd>
-                            <dd><span>售价：</span><strong>9999.00元</strong></dd>
+                            <dt><a href="/index.php/Home/Index/goods/id/5.html"><img   src='http://www.2018.com/Public/Uploads/Goods/2018-01-25/thumb_2_5a6919729799f.png' /></a></dt>
+                            <dd><a href="/index.php/Home/Index/goods/id/5.html">mijia冰箱</a></dd>
+                            <dd><span>售价：</span><strong>2344.00元</strong></dd>
                         </dl>
                     </li>
                                         <li>
                         <dl>
-                            <dt><a href="/index.php/Home/Index/goods/id/1.html"><img   src='http://www.2018.com/Public/Uploads/Goods/2018-01-16/thumb_2_5a5d9f7a22306.png' /></a></dt>
-                            <dd><a href="/index.php/Home/Index/goods/id/1.html">Mix2</a></dd>
-                            <dd><span>售价：</span><strong>2999.00元</strong></dd>
-                        </dl>
-                    </li>
-                                        <li>
-                        <dl>
-                            <dt><a href="/index.php/Home/Index/goods/id/10.html"><img   src='http://www.2018.com/Public/Uploads/Goods/2018-01-25/thumb_2_5a69a64b405d1.png' /></a></dt>
-                            <dd><a href="/index.php/Home/Index/goods/id/10.html">444</a></dd>
+                            <dt><a href="/index.php/Home/Index/goods/id/7.html"><img   src='http://www.2018.com/Public/Uploads/' /></a></dt>
+                            <dd><a href="/index.php/Home/Index/goods/id/7.html">嗯嗯嗯</a></dd>
                             <dd><span>售价：</span><strong>0.00元</strong></dd>
                         </dl>
                     </li>
                                         <li>
                         <dl>
-                            <dt><a href="/index.php/Home/Index/goods/id/14.html"><img   src='http://www.2018.com/Public/Uploads/Goods/2018-02-25/thumb_2_5a926a1205683.png' /></a></dt>
-                            <dd><a href="/index.php/Home/Index/goods/id/14.html">mix2s</a></dd>
-                            <dd><span>售价：</span><strong>3200.00元</strong></dd>
+                            <dt><a href="/index.php/Home/Index/goods/id/8.html"><img   src='http://www.2018.com/Public/Uploads/' /></a></dt>
+                            <dd><a href="/index.php/Home/Index/goods/id/8.html">嗯嗯嗯</a></dd>
+                            <dd><span>售价：</span><strong>0.00元</strong></dd>
+                        </dl>
+                    </li>
+                                        <li>
+                        <dl>
+                            <dt><a href="/index.php/Home/Index/goods/id/9.html"><img   src='http://www.2018.com/Public/Uploads/Goods/2018-01-25/thumb_2_5a691ac900dd6.png' /></a></dt>
+                            <dd><a href="/index.php/Home/Index/goods/id/9.html">哒哒哒哒大</a></dd>
+                            <dd><span>售价：</span><strong>0.00元</strong></dd>
                         </dl>
                     </li>
                                     </ul>
@@ -513,23 +515,37 @@
                 <ul>
                                         <li>
                         <dl>
-                            <dt><a href="/index.php/Home/Index/goods/id/7.html"><img   src='http://www.2018.com/Public/Uploads/Goods/2018-01-25/thumb_2_5a69441fcee90.png' /></a></dt>
-                            <dd><a href="/index.php/Home/Index/goods/id/7.html">elephant</a></dd>
-                            <dd><span>售价：</span><strong>9999.00元</strong></dd>
+                            <dt><a href="/index.php/Home/Index/goods/id/4.html"><img   src='http://www.2018.com/Public/Uploads/Goods/2018-01-24/thumb_2_5a688f023e577.png' /></a></dt>
+                            <dd><a href="/index.php/Home/Index/goods/id/4.html">mijia牙刷</a></dd>
+                            <dd><span>售价：</span><strong>299.00元</strong></dd>
                         </dl>
                     </li>
                                         <li>
                         <dl>
-                            <dt><a href="/index.php/Home/Index/goods/id/10.html"><img   src='http://www.2018.com/Public/Uploads/Goods/2018-01-25/thumb_2_5a69a64b405d1.png' /></a></dt>
-                            <dd><a href="/index.php/Home/Index/goods/id/10.html">444</a></dd>
+                            <dt><a href="/index.php/Home/Index/goods/id/5.html"><img   src='http://www.2018.com/Public/Uploads/Goods/2018-01-25/thumb_2_5a6919729799f.png' /></a></dt>
+                            <dd><a href="/index.php/Home/Index/goods/id/5.html">mijia冰箱</a></dd>
+                            <dd><span>售价：</span><strong>2344.00元</strong></dd>
+                        </dl>
+                    </li>
+                                        <li>
+                        <dl>
+                            <dt><a href="/index.php/Home/Index/goods/id/7.html"><img   src='http://www.2018.com/Public/Uploads/' /></a></dt>
+                            <dd><a href="/index.php/Home/Index/goods/id/7.html">嗯嗯嗯</a></dd>
                             <dd><span>售价：</span><strong>0.00元</strong></dd>
                         </dl>
                     </li>
                                         <li>
                         <dl>
-                            <dt><a href="/index.php/Home/Index/goods/id/14.html"><img   src='http://www.2018.com/Public/Uploads/Goods/2018-02-25/thumb_2_5a926a1205683.png' /></a></dt>
-                            <dd><a href="/index.php/Home/Index/goods/id/14.html">mix2s</a></dd>
-                            <dd><span>售价：</span><strong>3200.00元</strong></dd>
+                            <dt><a href="/index.php/Home/Index/goods/id/8.html"><img   src='http://www.2018.com/Public/Uploads/' /></a></dt>
+                            <dd><a href="/index.php/Home/Index/goods/id/8.html">嗯嗯嗯</a></dd>
+                            <dd><span>售价：</span><strong>0.00元</strong></dd>
+                        </dl>
+                    </li>
+                                        <li>
+                        <dl>
+                            <dt><a href="/index.php/Home/Index/goods/id/9.html"><img   src='http://www.2018.com/Public/Uploads/Goods/2018-01-25/thumb_2_5a691ac900dd6.png' /></a></dt>
+                            <dd><a href="/index.php/Home/Index/goods/id/9.html">哒哒哒哒大</a></dd>
+                            <dd><span>售价：</span><strong>0.00元</strong></dd>
                         </dl>
                     </li>
                                     </ul>
@@ -603,8 +619,8 @@
             <h2>家用电器</h2>
             <div class="cate_wrap">
                 <ul>
-                                        <li><a href=""><b>.</b>生活电器</a></li>
                                         <li><a href=""><b>.</b>厨房电器</a></li>
+                                        <li><a href=""><b>.</b>五金家装</a></li>
                                     </ul>
                 <p><a href=""><img src="/Public/Home/images/notebook.jpg" alt="" /></a></p>
             </div>
@@ -617,8 +633,8 @@
         <div class="goodslist fl">
             <h2>
                                 <span class="on">大家电</span>
+                                <span >生活电器</span>
                                 <span >个护健康</span>
-                                <span >五金家装</span>
                             </h2>
             <div class="goodslist_wrap">
                 <!--*********有几个按钮就循环几个放商品的Div，默认只显示第一个*********-->
@@ -626,16 +642,23 @@
                     <ul>
                                                 <li>
                             <dl>
-                                <dt><a href=""><img   src='http://www.2018.com/Public/Uploads/Goods/2018-01-25/thumb_2_5a694afb8d9dc.png' /></a></dt>
-                                <dd><a href="">666</a></dd>
-                                <dd><span>售价：</span> <strong>5.00元</strong></dd>
+                                <dt><a href=""><img   src='http://www.2018.com/Public/Uploads/Goods/2018-01-25/thumb_2_5a6919729799f.png' /></a></dt>
+                                <dd><a href="">mijia冰箱</a></dd>
+                                <dd><span>售价：</span> <strong>2344.00元</strong></dd>
                             </dl>
                         </li>
                                                 <li>
                             <dl>
-                                <dt><a href=""><img   src='http://www.2018.com/Public/Uploads/Goods/2018-01-25/thumb_2_5a69441fcee90.png' /></a></dt>
-                                <dd><a href="">elephant</a></dd>
-                                <dd><span>售价：</span> <strong>9999.00元</strong></dd>
+                                <dt><a href=""><img   src='http://www.2018.com/Public/Uploads/' /></a></dt>
+                                <dd><a href="">嗯嗯嗯</a></dd>
+                                <dd><span>售价：</span> <strong>0.00元</strong></dd>
+                            </dl>
+                        </li>
+                                                <li>
+                            <dl>
+                                <dt><a href=""><img   src='http://www.2018.com/Public/Uploads/Goods/2018-01-25/thumb_2_5a691ac900dd6.png' /></a></dt>
+                                <dd><a href="">哒哒哒哒大</a></dd>
+                                <dd><span>售价：</span> <strong>0.00元</strong></dd>
                             </dl>
                         </li>
                                             </ul>
@@ -644,29 +667,15 @@
                     <ul>
                                                 <li>
                             <dl>
-                                <dt><a href=""><img   src='http://www.2018.com/Public/Uploads/Goods/2018-01-25/thumb_2_5a69a64b405d1.png' /></a></dt>
-                                <dd><a href="">444</a></dd>
-                                <dd><span>售价：</span> <strong>0.00元</strong></dd>
-                            </dl>
-                        </li>
-                                                <li>
-                            <dl>
-                                <dt><a href=""><img   src='http://www.2018.com/Public/Uploads/Goods/2018-02-25/thumb_2_5a926a1205683.png' /></a></dt>
-                                <dd><a href="">mix2s</a></dd>
-                                <dd><span>售价：</span> <strong>3200.00元</strong></dd>
+                                <dt><a href=""><img   src='http://www.2018.com/Public/Uploads/Goods/2018-01-25/thumb_2_5a6919729799f.png' /></a></dt>
+                                <dd><a href="">mijia冰箱</a></dd>
+                                <dd><span>售价：</span> <strong>2344.00元</strong></dd>
                             </dl>
                         </li>
                                             </ul>
                 </div>
                                 <div class="none">
                     <ul>
-                                                <li>
-                            <dl>
-                                <dt><a href=""><img   src='http://www.2018.com/Public/Uploads/Goods/2018-01-25/thumb_2_5a69a64b405d1.png' /></a></dt>
-                                <dd><a href="">444</a></dd>
-                                <dd><span>售价：</span> <strong>0.00元</strong></dd>
-                            </dl>
-                        </li>
                                             </ul>
                 </div>
                             </div>
@@ -682,7 +691,9 @@
             <h2><a href="">更多品牌&nbsp;></a><strong>品牌旗舰店</strong></h2>
             <div class="sidebar_wrap">
                 <ul>
-                                        <li><a href=""><img   src='http://www.2018.com/Public/Uploads/Brand/2018-01-16/5a5d9e10cc917.png' /></a></li>
+                                        <li><a href=""><img   src='http://www.2018.com/Public/Uploads/Brand/2015-10-13/561cc92ba6c33.jpg' /></a></li>
+                                        <li><a href=""><img   src='http://www.2018.com/Public/Uploads/' /></a></li>
+                                        <li><a href=""><img   src='http://www.2018.com/Public/Uploads/' /></a></li>
                                     </ul>
             </div>
         </div>
@@ -719,7 +730,7 @@
     <div class="floor_left fl">
         <!-- 商品分类信息 start-->
         <div class="cate fl">
-            <h2>家居、家具、家装、厨具</h2>
+            <h2>手机、数码、京东通信</h2>
             <div class="cate_wrap">
                 <ul>
                                     </ul>
@@ -733,23 +744,11 @@
         <!-- 商品列表信息 start-->
         <div class="goodslist fl">
             <h2>
-                                <span class="on">tataMI</span>
-                                <span >飘窗</span>
+                                <span class="on">iphone</span>
                             </h2>
             <div class="goodslist_wrap">
                 <!--*********有几个按钮就循环几个放商品的Div，默认只显示第一个*********-->
                                 <div >
-                    <ul>
-                                                <li>
-                            <dl>
-                                <dt><a href=""><img   src='http://www.2018.com/Public/Uploads/Goods/2018-01-16/thumb_2_5a5d9f7a22306.png' /></a></dt>
-                                <dd><a href="">Mix2</a></dd>
-                                <dd><span>售价：</span> <strong>2999.00元</strong></dd>
-                            </dl>
-                        </li>
-                                            </ul>
-                </div>
-                                <div class="none">
                     <ul>
                                             </ul>
                 </div>
@@ -766,7 +765,73 @@
             <h2><a href="">更多品牌&nbsp;></a><strong>品牌旗舰店</strong></h2>
             <div class="sidebar_wrap">
                 <ul>
-                                        <li><a href=""><img   src='http://www.2018.com/Public/Uploads/Brand/2018-01-16/5a5d9e10cc917.png' /></a></li>
+                                        <li><a href=""><img   src='http://www.2018.com/Public/Uploads/Brand/2015-10-13/561cc92ba6c33.jpg' /></a></li>
+                                    </ul>
+            </div>
+        </div>
+        <!-- 品牌旗舰店 end -->
+
+        <!-- 分类资讯 start -->
+        <div class="info mt10">
+            <h2><strong>分类资讯</strong></h2>
+            <div class="sidebar_wrap">
+                <ul>
+                    <li><a href=""><b>.</b>iphone 5s土豪金大量到货</a></li>
+                    <li><a href=""><b>.</b>三星note 3低价促销</a></li>
+                    <li><a href=""><b>.</b>thinkpad x240即将上市</a></li>
+                    <li><a href=""><b>.</b>双十一来临，众商家血拼</a></li>
+                </ul>
+            </div>
+
+        </div>
+        <!-- 分类资讯 end -->
+
+        <!-- 广告 start -->
+        <div class="ads mt10">
+            <a href=""><img src="/Public/Home/images/canon.jpg" alt="" /></a>
+        </div>
+        <!-- 广告 end -->
+    </div>
+    <!-- 右侧 end -->
+
+</div>
+<!--1F 电脑办公 start -->
+<!--1F 电脑办公 start -->
+<div class="floor1 floor w1210 bc mt10">
+    <!-- 1F 左侧 start -->
+    <div class="floor_left fl">
+        <!-- 商品分类信息 start-->
+        <div class="cate fl">
+            <h2>电脑、办公</h2>
+            <div class="cate_wrap">
+                <ul>
+                                    </ul>
+                <p><a href=""><img src="/Public/Home/images/notebook.jpg" alt="" /></a></p>
+            </div>
+
+
+        </div>
+        <!-- 商品分类信息 end-->
+
+        <!-- 商品列表信息 start-->
+        <div class="goodslist fl">
+            <h2>
+                            </h2>
+            <div class="goodslist_wrap">
+                <!--*********有几个按钮就循环几个放商品的Div，默认只显示第一个*********-->
+                            </div>
+        </div>
+        <!-- 商品列表信息 end-->
+    </div>
+    <!-- 1F 左侧 end -->
+
+    <!-- 右侧 start -->
+    <div class="sidebar fl ml10">
+        <!-- 品牌旗舰店 start -->
+        <div class="brand">
+            <h2><a href="">更多品牌&nbsp;></a><strong>品牌旗舰店</strong></h2>
+            <div class="sidebar_wrap">
+                <ul>
                                     </ul>
             </div>
         </div>
