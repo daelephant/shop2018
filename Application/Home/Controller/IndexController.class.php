@@ -107,7 +107,7 @@ class IndexController extends NavController {
                 //把同一个属性放到一起 -》 三维数组
                 $mulArr[$v['attr_name']][] = $v;
         }
-        //dump($mulArr);
+        //dump($uniArr);
         //取出这件商品所有的会员价格
         $mpModel = D('member_price');
         $mpData = $mpModel->alias('a')

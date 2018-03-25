@@ -207,22 +207,24 @@
                         <?php foreach($mulArr as $k => $v):?>
                         <li class="product">
                             <dl>
-                                <dt>颜色：</dt>
+                                <dt><?php echo $k; ?>:</dt>
                                 <dd>
-                                    <a class="selected" href="javascript:;">黑色 <input type="radio" name="color" value="黑色" checked="checked" /></a>
-                                    <a href="javascript:;">白色 <input type="radio" name="color" value="白色" /></a>
-                                    <a href="javascript:;">蓝色 <input type="radio" name="color" value="蓝色" /></a>
-                                    <input type="hidden" name="" value="" />
+                                    <?php foreach($v as $k1=>$v1): ?>
+                                    <a <?php if($k1==0) echo 'class="selected"'; ?> href="javascript:;"><?php echo $v1['attr_value']; ?>
+                                    <input <?php if($k1==0) echo 'check="checked"'; ?> type="radio" name="color" value="<?php echo $v1['attr_value']; ?>" />
+                                    </a>
+                                    <?php endforeach; ?>
                                 </dd>
                             </dl>
                         </li>
 
+                        <?php endforeach; ?>
                         <li>
                             <dl>
                                 <dt>购买数量：</dt>
                                 <dd>
                                     <a href="javascript:;" id="reduce_num"></a>
-                                    <input type="text" name="amount" value="1" class="amount"/>
+                                    <input type="text" name="goods_number" value="1" class="amount"/>
                                     <a href="javascript:;" id="add_num"></a>
                                 </dd>
                             </dl>
@@ -236,7 +238,6 @@
                                 </dd>
                             </dl>
                         </li>
-
                     </ul>
                 </form>
             </div>
@@ -260,39 +261,15 @@
                 <div class="introduce detail_div none">
                     <div class="attr mt15">
                         <ul>
-                            <li><span>商品名称：</span>ThinkPadX230(2306 3T4）</li>
-                            <li><span>商品编号：</span>979631</li>
-                            <li><span>品牌：</span>联想（Thinkpad）</li>
-                            <li><span>上架时间：</span>2013-09-18 17:58:12</li>
-                            <li><span>商品毛重：</span>2.47kg</li>
-                            <li><span>商品产地：</span>中国大陆</li>
-                            <li><span>显卡：</span>集成显卡</li>
-                            <li><span>触控：</span>非触控</li>
-                            <li><span>厚度：</span>正常厚度（>25mm）</li>
-                            <li><span>处理器：</span>Intel i5</li>
-                            <li><span>尺寸：</span>12英寸</li>
+                            <?php foreach($uniArr as $k=>$v):?>
+                            <li><span><?php echo $v['attr_name']; ?>：</span><?php echo $v['attr_value']; ?></li>
+                            <?php endforeach;?>
                         </ul>
                     </div>
 
                     <div class="desc mt10">
                         <!-- 此处的内容 一般是通过在线编辑器添加保存到数据库，然后直接从数据库中读出 -->
-                        <img src="__PUBLIC__/Home/images/desc1.jpg" alt="" />
-                        <p style="height:10px;"></p>
-                        <img src="__PUBLIC__/Home/images/desc2.jpg" alt="" />
-                        <p style="height:10px;"></p>
-                        <img src="__PUBLIC__/Home/images/desc3.jpg" alt="" />
-                        <p style="height:10px;"></p>
-                        <img src="__PUBLIC__/Home/images/desc4.jpg" alt="" />
-                        <p style="height:10px;"></p>
-                        <img src="__PUBLIC__/Home/images/desc5.jpg" alt="" />
-                        <p style="height:10px;"></p>
-                        <img src="__PUBLIC__/Home/images/desc6.jpg" alt="" />
-                        <p style="height:10px;"></p>
-                        <img src="__PUBLIC__/Home/images/desc7.jpg" alt="" />
-                        <p style="height:10px;"></p>
-                        <img src="__PUBLIC__/Home/images/desc8.jpg" alt="" />
-                        <p style="height:10px;"></p>
-                        <img src="__PUBLIC__/Home/images/desc9.jpg" alt="" />
+                        <?php echo $info['goods_desc']; ?>
                     </div>
                 </div>
                 <!-- 商品介绍 end -->
