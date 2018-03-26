@@ -499,3 +499,24 @@ ALTER TABLE p2018_goods ADD `sort_num` tinyint(3) unsigned NOT NULL DEFAULT '100
 ALTER TABLE p2018_goods ADD `is_floor` enum('是','否') NOT NULL DEFAULT '否' COMMENT '是否推荐楼层';
 ALTER TABLE p2018_category ADD `is_floor` enum('是','否') NOT NULL DEFAULT '否' COMMENT '是否推荐楼层';
 ___________________________________________________________________
+
+
+--
+-- 表的结构 `p2018_member`
+--
+
+CREATE TABLE IF NOT EXISTS `p2018_member` (
+  `id` mediumint(8) unsigned NOT NULL AUTO_INCREMENT COMMENT 'Id',
+  `username` varchar(30) NOT NULL COMMENT '用户名',
+  `password` char(32) NOT NULL COMMENT '密码',
+  `face` varchar(150) NOT NULL DEFAULT '' COMMENT '头像',
+  `jifen` mediumint(8) unsigned NOT NULL DEFAULT '0' COMMENT '积分',
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 COMMENT='会员' AUTO_INCREMENT=2 ;
+
+--
+-- 转存表中的数据 `p2018_member`
+--
+
+INSERT INTO `p2018_member` (`id`, `username`, `password`, `face`, `jifen`) VALUES
+(1, 'php39', '9724f7a7f7887b4388c15d2ff86fb784', '', 15000);

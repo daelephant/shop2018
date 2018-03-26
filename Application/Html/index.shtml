@@ -26,7 +26,7 @@
         </div>
         <div class="topnav_right fr">
             <ul>
-                <li>您好，欢迎来到京西！[<a href="login.html">登录</a>] [<a href="register.html">免费注册</a>] </li>
+                <li id="logInfo" ></li>
                 <li class="line">|</li>
                 <li>我的订单</li>
                 <li class="line">|</li>
@@ -659,6 +659,13 @@
                                 <dd><span>售价：</span> <strong>9999.00元</strong></dd>
                             </dl>
                         </li>
+                                                <li>
+                            <dl>
+                                <dt><a href=""><img   src='http://www.2018.com/Public/Uploads/' /></a></dt>
+                                <dd><a href="">111</a></dd>
+                                <dd><span>售价：</span> <strong>0.00元</strong></dd>
+                            </dl>
+                        </li>
                                             </ul>
                 </div>
                                 <div class="none">
@@ -700,10 +707,11 @@
     <div class="sidebar fl ml10">
         <!-- 品牌旗舰店 start -->
         <div class="brand">
-            <h2><a href="">更多品牌&nbsp;></a><strong>品牌旗舰店</strong></h2>
+            <h2><a href="">更多品牌&nbsp;></a><strong>品牌旗舰店:</strong></h2>
             <div class="sidebar_wrap">
                 <ul>
                                         <li><a href=""><img   src='http://www.2018.com/Public/Uploads/Brand/2018-01-16/5a5d9e10cc917.png' /></a></li>
+                                        <li><a href=""><img   src='http://www.2018.com/Public/Uploads/Brand/2018-03-23/5ab4cd101d49e.png' /></a></li>
                                     </ul>
             </div>
         </div>
@@ -784,7 +792,7 @@
     <div class="sidebar fl ml10">
         <!-- 品牌旗舰店 start -->
         <div class="brand">
-            <h2><a href="">更多品牌&nbsp;></a><strong>品牌旗舰店</strong></h2>
+            <h2><a href="">更多品牌&nbsp;></a><strong>品牌旗舰店:</strong></h2>
             <div class="sidebar_wrap">
                 <ul>
                                         <li><a href=""><img   src='http://www.2018.com/Public/Uploads/Brand/2018-01-16/5a5d9e10cc917.png' /></a></li>
@@ -914,3 +922,20 @@
 
 </body>
 </html>
+
+<script>
+   // 判断登录状态
+    $.ajax({
+        url:"/index.php/Home/Member/ajaxChkLogin.html",
+        data:'',
+        dataType:"json",
+        type:"GET",
+        success:function (msg) {
+            if(msg.login == 1)
+                var li = '您好，'+msg.username+'[<a href="/index.php/Home/Member/logout.html">退出</a>]';
+            else
+                var li = '您好，欢迎来到京西！[<a href="/index.php/Home/Member/login.html">登录</a>] [<a href="/index.php/Home/Member/regist.html">免费注册</a>]';
+            $("#logInfo").html(li);
+        }
+    });
+</script>

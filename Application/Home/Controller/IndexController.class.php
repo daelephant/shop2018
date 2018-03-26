@@ -53,6 +53,7 @@ class IndexController extends NavController {
         //取出首页楼层的数据
         $catModel = D('Admin/Category');
         $floorData = $catModel->floorData();
+        //dump($floorData);
         //设置页面信息
         $this->assign(array(
             'goods1' => $goods1,
@@ -78,9 +79,57 @@ class IndexController extends NavController {
         $catModel = D('Admin/Category');
         $catPath = $catModel->parentPath($info['cat_id']);
         //dump($catPath);
+
+        //取出商品相册
+        $gpModel = D('goods_pic');
+        $gpData = $gpModel->where(array(
+            'goods_id' => array('eq',$id),
+        ))->select();
+        //解决乱码问题
+        header('Content-Type:text/html;chartset=utf-8');
+        //取出这件商品所有的属性
+        $gaModel = D('goods_attr');
+        $gaData = $gaModel->alias('a')
+            ->field('a.*,b.attr_name,b.attr_type')
+            ->join('LEFT JOIN __ATTRIBUTE__ b ON a.attr_id=b.id')
+            ->where(array(
+                'a.goods_id' => array('eq',$id),
+            ))
+            ->select();
+        //dump($gaData);
+        //整理所有的商品，把唯一的和可选的属性分开存放
+        $uniArr = array();//唯一属性
+        $mulArr = array();//可选属性
+        foreach ($gaData as $k=>$v){
+            if ($v['attr_type'] == '唯一')
+                $uniArr[] = $v;
+            else
+                //把同一个属性放到一起 -》 三维数组
+                $mulArr[$v['attr_name']][] = $v;
+        }
+        //dump($uniArr);
+        //取出这件商品所有的会员价格
+        $mpModel = D('member_price');
+        $mpData = $mpModel->alias('a')
+            ->field('a.price,b.level_name')
+            ->join('LEFT JOIN __MEMBER_LEVEL__ b on a.level_id=b.id')
+            ->where(array(
+                'a.goods_id'=>array('eq',$id)
+            ))
+            ->select();
+        //dump($mpData);
+
+        $viewPath = C('IMAGE_CONFIG');
+        //dump($viewPath);
+
         $this->assign(array(
             'info' => $info,
             'catPath' => $catPath,
+            'gpData' => $gpData,
+            'uniArr' => $uniArr,
+            'mulArr' => $mulArr,
+            'mpData' => $mpData,
+            'viewPath' => $viewPath['viewPath'],
         ));
 
         //设置页面信息

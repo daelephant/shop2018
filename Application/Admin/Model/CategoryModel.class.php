@@ -187,6 +187,7 @@ class CategoryModel extends Model
             }
             S('floorData',$ret,86400);
             return $ret;
+            //dump($ret);exit;
         }
     }
 
