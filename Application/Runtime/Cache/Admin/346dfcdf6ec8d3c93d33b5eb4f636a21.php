@@ -143,6 +143,19 @@
                         <input type="radio" name="is_hot" value="否" checked="checked" /> 否
                     </td>
                 </tr>
+                <tr>
+                    <td class="label">推荐到楼层：</td>
+                    <td>
+                        <input type="radio" name="is_floor" value="是" /> 是
+                        <input type="radio" name="is_floor" value="否" checked="checked" /> 否
+                    </td>
+                </tr>
+                <tr>
+                    <td class="label">排序：</td>
+                    <td>
+                        <input type="text" name="sort_num" value="100" size="8"/>
+                    </td>
+                </tr>
             </table>
             <!-- 商品描述 -->
             <table style="display:none;" width="100%" class="tab_table" align="center">

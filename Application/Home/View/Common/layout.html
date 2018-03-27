@@ -26,7 +26,7 @@
         </div>
         <div class="topnav_right fr">
             <ul>
-                <li>您好，欢迎来到京西！[<a href="login.html">登录</a>] [<a href="register.html">免费注册</a>] </li>
+                <li id="logInfo" ></li>
                 <li class="line">|</li>
                 <li>我的订单</li>
                 <li class="line">|</li>
@@ -72,3 +72,20 @@
 
 </body>
 </html>
+
+<script>
+   // 判断登录状态
+    $.ajax({
+        url:"<?php echo U('Member/ajaxChkLogin');?>",
+        data:'',
+        dataType:"json",
+        type:"GET",
+        success:function (msg) {
+            if(msg.login == 1)
+                var li = '您好，'+msg.username+'[<a href="<?php echo U('Member/logout'); ?>">退出</a>]';
+            else
+                var li = '您好，欢迎来到京西！[<a href="<?php echo U('Member/login'); ?>">登录</a>] [<a href="<?php echo U('Member/regist'); ?>">免费注册</a>]';
+            $("#logInfo").html(li);
+        }
+    });
+</script>
