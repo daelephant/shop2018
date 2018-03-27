@@ -2,6 +2,12 @@
 namespace Home\Controller;
 use Think\Controller;
 class IndexController extends NavController {
+    public function ajaxGetMemberPrice(){
+        $goodsId = I('get.goods_id');
+        $gModel = D('Admin/Goods');
+        echo $gModel->getMemberPrice($goodsId);
+
+    }
     //处理浏览历史
     public function displayHistory(){
         $id = I('get.id');

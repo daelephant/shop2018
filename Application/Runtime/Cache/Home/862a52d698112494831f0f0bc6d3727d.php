@@ -26,7 +26,7 @@
         </div>
         <div class="topnav_right fr">
             <ul>
-                <li>您好，欢迎来到京西！[<a href="login.html">登录</a>] [<a href="register.html">免费注册</a>] </li>
+                <li id="logInfo" ></li>
                 <li class="line">|</li>
                 <li>我的订单</li>
                 <li class="line">|</li>
@@ -375,10 +375,14 @@
                             </table>
                         </p>
                     </li>
+                    <li class="shop_price"><span>购买价格：</span> <strong style="font-size: 25px;" id="member_price"></strong> </li>
+
                     <li><span>上架时间：</span><?php echo $info['addtime']; ?></li>
                     <li class="star"><span>商品评分：</span> <strong></strong><a href="">(已有21人评价)</a></li> <!-- 此处的星级切换css即可 默认为5星 star4 表示4星 star3 表示3星 star2表示2星 star1表示1星 -->
                 </ul>
-                <form action="" method="post" class="choose">
+                <!--加入购物车的表单-->
+                <form action="<?php echo U('Cart/add');?>" method="post" class="choose">
+                    <input type="hidden" name="goods_id" value="<?php echo $info['id']?>" />
                     <ul>
                         <?php foreach($mulArr as $k => $v):?>
                         <li class="product">
@@ -387,7 +391,7 @@
                                 <dd>
                                     <?php foreach($v as $k1=>$v1): ?>
                                     <a <?php if($k1==0) echo 'class="selected"'; ?> href="javascript:;"><?php echo $v1['attr_value']; ?>
-                                    <input <?php if($k1==0) echo 'check="checked"'; ?> type="radio" name="color" value="<?php echo $v1['attr_value']; ?>" />
+                                    <input <?php if($k1==0) echo 'check="checked"'; ?> type="radio" name="goods_attr_id[<?php echo $v1['attr_id']; ?>]" value="<?php echo $v1['id']; ?>" />
                                     </a>
                                     <?php endforeach; ?>
                                 </dd>
@@ -761,6 +765,17 @@
             $("#display_history").html(html);
         }
     });
+
+        //AJAX计算会员价格
+    $.ajax({
+        url:"<?php echo U('ajaxGetMemberPrice?goods_id='.$info['id']);?>",
+        data:"",
+        dataType:"json",
+        type:"GET",
+        success:function (msg) {
+            $("#member_price").html("￥"+msg+"元");
+        }
+    });
 </script>
 
 
@@ -794,3 +809,20 @@
 
 </body>
 </html>
+
+<script>
+   // 判断登录状态
+    $.ajax({
+        url:"<?php echo U('Member/ajaxChkLogin');?>",
+        data:'',
+        dataType:"json",
+        type:"GET",
+        success:function (msg) {
+            if(msg.login == 1)
+                var li = '您好，'+msg.username+'[<a href="<?php echo U('Member/logout'); ?>">退出</a>]';
+            else
+                var li = '您好，欢迎来到京西！[<a href="<?php echo U('Member/login'); ?>">登录</a>] [<a href="<?php echo U('Member/regist'); ?>">免费注册</a>]';
+            $("#logInfo").html(li);
+        }
+    });
+</script>

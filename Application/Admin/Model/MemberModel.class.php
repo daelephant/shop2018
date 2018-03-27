@@ -37,7 +37,7 @@ class MemberModel extends Model
         $username = $this->username;
         $password = $this->password;
         //先检查这个用户名是否存在
-        $user = $this->where(array(
+        $user = $this->field('id,username,password,jifen')->where(array(
             'username' => array('eq',$username),
         ))->find();
         if($user){
@@ -45,6 +45,16 @@ class MemberModel extends Model
                 //登录成功存session
                 session('m_id',$user['id']);
                 session('m_username',$user['username']);
+                //计算当前会员级别ID并保存SESSION
+                $mlModel = D('member_level');
+                $levelId = $mlModel->field('id')->where(array(
+                    'jifen_bottom' => array('elt',$user['jifen']),
+                    'jifen_top' => array('egt',$user['jifen']),
+                ))->find();
+                //$sql = $mlModel->getLastSql();//SELECT `id` FROM `p2018_member_level` WHERE `jifen_bottom` <= '20000' AND `jifen_top` >= '20000' LIMIT 1
+                //$levelId = json_encode($levelId);//{"id":"3"}
+                //file_put_contents('./model.txt',"$levelId");
+                session('level_id',$levelId['id']);
                 return TRUE;
             }else{
                 $this->error = '密码不正确！';

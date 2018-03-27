@@ -520,3 +520,26 @@ CREATE TABLE IF NOT EXISTS `p2018_member` (
 
 INSERT INTO `p2018_member` (`id`, `username`, `password`, `face`, `jifen`) VALUES
 (1, 'php39', '9724f7a7f7887b4388c15d2ff86fb784', '', 15000);
+
+--
+-- 表的结构 `p2018_cart`
+--
+
+CREATE TABLE IF NOT EXISTS `p2018_cart` (
+  `id` mediumint(8) unsigned NOT NULL AUTO_INCREMENT COMMENT 'Id',
+  `goods_id` mediumint(8) unsigned NOT NULL COMMENT '商品Id',
+  `goods_attr_id` varchar(150) NOT NULL DEFAULT '' COMMENT '商品属性Id',
+  `goods_number` mediumint(8) unsigned NOT NULL COMMENT '购买的数量',
+  `member_id` mediumint(8) unsigned NOT NULL COMMENT '会员Id',
+  PRIMARY KEY (`id`),
+  KEY `member_id` (`member_id`)
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 COMMENT='购物车' AUTO_INCREMENT=15 ;
+
+--
+-- 转存表中的数据 `p2018_cart`
+--
+
+INSERT INTO `p2018_cart` (`id`, `goods_id`, `goods_attr_id`, `goods_number`, `member_id`) VALUES
+(14, 7, '2,6', 1, 1);
+
+-- --------------------------------------------------------
