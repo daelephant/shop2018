@@ -1,1 +1,1 @@
-[{"id":"7","mid_logo":"Goods\/2018-01-25\/thumb_2_5a69441fcee90.png","goods_name":"elephant"}]
+[{"id":"14","mid_logo":"Goods\/2018-02-25\/thumb_2_5a926a1205683.png","goods_name":"mix2s"},{"id":"1","mid_logo":"Goods\/2018-01-16\/thumb_2_5a5d9f7a22306.png","goods_name":"Mix2"},{"id":"12","mid_logo":"Goods\/2018-01-25\/thumb_2_5a694afb8d9dc.png","goods_name":"666"},{"id":"7","mid_logo":"Goods\/2018-01-25\/thumb_2_5a69441fcee90.png","goods_name":"elephant"}]

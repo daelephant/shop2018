@@ -57,7 +57,7 @@
 .cart dt b{display: inline-block;width:7px; height: 11px; background: url("../images/bg1.png") -52px -275px; margin-top:10px;}
 
 .cart dd{width: 350px;  display: none; border: 1px solid #e3e3e3; position: absolute; top:31px; right: 0px; z-index:8; border-radius: 5px 0 5px 5px; -webkit-border-radius:5px 0 5px 5px; }
-.cart .prompt{height: 37px; line-height: 37px; text-align: center; background: #fcfcfc; border-radius: 5px 0 5px 5px; -webkit-border-radius:5px 0 5px 5px;}
+.cart .prompt{ line-height: 37px; text-align: center; background: #fcfcfc; border-radius: 5px 0 5px 5px; -webkit-border-radius:5px 0 5px 5px;}
 
 /*鼠标悬停时 css js控制切换*/
 .cart dt.on{height:32px;background: url("../images/icon.png") 0 -283px;}

@@ -118,12 +118,13 @@
         <div class="cart fl">
             <dl>
                 <dt>
-                    <a href="">去购物车结算</a>
+                    <a id="cart_list" href="<?php echo U('Cart/lst');?>">去购物车结算</a>
                     <b></b>
                 </dt>
                 <dd>
-                    <div class="prompt">
-                        购物车中还没有商品，赶紧选购吧！
+                    <div id="cart_div_list" class="prompt">
+                        <!--购物车中还没有商品，赶紧选购吧！-->
+                        <img src="/Public/Home/images/loading.gif"/>
                     </div>
                 </dd>
             </dl>
@@ -185,6 +186,31 @@
 <!-- 头部 end-->
 
 <div style="clear:both;"></div>
+<!--php变量可以赋值给js，但是反过来不行，js变量无法直接赋值给php。先运行php，运行之后再赋值给php。-->
+<script>
+    <?php $ic = C('IMAGE_CONFIG'); ?>
+    var picView = "<?php echo $ic['viewPath']; ?>";
+    $("#cart_list").mouseover(function () {
+       $.ajax({
+           url:"<?php echo U('Cart/ajaxCartList'); ?>",
+           data:"",
+           dataType:"json",
+           type:"GET",
+           success:function (msg) {
+                //拼出的HTML放到页面中
+               var html = "<table>";
+                $(msg).each(function (k,v) {
+                    html += "<tr>";
+                    html += '<td><img width="50" src="'+picView+v.mid_logo+'" /></td>';
+                    html += '<td>'+v.goods_name+'</td>';
+                    html += "</tr>";
+                });
+               html += "</table>";
+               $("#cart_div_list").html(html);
+           }
+       });
+    });
+</script>
 
 <!-- 综合区域 start 包括幻灯展示，商城快报 -->
 <div class="colligate w1210 bc mt10">

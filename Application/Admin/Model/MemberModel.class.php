@@ -55,6 +55,9 @@ class MemberModel extends Model
                 //$levelId = json_encode($levelId);//{"id":"3"}
                 //file_put_contents('./model.txt',"$levelId");
                 session('level_id',$levelId['id']);
+                // move CartData in cart to DB
+                $cartModel = D('Home/Cart');
+                $cartModel->moveDataToDb();
                 return TRUE;
             }else{
                 $this->error = '密码不正确！';

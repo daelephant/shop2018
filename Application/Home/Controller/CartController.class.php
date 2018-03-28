@@ -4,7 +4,7 @@ use Think\Controller;
 class CartController extends Controller {
    public function add(){
        if(IS_POST){
-           //dump($_POST);exit;ok
+           //dump($_POST);exit;
            $cartModel = D('Cart');
            if($cartModel->create(I('post.'),1)){
                if($cartModel->add()){
@@ -16,6 +16,24 @@ class CartController extends Controller {
        }
    }
    public function lst(){
-       dump($_COOKIE);
+       //dump($_COOKIE);
+       header('Content-Type:text/html;charset=utf-8');
+       $cartModel = D('Cart');
+       $data = $cartModel->cartList();
+       //dump($data);
+       //设置页面信息
+       $this->assign(array(
+           'data' => $data,
+           '_page_title' => '购物车列表',
+           '_page_keywords' => '购物车列表...',
+           '_page_description' => '购物车列表...',
+       ));
+       $this->display();
    }
+    public function ajaxCartList(){
+        $cartModel = D('Cart');
+        $data = $cartModel->cartList();
+        echo json_encode($data);
+    }
+
 }
