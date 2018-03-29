@@ -543,3 +543,71 @@ INSERT INTO `p2018_cart` (`id`, `goods_id`, `goods_attr_id`, `goods_number`, `me
 (14, 7, '2,6', 1, 1);
 
 -- --------------------------------------------------------
+
+-- --------------------------------------------------------
+
+--
+-- 表的结构 `p2018_order`
+--
+
+CREATE TABLE IF NOT EXISTS `p2018_order` (
+  `id` mediumint(8) unsigned NOT NULL AUTO_INCREMENT COMMENT 'Id',
+  `member_id` mediumint(8) unsigned NOT NULL COMMENT '会员Id',
+  `addtime` int(10) unsigned NOT NULL COMMENT '下单时间',
+  `pay_status` enum('是','否') NOT NULL DEFAULT '否' COMMENT '支付状态',
+  `pay_time` int(10) unsigned NOT NULL DEFAULT '0' COMMENT '支付时间',
+  `total_price` decimal(10,2) NOT NULL COMMENT '定单总价',
+  `shr_name` varchar(30) NOT NULL COMMENT '收货人姓名',
+  `shr_tel` varchar(30) NOT NULL COMMENT '收货人电话',
+  `shr_province` varchar(30) NOT NULL COMMENT '收货人省',
+  `shr_city` varchar(30) NOT NULL COMMENT '收货人城市',
+  `shr_area` varchar(30) NOT NULL COMMENT '收货人地区',
+  `shr_address` varchar(30) NOT NULL COMMENT '收货人详细地址',
+  `post_status` tinyint(3) unsigned NOT NULL DEFAULT '0' COMMENT '发货状态,0:未发货,1:已发货2:已收到货',
+  `post_number` varchar(30) NOT NULL DEFAULT '' COMMENT '快递号',
+  PRIMARY KEY (`id`),
+  KEY `member_id` (`member_id`),
+  KEY `addtime` (`addtime`)
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 COMMENT='定单基本信息' AUTO_INCREMENT=4 ;
+
+--
+-- 转存表中的数据 `p2018_order`
+--
+
+INSERT INTO `p2018_order` (`id`, `member_id`, `addtime`, `pay_status`, `pay_time`, `total_price`, `shr_name`, `shr_tel`, `shr_province`, `shr_city`, `shr_area`, `shr_address`, `post_status`, `post_number`) VALUES
+(2, 1, 1445655657, '是', 0, '3359.00', '吴英雷', '13344441111', '上海', '东城区', '西三旗', '西三旗', 0, ''),
+(3, 1, 1445655771, '是', 0, '333.00', '吴英雷', '13344441111', '北京', '东城区', '三环以内', '西三旗', 0, '');
+
+-- --------------------------------------------------------
+
+--
+-- 表的结构 `p2018_order_goods`
+--
+
+CREATE TABLE IF NOT EXISTS `p2018_order_goods` (
+  `id` mediumint(8) unsigned NOT NULL AUTO_INCREMENT COMMENT 'Id',
+  `order_id` mediumint(8) unsigned NOT NULL COMMENT '定单Id',
+  `goods_id` mediumint(8) unsigned NOT NULL COMMENT '商品Id',
+  `goods_attr_id` varchar(150) NOT NULL DEFAULT '' COMMENT '商品属性id',
+  `goods_number` mediumint(8) unsigned NOT NULL COMMENT '购买的数量',
+  `price` decimal(10,2) NOT NULL COMMENT '购买的价格',
+  PRIMARY KEY (`id`),
+  KEY `order_id` (`order_id`),
+  KEY `goods_id` (`goods_id`)
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 COMMENT='定单商品表' AUTO_INCREMENT=9 ;
+
+--
+-- 转存表中的数据 `p2018_order_goods`
+--
+
+INSERT INTO `p2018_order_goods` (`id`, `order_id`, `goods_id`, `goods_attr_id`, `goods_number`, `price`) VALUES
+(2, 2, 7, '2,6', 7, '95.00'),
+(3, 2, 7, '3,5', 4, '95.00'),
+(4, 2, 7, '1,5', 4, '95.00'),
+(5, 2, 7, '3,6', 4, '95.00'),
+(6, 2, 3, '', 4, '222.00'),
+(7, 2, 4, '', 2, '333.00'),
+(8, 3, 4, '', 1, '333.00');
+
+-- --------------------------------------------------------
+
