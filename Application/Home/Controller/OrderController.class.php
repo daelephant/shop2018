@@ -26,6 +26,7 @@ class OrderController extends Controller {
        $data = $cartModel->cartList();
         //设置页面信息
        $this->assign(array(
+           'data' => $data,
            '_page_title' => '订单确认页',
            '_page_keywords' => '订单确认页...',
            '_page_description' => '订单确认页...',
@@ -34,6 +35,12 @@ class OrderController extends Controller {
    }
 
    public function order_success(){
-       var_dump($_GET);
+       //设置页面信息
+       $this->assign(array(
+           '_page_title' => '下单成功',
+           '_page_keywords' => '下单成功...',
+           '_page_description' => '下单成功...',
+       ));
+       $this->display();
    }
 }

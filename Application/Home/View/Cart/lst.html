@@ -42,7 +42,7 @@
 						<td class="col1"><a href=""><?php showImage($v['mid_logo']); ?></a>  <strong><a href="<?php echo U('Index/goods?id='.$v['goods_id']);?>"><?php echo $v['goods_name'];?></a></strong></td>
 						<td class="col2">
 							<?php foreach($v['gaData'] as $k1=>$v1): ?>
-							<p><?php echo $v1['attr_name'];?></p> <p><?php echo $v1['attr_value'];?></p>
+							<p><?php echo $v1['attr_name'];?>：<?php echo $v1['attr_value'];?></p>
 							<?php endforeach;?>
 						</td>
 						<td class="col3">￥<span><?php echo $v['price'];?>元</span></td>

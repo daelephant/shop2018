@@ -83,7 +83,7 @@ class OrderModel extends Model
                 'goods_id' => $v['goods_id'],
                 'goods_attr_id' => $v['goods_attr_id'],
             ))->setDec('goods_number',$v['goods_number']);
-             if(FALSE !== $ret){
+             if(FALSE === $ret){
                  $this->rollback();
                  return FALSE;
              }
