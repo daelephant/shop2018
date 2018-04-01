@@ -152,14 +152,16 @@
            success:function (msg) {
                 //拼出的HTML放到页面中
                var html = "<table>";
-                $(msg).each(function (k,v) {
-                    html += "<tr>";
-                    html += '<td><img width="50" src="'+picView+v.mid_logo+'" /></td>';
-                    html += '<td>'+v.goods_name+'</td>';
-                    html += "</tr>";
-                });
-               html += "</table>";
-               $("#cart_div_list").html(html);
+               if(msg) {
+                   $(msg).each(function (k, v) {
+                       html += "<tr>";
+                       html += '<td><img width="50" src="' + picView + v.mid_logo + '" /></td>';
+                       html += '<td>' + v.goods_name + '</td>';
+                       html += "</tr>";
+                   });
+                   html += "</table>";
+                   $("#cart_div_list").html(html);
+               }
            }
        });
     });

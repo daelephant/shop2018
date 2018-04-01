@@ -1,0 +1,1 @@
+E:\phpstudy1015\Apache\bin\ab.exe -c 20 -n 20 -C "PHPSESSID=6ib434175b4v1t7fn6i7vnpbe2" -p E:\phpstudy1015\WWW\new\shop2018\post_data.txt -T "application/x-www-form-urlencoded" http://www.2018.com/index.php/Home/Order/add.html
