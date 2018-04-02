@@ -213,7 +213,24 @@ class CategoryModel extends Model
             ))->select();
 
         /**************价格区间段************************/
+        $sectionCount = 6;//默认分几段
+        //取出这个分类下最大和最小的价格
+        $priceInfo = $goodsModel->field('MAX(shop_price) max_price,MIN(shop_price) min_price')
+            ->where(array(
+                'id' => array('in',$goodsId),
+            ))->find();
 
+        //最大价和最小价的区间长度
+        $priceSection = $priceInfo['max_price'] - $priceInfo['min_price'];
+        //分类下商品数量
+        $goodsCount = count($goodsId);
+        //只有商品数量有 这些价格才分段
+        if ($goodsCount>1){
+            //根据最大价和最小价的差值计算分几段更为合适
+            if($priceSection < 100)
+                $sectionCount =2;
+                  $sectionCount =4;
+        }
 
         /**************商品属性**************************/
 
