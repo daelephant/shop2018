@@ -191,4 +191,34 @@ class CategoryModel extends Model
         }
     }
 
+    /**
+     * 根据分类ID取出筛选条件
+     * @param $catId
+     */
+    public function getSearchConditionByCatId($catId){
+        $ret = array();//返回的数组
+
+        $goodsModel = D('Admin/Goods');
+        //先取出这个分类下所有商品的id
+        $goodsId = $goodsModel->getGoodsIdByCatId($catId);
+
+        /**********************品牌*********************/
+        //根据商品Id取出品牌ID再连品牌表取出品牌名称
+        $ret['brand'] = $goodsModel->alias('a')
+            ->field('DISTINCT brand_id,b.brand_name,b.logo')
+            ->join('LEFT JOIN __BRAND__ b ON a.brand_id=b.id')
+            ->where(array(
+                'a.id' => array('in',$goodsId),
+                'a.brand_id' => array('neq',0),
+            ))->select();
+
+        /**************价格区间段************************/
+
+
+        /**************商品属性**************************/
+
+
+        return $ret;
+    }
+
 }
