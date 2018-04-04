@@ -147,14 +147,14 @@
                 <!--循环输出三层分类数据-->
                 <?php foreach($catData as $k=>$v): ?>
                     <div class="cat <?php if($k==0) echo 'item1'; ?>">
-                    <h3><a href="<?php echo U('Search/cat_search?cat_id='.$v['id']);?>"><?php echo $v['cat_name']; ?></a> <b></b></h3>
+                    <h3><a href="<?php echo U('Search/cat_search?cat_id='.$v['id'],'',FALSE);?>"><?php echo $v['cat_name']; ?></a> <b></b></h3>
                     <div class="cat_detail none">
                         <?php foreach($v['children'] as $k1=>$v1): ?>
                         <dl <?php if($k1==0) echo 'class="dl_1st"';?>>
-                            <dt><a href="<?php echo U('Search/cat_search?cat_id='.$v1['id']);?>"><?php echo $v1['cat_name']; ?></a></dt>
+                            <dt><a href="<?php echo U('Search/cat_search?cat_id='.$v1['id'],'',FALSE);?>"><?php echo $v1['cat_name']; ?></a></dt>
                             <dd>
                                 <?php foreach($v1['children'] as $k2=>$v2): ?>
-                                <a href="<?php echo U('Search/cat_search?cat_id='.$v2['id']);?>"><?php echo $v2['cat_name']; ?></a>
+                                <a href="<?php echo U('Search/cat_search?cat_id='.$v2['id'],'',FALSE);?>"><?php echo $v2['cat_name']; ?></a>
                                 <?php endforeach; ?>
                             </dd>
                         </dl>
@@ -399,63 +399,75 @@
 			<!-- 热卖、促销 end -->
 			
 			<div style="clear:both;"></div>
-			
+
+			<style>
+				#search_condition{margin: 10px;padding: 5px;padding-right: 0;}
+				#search_condition span{border: 1px solid #F00;padding: 5px;margin-right: 5px;}
+				#search_condition span a:hover{background: #F00;color:#FFF;padding: 5px;margin-right: 0;}
+			</style>
+			<div id="search_condition">
+				当前搜索条件：
+
+				<?php
+ $brandId = I('get.brand_id'); if($brandId): ?>
+					<span>
+						品牌：<?php echo ltrim(strstr($brandId,'-'),'-');?>
+						<a href="<?php echo filterUrl('brand_id');?>">X</a>
+					</span>
+				<?php endif; ?>
+
+				<?php
+ $price = I('get.price'); if($price): ?>
+				<span>
+						价格：<?php echo $price;?>
+					<a href="<?php echo filterUrl('price');?>">X</a>
+					</span>
+				<?php endif; ?>
+
+				<?php
+ foreach($_GET as $k=>$v): if(strpos($k,'attr_') ===0): $_attrName = strrchr($v,'-'); ?>
+					<span>
+							<?php echo ltrim($_attrName,'-');?>：<?php echo str_replace($_attrName,'',$v);?>
+							<a href="<?php echo filterUrl($k);?>">X</a>
+					</span>
+				<?php endif; endforeach;?>
+			</div>
 			<!-- 商品筛选 start -->
 			<div class="filter mt10">
 				<h2><a href="">重置筛选条件</a> <strong>商品筛选</strong></h2>
+
 				<div class="filter_wrap">
+					<?php if(!I('get.brand_id')):?>
 					<dl>
 						<dt>品牌：</dt>
 						<dd class="cur"><a href="">不限</a></dd>
-						<dd><a href="">联想（ThinkPad）</a></dd>
-						<dd><a href="">联想（Lenovo）</a></dd>
-						<dd><a href="">宏碁（acer）</a></dd>
-						<dd><a href="">华硕（ASUS）</a></dd>
-						<dd><a href="">戴尔（DELL）</a></dd>
-						<dd><a href="">索尼（SONY）</a></dd>
-						<dd><a href="">惠普（HP）</a></dd>
-						<dd><a href="">三星（SAMSUNG）</a></dd>
-						<dd><a href="">优派（ViewSonic）</a></dd>
-						<dd><a href="">苹果（Apple）</a></dd>
-						<dd><a href="">富士通（Fujitsu）</a></dd>
+						<?php foreach($searchFilter['brand'] as $k=>$v):?>
+						<dd><a href="/index.php/Home/Search/cat_search/cat_id/1/attr_10/6.08-%E5%B1%8F%E5%B9%95%E5%B0%BA%E5%AF%B8/attr_5/android-%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F/brand_id/<?php echo $v['brand_id']; ?>-<?php echo $v['brand_name']; ?>"><?php echo $v['brand_name']; ?></a></dd>
+						<?php endforeach;?>
 					</dl>
-
+					<?php endif;?>
+					<?php if(!I('get.price')):?>
 					<dl>
 						<dt>价格：</dt>
 						<dd class="cur"><a href="">不限</a></dd>
-						<dd><a href="">1000-1999</a></dd>
-						<dd><a href="">2000-2999</a></dd>
-						<dd><a href="">3000-3499</a></dd>
-						<dd><a href="">3500-3999</a></dd>
-						<dd><a href="">4000-4499</a></dd>
-						<dd><a href="">4500-4999</a></dd>
-						<dd><a href="">5000-5999</a></dd>
-						<dd><a href="">6000-6999</a></dd>
-						<dd><a href="">7000-7999</a></dd>
+						<?php foreach($searchFilter['price'] as $k=>$v):?>
+						<dd><a href="/index.php/Home/Search/cat_search/cat_id/1/attr_10/6.08-%E5%B1%8F%E5%B9%95%E5%B0%BA%E5%AF%B8/attr_5/android-%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F/price/<?php echo $v;?>"><?php echo $v; ?></a></dd>
+						<?php endforeach;?>
 					</dl>
-
+					<?php endif;?>
+					<!--筛选属性-->
+					<?php foreach($searchFilter['gaData'] as $k=>$v): $attrUrlName = 'attr_'.$v[0]['attr_id']; if(isset($_GET[$attrUrlName])) continue ?>
 					<dl>
-						<dt>尺寸：</dt>
+						<dt><?php echo $k; ?></dt>
 						<dd class="cur"><a href="">不限</a></dd>
-						<dd><a href="">10.1英寸及以下</a></dd>
-						<dd><a href="">11英寸</a></dd>
-						<dd><a href="">12英寸</a></dd>
-						<dd><a href="">13英寸</a></dd>
-						<dd><a href="">14英寸</a></dd>
-						<dd><a href="">15英寸</a></dd>
+						<?php foreach($v as $k1=>$v1):?>
+						<dd><a href="/index.php/Home/Search/cat_search/cat_id/1/attr_10/6.08-%E5%B1%8F%E5%B9%95%E5%B0%BA%E5%AF%B8/attr_5/android-%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F/<?php echo $attrUrlName; ?>/<?php echo $v1['attr_value']; ?>-<?php echo $k; ?>"><?php echo $v1['attr_value']; ?></a></dd>
+						<?php endforeach;?>
 					</dl>
+					<dd><a href=""><?php echo $v['brand_name']; ?></a></dd>
+					<?php endforeach;?>
 
-					<dl class="last">
-						<dt>处理器：</dt>
-						<dd class="cur"><a href="">不限</a></dd>
-						<dd><a href="">intel i3</a></dd>
-						<dd><a href="">intel i5</a></dd>
-						<dd><a href="">intel i7</a></dd>
-						<dd><a href="">AMD A6</a></dd>
-						<dd><a href="">AMD A8</a></dd>
-						<dd><a href="">AMD A10</a></dd>
-						<dd><a href="">其它intel平台</a></dd>
-					</dl>
+
 				</div>
 			</div>
 			<!-- 商品筛选 end -->

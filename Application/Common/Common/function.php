@@ -1,4 +1,14 @@
 <?php
+
+function filterUrl($param){
+    //先取出当前的URL地址
+    $url = $_SERVER['PHP_SELF'];
+    //正则去掉某个参数
+    //http://www.2018.com/index.php/Home/Search/cat_search/cat_id/1/brand_id/1-%E5%B0%8F%E7%B1%B3
+    $re = "/\/$param\/[^\/]+/";//匹配/brand_id/1-%E5%B0%8F%E7%B1%B3这个字符串，分析，$param后绝不是斜线/的字符，即非斜线的字符出现1+次
+    return preg_replace($re,'',$url);
+}
+
 /**
  *为一个订单生成支付宝按钮
  *

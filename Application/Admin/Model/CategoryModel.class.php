@@ -229,12 +229,48 @@ class CategoryModel extends Model
             //根据最大价和最小价的差值计算分几段更为合适
             if($priceSection < 100)
                 $sectionCount =2;
+            elseif ($priceSection < 1000)
                   $sectionCount =4;
+            elseif ($priceSection < 10000)
+                $sectionCount =6;
+            else
+                $sectionCount =7;
+            //根据这些段数分段
+            $priceSection = ceil($priceSection/$sectionCount);//每段的范围
+            $price = array();//存放最终的分段数据
+            $firstPrice = 0;//第一个价格段的开始价格
+            //循环放每个段
+            for ($i=0;$i<$sectionCount;$i++){
+                //每段结束的价格
+                $_tmpEnd = $firstPrice+$priceSection;
+                //把结束的价格取整
+                $_tmpEnd = ((ceil($_tmpEnd/100))*100 -1);
+                $price[] = $firstPrice.'-'.$_tmpEnd;
+                //计算下一个价格段的开始价格
+                $firstPrice = $_tmpEnd+1;
+            }
+            //放到返回的数组中
+            $ret['price'] = $price;
+
         }
 
         /**************商品属性**************************/
+        $gaModel = D('goods_attr');
+        $gaData = $gaModel->alias('a')
+            ->field('DISTINCT a.attr_id,a.attr_value,b.attr_name')
+            ->join('LEFT JOIN __ATTRIBUTE__ b ON a.attr_id=b.id')
+            ->where(array(
+                'a.goods_id' => array('in',$goodsId),
+        ))->select();
+        //处理这个属性数组:把属性相同的放到一起用属性名称做下标->>2维数组转3维
+        $_gaData = array();
+        foreach ($gaData as $k=>$v){
+            $_gaData[$v['attr_name']][] = $v;
+        }
+        //放到返回数组中
+        $ret['gaData'] = $_gaData;
 
-
+        //返回数组
         return $ret;
     }
 
