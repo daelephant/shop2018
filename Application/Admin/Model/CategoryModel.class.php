@@ -193,14 +193,17 @@ class CategoryModel extends Model
 
     /**
      * 根据分类ID取出筛选条件
+     * 根据当前搜索出来的商品来计算筛选条件
      * @param $catId
      */
-    public function getSearchConditionByCatId($catId){
+    //直接根据当前的商品id来构造条件
+    public function getSearchConditionByGoodsId($goodsId){
         $ret = array();//返回的数组
 
         $goodsModel = D('Admin/Goods');
         //先取出这个分类下所有商品的id
-        $goodsId = $goodsModel->getGoodsIdByCatId($catId);
+        //$goodsId = $goodsModel->getGoodsIdByCatId($catId);
+        //把原来的去掉，原来是取出这个分类下所有商品ID来计算这是不对的，应该根据当前索引的商品ID来计算而不是所有的
 
         /**********************品牌*********************/
         //根据商品Id取出品牌ID再连品牌表取出品牌名称
@@ -261,6 +264,7 @@ class CategoryModel extends Model
             ->join('LEFT JOIN __ATTRIBUTE__ b ON a.attr_id=b.id')
             ->where(array(
                 'a.goods_id' => array('in',$goodsId),
+                'a.attr_value' => array('neq',''),
         ))->select();
         //处理这个属性数组:把属性相同的放到一起用属性名称做下标->>2维数组转3维
         $_gaData = array();

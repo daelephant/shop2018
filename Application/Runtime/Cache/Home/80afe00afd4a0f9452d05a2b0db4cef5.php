@@ -53,8 +53,9 @@
         <div class="search fl">
             <div class="search_form">
                 <div class="form_left fl"></div>
-                <form action="" name="serarch" method="get" class="fl">
-                    <input type="text" class="txt" value="请输入商品关键字" /><input type="submit" class="btn" value="搜索" />
+                <form name="serarch" method="get" class="fl">
+                    <input id="key" name="key" type="text" class="txt" value="<?php echo I('get.key','请输入商品关键字');?>" />
+                    <input onclick="location.href='<?php echo U('Search/key_search','',FALSE);?>/key/'+$('#key').val();" type="button" class="btn" value="搜索" />
                 </form>
                 <div class="form_right fl"></div>
             </div>
@@ -437,31 +438,31 @@
 				<h2><a href="">重置筛选条件</a> <strong>商品筛选</strong></h2>
 
 				<div class="filter_wrap">
-					<?php if(!I('get.brand_id')):?>
+					<?php if(!I('get.brand_id') && !empty($searchFilter['brand'])):?>
 					<dl>
 						<dt>品牌：</dt>
 						<dd class="cur"><a href="">不限</a></dd>
 						<?php foreach($searchFilter['brand'] as $k=>$v):?>
-						<dd><a href="/index.php/Home/Search/cat_search/cat_id/1/odby/xl/brand_id/<?php echo $v['brand_id']; ?>-<?php echo $v['brand_name']; ?>"><?php echo $v['brand_name']; ?></a></dd>
+						<dd><a href="/index.php/Home/Search/cat_search/cat_id/1/brand_id/<?php echo $v['brand_id']; ?>-<?php echo $v['brand_name']; ?>"><?php echo $v['brand_name']; ?></a></dd>
 						<?php endforeach;?>
 					</dl>
 					<?php endif;?>
-					<?php if(!I('get.price')):?>
+					<?php if(!I('get.price') && !empty($searchFilter['price'])):?>
 					<dl>
 						<dt>价格：</dt>
 						<dd class="cur"><a href="">不限</a></dd>
 						<?php foreach($searchFilter['price'] as $k=>$v):?>
-						<dd><a href="/index.php/Home/Search/cat_search/cat_id/1/odby/xl/price/<?php echo $v;?>"><?php echo $v; ?></a></dd>
+						<dd><a href="/index.php/Home/Search/cat_search/cat_id/1/price/<?php echo $v;?>"><?php echo $v; ?></a></dd>
 						<?php endforeach;?>
 					</dl>
 					<?php endif;?>
 					<!--筛选属性-->
 					<?php foreach($searchFilter['gaData'] as $k=>$v): $attrUrlName = 'attr_'.$v[0]['attr_id']; if(isset($_GET[$attrUrlName])) continue ?>
 					<dl>
-						<dt><?php echo $k; ?></dt>
+						<dt><?php echo $k; ?>：</dt>
 						<dd class="cur"><a href="">不限</a></dd>
 						<?php foreach($v as $k1=>$v1):?>
-						<dd><a href="/index.php/Home/Search/cat_search/cat_id/1/odby/xl/<?php echo $attrUrlName; ?>/<?php echo $v1['attr_value']; ?>-<?php echo $k; ?>"><?php echo $v1['attr_value']; ?></a></dd>
+						<dd><a href="/index.php/Home/Search/cat_search/cat_id/1/<?php echo $attrUrlName; ?>/<?php echo $v1['attr_value']; ?>-<?php echo $k; ?>"><?php echo $v1['attr_value']; ?></a></dd>
 						<?php endforeach;?>
 					</dl>
 					<dd><a href=""><?php echo $v['brand_name']; ?></a></dd>
