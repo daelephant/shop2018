@@ -666,6 +666,11 @@
     </div>
 </div>
 <!-- 底部导航 end -->
+
+<!--导入jquUi中的dialog插件-->
+<link href="/Public/jquery-ui-1.9.2.custom/css/blitzer/jquery-ui-1.9.2.custom.css" rel="stylesheet">
+<script src="/Public/jquery-ui-1.9.2.custom/js/jquery-ui-1.9.2.custom.js"></script>
+
 <script>
 
     var viewPath = '<?php echo $viewPath; ?>';
@@ -710,8 +715,47 @@
             dataType:"json",
             type:"POST",
             success:function (dataMsg) {
-                if(dataMsg.status == 0)
-                    alert(dataMsg.info);
+                //alert(dataMsg.info);
+                if(dataMsg.info == '必须先登录'){
+                     //alert(dataMsg.info);
+                    //配置对话框
+                    $("#login_dialog").dialog({
+                        resizable : false,
+                        position : {at:"center"},
+                        modal : true,
+                        autoOpen : false,
+                        width : 400,
+                        buttons : [
+                            {
+                                text:"登录",
+                                //AJAX提交表单
+                                click:function () {
+                                    $.ajax({
+                                        url:"<?php echo U('Member/login');?>",
+                                        data:$("#login_form").serialize(),
+                                        dataType:"json",
+                                        type:"POST",
+                                        success:function (dataMsg1) {
+                                            if(dataMsg1.status ==1)
+                                                $("#login_dialog").dialog("close");
+                                            else
+                                                alert(dataMsg1.info);
+                                        }
+                                    });
+                                }
+                            },
+                            {
+                                text:"取消",
+                                click:function () {
+                                    $(this).dialog("close");
+                                }
+                            }
+                        ]
+                    });
+                    //显示对话框
+                    $("#login_dialog").dialog("open");
+
+                }
                 else {
                     //清空表单数据
                     form.trigger("reset");//触发表单的reset事件
@@ -747,15 +791,34 @@
                     },1000,function(){
                         html.fadeIn(2000);
                     });
-                    alert($("body").scrollTop()+" px");
+                    //alert($("body").scrollTop()+" px");
                     //需要先隐藏，才能显示效果
+                    //页面首部有<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"scrollTop()不生效
 
                 }
             }
         });
     });
 </script>
-
+    <div id="login_dialog" class="none" title="登录表单">
+        <form id="login_form">
+        <ul>
+        <li>
+        <label for="">用户名：</label>
+    <input type="text" class="txt" name="username" />
+        </li>
+        <li>
+        <label for="">密　码：</label>
+    <input type="password" class="txt" name="password" />
+    </li>
+    <li class="checkcode">
+        <label for="">验证码：</label>
+    <input type="text"  name="chkcode" /><br>
+        <img style="cursor: pointer;" onclick="this.src='<?php echo U('Member/chkcode'); ?>#'+Math.random();" src="<?php echo U('Member/chkcode'); ?>" />
+    </li>
+        </ul>
+        </form>
+        </div>
 
 <div style="clear:both;"></div>
 <!-- 底部版权 start -->
