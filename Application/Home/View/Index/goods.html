@@ -282,32 +282,27 @@
                 <div class="comment detail_div mt10">
                     <div class="comment_summary">
                         <div class="rate fl">
-                            <strong><em>90</em>%</strong> <br />
+                            <strong><em class="hao"></em>%</strong> <br />
                             <span>好评度</span>
                         </div>
                         <div class="percent fl">
                             <dl>
-                                <dt>好评（90%）</dt>
-                                <dd><div style="width:90px;"></div></dd>
+                                <dt>好评（<span class="hao"></span>%）</dt>
+                                <!--<dd><div style="width:90px;"></div></dd>-->
+                                <dd><div id="hao_width"></div></dd>
                             </dl>
                             <dl>
-                                <dt>中评（5%）</dt>
-                                <dd><div style="width:5px;"></div></dd>
+                                <dt>中评（<span class="zhong"></span>%）</dt>
+                                <dd><div id="zhong_width"></div></dd>
                             </dl>
                             <dl>
-                                <dt>差评（5%）</dt>
-                                <dd><div style="width:5px;" ></div></dd>
+                                <dt>差评（<span class="cha"></span>%）</dt>
+                                <dd><div id="cha_width"></div></dd>
                             </dl>
                         </div>
                         <div class="buyer fl">
                             <dl>
                                 <dt>买家印象：</dt>
-                                <dd><span>屏幕大</span><em>(1953)</em></dd>
-                                <dd><span>外观漂亮</span><em>(786)</em></dd>
-                                <dd><span>系统流畅</span><em>(1091)</em></dd>
-                                <dd><span>功能齐全</span><em>(1109)</em></dd>
-                                <dd><span>反应快</span><em>(659)</em></dd>
-                                <dd><span>分辨率高</span><em>(824)</em></dd>
                             </dl>
                         </div>
                     </div>
@@ -315,17 +310,7 @@
                     <div id="comment_container"></div>
 
                     <!-- 分页信息 start -->
-                    <div class="page mt20">
-                        <a href="">首页</a>
-                        <a href="">上一页</a>
-                        <a href="">1</a>
-                        <a href="">2</a>
-                        <a href="" class="cur">3</a>
-                        <a href="">4</a>
-                        <a href="">5</a>
-                        <a href="">下一页</a>
-                        <a href="">尾页</a>
-                    </div>
+                    <div class="page mt20"></div>
                     <!-- 分页信息 end -->
 
                     <!--  评论表单 start-->
@@ -345,6 +330,10 @@
                                 <li>
                                     <label for="">评价内容：</label>
                                     <textarea name="content" id="" cols="" rows=""></textarea>
+                                </li>
+                                <li id="mjyx">
+                                    <label for="">买家印象：</label>
+                                    <input type="text" name="yx_name" size="60" />多个印象用，号隔开
                                 </li>
                                 <li>
                                     <label for="">&nbsp;</label>
@@ -530,6 +519,105 @@
             }
         });
     });
+
+   /**********************ajax评论的缓存************************/
+   var cache = [];//每页评论的缓存：格式：[[页码，评论数据，翻页],[3，'xxxxxxx','xx']]  缓存在客户端浏览器的内存中了
+    //获取某一页缓存
+    function getCache(page) {
+        for(var i=0;i<cache.length;i++){
+            if(cache[i][0] == page)
+                return cache[i];
+        }
+        return false;
+    }
+
+   /**********************ajax获取某一页的评论************************/
+   function ajaxGetpl(page) {
+       var c = getCache(page);
+       if(c !== false){
+           $("#comment_container").html(c[1]);
+           $('.page').html(c[2]);
+           return;
+       }
+       $.ajax({
+           url:"<?php echo U('Comment/ajaxGetpl?goods_id='.$info['id'],'',FALSE);?>/p/"+page,
+           // data:"",
+           dataType:"json",
+           type:"GET",
+           success:function (dataMsg) {
+               //如果是第一页的评论,那么服务器会返回好评率和印象
+               if(page ==1){
+                    //放置好评率
+                   $(".hao").html(dataMsg.hao);
+                   $("#hao_width").css("width",dataMsg.hao+"px");
+
+                   $(".zhong").html(dataMsg.zhong);
+                   $("#zhong_width").css("width",dataMsg.zhong+"px");
+
+                   $(".cha").html(dataMsg.cha);
+                   $("#cha_width").css("width",dataMsg.cha+"px");
+
+                   //循环印象的数据，1.拼成复选框(给表单)2.拼成dd标签（给右侧展示）
+                   var yxhtml = "";
+                   var yxChkHtml = "";//复选框
+                   $(dataMsg.yxData).each(function (k,v) {
+                       yxhtml += '<dd><span>'+v.yx_name+'</span><em>('+v.yx_count+')</em></dd>';
+                       yxChkHtml += '<input type="checkbox" name="yx_id[]" value="'+v.id+'"/>'+v.yx_name+'';
+                   });
+                   //console.log(dataMsg.yxData);
+                   $(".buyer dl").append(yxhtml);
+                   //把复选框放到买家印象前面
+                   if(yxChkHtml != "")
+                       $("#mjyx").before('<li><label for="">选择印象：</label>'+yxChkHtml+'</li>');
+               }
+
+               //循环每个评论拼出HTML字符串放到页面中
+               var html = "";
+               $(dataMsg.data).each(function (k,v) {
+                   html += '                    <div class="comment_items mt10">\n' +
+                       '                        <div class="user_pic">\n' +
+                       '                            <dl>\n' +
+                       '                                <dt><a href=""><img src="'+v.face+'" alt="" /></a></dt>\n' +
+                       '                                <dd><a href="">'+v.username+'</a></dd>\n' +
+                       '                            </dl>\n' +
+                       '                        </div>\n' +
+                       '                        <div class="item">\n' +
+                       '                            <div class="title">\n' +
+                       '                                <span>'+v.addtime+'</span>\n' +
+                       '                                <strong class="star star'+v.star+'"></strong> <!-- star5表示5星级 start4表示4星级，以此类推 -->\n' +
+                       '                            </div>\n' +
+                       '                            <div class="comment_content">\n' +v.content+
+                       '                            </div>\n' +
+                       '                            <div class="btns">\n' +
+                       '                                <a href="" class="reply">回复('+v.reply_count+')</a>\n' +
+                       '                                <a href="" class="useful">有用('+v.click_count+')</a>\n' +
+                       '                            </div>\n' +
+                       '                        </div>\n' +
+                       '                        <div class="cornor"></div>\n' +
+                       '                    </div>';
+               });
+               //放到页面中覆盖原数据
+               $("#comment_container").html(html);//覆盖
+
+               /************根据总得页数，拼出翻页字符串************/
+               var pageString = "";
+               for(var i=1;i<=dataMsg.pageCount;i++){
+                   if(page == i)
+                       var cls = 'class="cur"';
+                   else
+                       var cls = '';
+                   pageString += '<a '+cls+' onclick="ajaxGetpl('+i+');" href="javascript:void(0);">'+i+'</a>';
+               }
+               //放到页面
+                $('.page').html(pageString);
+
+               //放到缓存中
+               cache.push([page,html,pageString]);
+           }
+       });
+   }
+   //取第一页的评论
+   ajaxGetpl(1);
 </script>
     <div id="login_dialog" class="none" title="登录表单">
         <form id="login_form">

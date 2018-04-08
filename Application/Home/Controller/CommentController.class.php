@@ -2,6 +2,14 @@
 namespace Home\Controller;
 use Think\Controller;
 class CommentController extends Controller {
+    //获取评论数据和AJAX翻页
+    public function ajaxGetPl(){
+        $goodsId = I('get.goods_id');
+        $model = D('Admin/Comment');
+        $data = $model->search($goodsId,5);
+        echo json_encode($data);
+    }
+
     //AJAX发表评论
    public function add(){
        if(IS_POST){
