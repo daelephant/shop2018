@@ -40,6 +40,7 @@ class SearchController extends NavController {
         //第一个参数：要查询的关键字
         //第一个参数：aphinx中索引的名字，默认是*，所有的索引
         $ret = $sph->Query($key,'goods');
+        dump($ret);
         //提取出商品的id
         $ids = array_keys($ret['matches']);
         $gModel = D('Goods');
