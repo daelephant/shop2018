@@ -113,7 +113,7 @@ class CommentModel extends Model
 
         //取数据
         $data = $this->alias('a')
-            ->field('a.content,a.addtime,a.star,a.click_count,b.face,b.username,COUNT(c.id) reply_count')
+            ->field('a.id,a.content,a.addtime,a.star,a.click_count,b.face,b.username,COUNT(c.id) reply_count')
             ->join('LEFT JOIN __MEMBER__ b ON a.member_id=b.id
                     LEFT JOIN __COMMENT_REPLY__ c ON a.id=c.comment_id')
             ->where($where)
@@ -122,6 +122,20 @@ class CommentModel extends Model
             ->group('a.id')
             ->select();
 
+        //循环每个评论再取回复
+        $crModel = D('comment_reply');
+        foreach ($data as $k=>&$v){
+           $v['reply'] = $crModel->alias('a')
+                ->field('a.*,b.username,b.face')
+                ->join('LEFT JOIN __MEMBER__ b ON a.member_id=b.id')
+                ->where(array(
+                    'a.comment_id' => $v['id'],
+                ))
+                ->order('a.id ASC')
+                ->select();
+        }
+
+
         return array(
             'data' => $data,
             'pageCount' => $pageCount,
@@ -129,6 +143,7 @@ class CommentModel extends Model
             'zhong' => $zhong,
             'cha' => $cha,
             'yxData' => $yxData,
+            'memberId' => (int)session('m_id'),
         );
     }
 }

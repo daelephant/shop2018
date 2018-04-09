@@ -386,12 +386,17 @@
 
 <!--引入帮助文件-->
 <include file="Common/help" />
-
+<style>
+    .reply_container{margin-top: 25px;}
+    .reply_container li{margin-heignt: 70px;margin: 3px;background: #DAF1DA;padding: 5px;}
+    .reply_container li p{margin-top: 10px;}
+    .reply_container img{float: right;}
+</style>
 <!--导入jquUi中的dialog插件-->
 <link href="__PUBLIC__/jquery-ui-1.9.2.custom/css/blitzer/jquery-ui-1.9.2.custom.css" rel="stylesheet">
 <script src="__PUBLIC__/jquery-ui-1.9.2.custom/js/jquery-ui-1.9.2.custom.js"></script>
-
 <script>
+    var is_login = 0;//是否登录
 
     var viewPath = '<?php echo $viewPath; ?>';
     console.log(viewPath);
@@ -436,45 +441,16 @@
             type:"POST",
             success:function (dataMsg) {
                 //alert(dataMsg.info);
-                if(dataMsg.info == '必须先登录'){
-                     //alert(dataMsg.info);
-                    //配置对话框
-                    $("#login_dialog").dialog({
-                        resizable : false,
-                        position : {at:"center"},
-                        modal : true,
-                        autoOpen : false,
-                        width : 400,
-                        buttons : [
-                            {
-                                text:"登录",
-                                //AJAX提交表单
-                                click:function () {
-                                    $.ajax({
-                                        url:"<?php echo U('Member/login');?>",
-                                        data:$("#login_form").serialize(),
-                                        dataType:"json",
-                                        type:"POST",
-                                        success:function (dataMsg1) {
-                                            if(dataMsg1.status ==1)
-                                                $("#login_dialog").dialog("close");
-                                            else
-                                                alert(dataMsg1.info);
-                                        }
-                                    });
-                                }
-                            },
-                            {
-                                text:"取消",
-                                click:function () {
-                                    $(this).dialog("close");
-                                }
-                            }
-                        ]
-                    });
-                    //显示对话框
-                    $("#login_dialog").dialog("open");
+                if(dataMsg.status == 0){
+                    //未登录就显示弹出窗口
+                    if(dataMsg.info == '必须先登录'){
+                        //把配置对话框写到外面公用
+                        //显示对话框
+                        $("#login_dialog").dialog("open");
 
+                    }else {
+                        alert(dataMsg.info);
+                    }
                 }
                 else {
                     //清空表单数据
@@ -495,9 +471,11 @@
                         '                            <div class="comment_content">\n' +dataMsg.info.content+
                         '                            </div>\n' +
                         '                            <div class="btns">\n' +
-                        '                                <a href="" class="reply">回复(0)</a>\n' +
+                        '                                <a href="javascript:void(0);" onclick="do_reply(this,'+dataMsg.info.id+');" class="reply">回复(0)</a>\n' +
                         '                                <a href="" class="useful">有用(0)</a>\n' +
                         '                            </div>\n' +
+                        '                            <div class="replay_form">\n' +
+                        '                            </div><ul class="reply_container"><li><img src="\'+dataMsg.info.face+\'" width="50"/> \'+dataMsg.info.username+\'【\'+dataMsg.info.addtime+\'】回复：<p>\'+dataMsg.info.content+\'</p></li></ul>\n' +
                         '                        </div>\n' +
                         '                        <div class="cornor"></div>\n' +
                         '                    </div>';
@@ -545,6 +523,7 @@
            dataType:"json",
            type:"GET",
            success:function (dataMsg) {
+               is_login = dataMsg.memberId;  // 把当前会员ID传给全局变量,这样每次刷新页面后，都会赋值给全局变量is_login.只要is_login不为零即可满足需求
                //如果是第一页的评论,那么服务器会返回好评率和印象
                if(page ==1){
                     //放置好评率
@@ -573,7 +552,14 @@
 
                //循环每个评论拼出HTML字符串放到页面中
                var html = "";
+               //循环每个评论
                $(dataMsg.data).each(function (k,v) {
+                   //拼每个评论的回复
+                   var hfhtml = "";
+                   $(v.reply).each(function (k1,v1) {
+                       hfhtml += '<li><img src="'+v1.face+'" width="50"/> '+v1.username+'【'+v1.addtime+'】回复：<p>'+v1.content+'</p></li>';
+                   });
+
                    html += '                    <div class="comment_items mt10">\n' +
                        '                        <div class="user_pic">\n' +
                        '                            <dl>\n' +
@@ -589,9 +575,12 @@
                        '                            <div class="comment_content">\n' +v.content+
                        '                            </div>\n' +
                        '                            <div class="btns">\n' +
-                       '                                <a href="" class="reply">回复('+v.reply_count+')</a>\n' +
+                       '                                <a href="javascript:void(0);" onclick="do_reply(this,'+v.id+');" class="reply">回复('+v.reply_count+')</a>\n' +
                        '                                <a href="" class="useful">有用('+v.click_count+')</a>\n' +
                        '                            </div>\n' +
+                       '                            <div class="replay_form">\n' +
+                       '                            </div>\n' +
+                       '                            <ul class="reply_container">'+hfhtml+'</ul>\n' +
                        '                        </div>\n' +
                        '                        <div class="cornor"></div>\n' +
                        '                    </div>';
@@ -618,7 +607,63 @@
    }
    //取第一页的评论
    ajaxGetpl(1);
-</script>
+   /********************回复*******************************/
+   function do_reply(btn,commentId) {
+
+       //先选中按钮所在的div
+       var div = $(btn).parent().next("div");
+       /********************在回复按钮下面构造一个回复的表单*******************************/
+       /********************clear:清除浮动，both  :  不允许有浮动对象*******************************/
+       var replyForm = '<br /><hr style="clear:both;margin-top: 15px;"/><form><input type="hidden" name="comment_id" value="'+commentId+'"/><textarea name="content" style="width: 100%;" rows="6"></textarea><br /><input type="button" onclick="post_reply(this);" value="回复"/><input onclick="close_reply(this);" type="button" value="取消"/></form>';
+       //放到按钮后面
+       // div.after(replyForm);
+       div.html(replyForm);
+       //判断有没有登录
+       // alert(is_login);
+       if(is_login <= 0){
+           alert(is_login);
+           //把配置对话框写到外面公用
+           //显示对话框
+           $("#login_dialog").dialog("open");
+       }
+   }
+   //ajax提交回复
+    function post_reply(btn) {
+        var formData = $(btn).parent().serialize();
+        //alert(formData);
+        $.ajax({
+            url:"<?php echo U('Comment/reply');?>",
+            data:formData,
+            dataType:"json",
+            type:"POST",
+            success:function (dataMsg) {
+                if(dataMsg.status == 1){
+                    // alert('回复成功！');
+                    //把回复的内容直接显示在界面中！！
+                    var html = '<li><img src="'+dataMsg.info.face+'" width="50"/> '+dataMsg.info.username+'【'+dataMsg.info.addtime+'】回复：<p>'+dataMsg.info.content+'</p></li>';
+                    $(btn).parent().parent().next("ul").append(html);
+                    //把表单去掉
+                    $(btn).parent().parent().html('');
+                }else {
+                    //未登录就显示弹出窗口
+                    if(dataMsg.info == '必须先登录'){
+                        //把配置对话框写到外面公用
+                        //显示对话框
+                        $("#login_dialog").dialog("open");
+
+                    }else {
+                        alert(dataMsg.info);
+                    }
+                }
+            }
+        });
+    }
+   //关闭回复按钮
+    function close_reply(btn) {
+        var div = $(btn).parent().parent();
+        div.html('');
+    }
+    </script>
     <div id="login_dialog" class="none" title="登录表单">
         <form id="login_form">
         <ul>
@@ -638,3 +683,41 @@
         </ul>
         </form>
         </div>
+<script>
+        //配置对话框
+        $("#login_dialog").dialog({
+            resizable : false,
+            position : {at:"center"},
+            modal : true,
+            autoOpen : false,
+            width : 400,
+            buttons : [
+                {
+                    text:"登录",
+                    //AJAX提交表单
+                    click:function () {
+                        $.ajax({
+                            url:"<?php echo U('Member/login');?>",
+                            data:$("#login_form").serialize(),
+                            dataType:"json",
+                            type:"POST",
+                            success:function (dataMsg1) {
+                                if(dataMsg1.status ==1){
+                                    is_login = 1;
+                                    $("#login_dialog").dialog("close");
+                                }
+                                else
+                                    alert(dataMsg1.info);
+                            }
+                        });
+                    }
+                },
+                {
+                    text:"取消",
+                    click:function () {
+                        $(this).dialog("close");
+                    }
+                }
+            ]
+        });
+</script>

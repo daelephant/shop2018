@@ -15,8 +15,9 @@ class CommentController extends Controller {
        if(IS_POST){
             $model = D('Admin/Comment');
             if($model->create(I('post.'),1)){
-                if($model->add()){
+                if($id=$model->add()){
                     $this->success(array(
+                        'id' => $id,
                         'face' => session('face'),
                         'username' => session('m_username'),
                         'addtime' => date('Y-m-d H:i:s'),
@@ -29,5 +30,25 @@ class CommentController extends Controller {
             $this->error($model->getError(),'',TRUE);
        }
    }
+
+    //AJAX回复
+    public function reply(){
+        //dump($_POST);exit;
+        file_put_contents('post_data.txt','reply');
+        if(IS_POST){
+            $model = D('Admin/CommentReply');
+            if($model->create(I('post.'),1)){
+                if($model->add()){
+                    $this->success(array(
+                        'face' => session('face'),
+                        'username' => session('m_username'),
+                        'addtime' => date('Y-m-d H:i:s'),
+                        'content' => I('post.content'),
+                    ));//因为是AJAX处理，所以这里设置成返回TRUE
+                }
+            }
+            $this->error($model->getError());
+        }
+    }
 
 }
