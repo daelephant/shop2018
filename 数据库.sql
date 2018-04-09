@@ -771,3 +771,9 @@ INSERT INTO `p2018_yinxiang` (`id`, `goods_id`, `yx_name`, `yx_count`) VALUES
 (29, 4, '45', 1);
 
 
+drop table if exists p2018_sphinx_id;
+create table p2018_sphinx_id
+(
+	id mediumint unsigned not null default '0' comment '已经索引好索引的最后一件商品的ID'
+)engine=InnoDB default charset=utf8 comment 'sphinx';
+INSERT INTO p2018_sphinx_id VALUES(0);
