@@ -216,6 +216,15 @@
     });
 </script>
 
+<!--测试jsonp-->
+<script>
+    function abc(data) {
+       console.log(data.name + data.age);
+    }
+</script>
+<script src="http://localhost/jsonp/ele.php"></script>
+<!--测试jsonp-->
+
 <!-- 综合区域 start 包括幻灯展示，商城快报 -->
 <div class="colligate w1210 bc mt10">
     <!-- 幻灯区域 start -->

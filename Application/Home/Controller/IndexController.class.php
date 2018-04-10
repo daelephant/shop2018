@@ -5,7 +5,13 @@ class IndexController extends NavController {
     public function ajaxGetMemberPrice(){
         $goodsId = I('get.goods_id');
         $gModel = D('Admin/Goods');
-        echo $gModel->getMemberPrice($goodsId);
+        $rec = $gModel->getMemberPrice($goodsId);
+        if($_GET['type'] == 'jsonp'){
+            $str = json_encode($rec);
+            echo "ele($str)";
+        }else{
+            echo $rec;
+        }
 
     }
     //处理浏览历史
