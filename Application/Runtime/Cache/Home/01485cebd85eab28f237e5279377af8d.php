@@ -443,7 +443,7 @@
 						<dt>品牌：</dt>
 						<dd class="cur"><a href="">不限</a></dd>
 						<?php foreach($searchFilter['brand'] as $k=>$v):?>
-						<dd><a href="/index.php/Home/Search/key_search/key/%E8%BD%AF/brand_id/<?php echo $v['brand_id']; ?>-<?php echo $v['brand_name']; ?>"><?php echo $v['brand_name']; ?></a></dd>
+						<dd><a href="/index.php/Home/Search/key_search/key/%E4%BA%A4%E6%B5%81/brand_id/<?php echo $v['brand_id']; ?>-<?php echo $v['brand_name']; ?>"><?php echo $v['brand_name']; ?></a></dd>
 						<?php endforeach;?>
 					</dl>
 					<?php endif;?>
@@ -452,7 +452,7 @@
 						<dt>价格：</dt>
 						<dd class="cur"><a href="">不限</a></dd>
 						<?php foreach($searchFilter['price'] as $k=>$v):?>
-						<dd><a href="/index.php/Home/Search/key_search/key/%E8%BD%AF/price/<?php echo $v;?>"><?php echo $v; ?></a></dd>
+						<dd><a href="/index.php/Home/Search/key_search/key/%E4%BA%A4%E6%B5%81/price/<?php echo $v;?>"><?php echo $v; ?></a></dd>
 						<?php endforeach;?>
 					</dl>
 					<?php endif;?>
@@ -462,7 +462,7 @@
 						<dt><?php echo $k; ?>：</dt>
 						<dd class="cur"><a href="">不限</a></dd>
 						<?php foreach($v as $k1=>$v1):?>
-						<dd><a href="/index.php/Home/Search/key_search/key/%E8%BD%AF/<?php echo $attrUrlName; ?>/<?php echo $v1['attr_value']; ?>-<?php echo $k; ?>"><?php echo $v1['attr_value']; ?></a></dd>
+						<dd><a href="/index.php/Home/Search/key_search/key/%E4%BA%A4%E6%B5%81/<?php echo $attrUrlName; ?>/<?php echo $v1['attr_value']; ?>-<?php echo $k; ?>"><?php echo $v1['attr_value']; ?></a></dd>
 						<?php endforeach;?>
 					</dl>
 					<dd><a href=""><?php echo $v['brand_name']; ?></a></dd>

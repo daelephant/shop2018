@@ -37,6 +37,8 @@ class SearchController extends NavController {
         require('./sphinxapi.php');
         $sph = new \SphinxClient();
         $sph->SetServer('localhost',9312);
+        //在sphinx搜索只取出is_updated=0的，过滤其他
+        $sph->SetFilter('is_updated',array(0));
         //第一个参数：要查询的关键字
         //第一个参数：aphinx中索引的名字，默认是*，所有的索引
         $ret = $sph->Query($key,'goods');
