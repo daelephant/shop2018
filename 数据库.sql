@@ -297,6 +297,7 @@ INSERT INTO `p2018_attribute` (`id`, `attr_name`, `attr_type`, `attr_option_valu
 -- --------------------------------------------------------
 ALTER TABLE  `p2018_goods` ADD  `type_id` MEDIUMINT UNSIGNED NOT NULL DEFAULT  '0' COMMENT  '类型Id'
 ALTER TABLE  `p2018_goods` ADD  `is_updated` tinyint unsigned not null default '0' comment '是否被修改'
+ALTER TABLE  `p2018_member` ADD  `openid` char(32)  not null default '' comment 'openid'
 
 
 
