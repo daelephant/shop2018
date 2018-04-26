@@ -78,8 +78,9 @@ if(!IS_CLI) {
     if(!defined('_PHP_FILE_')) {
         if(IS_CGI) {
             //CGI/FASTCGI模式下
-            $_temp  = explode('.php',$_SERVER['PHP_SELF']);
-            define('_PHP_FILE_',    rtrim(str_replace($_SERVER['HTTP_HOST'],'',$_temp[0].'.php'),'/'));
+            //$_temp  = explode('.php',$_SERVER['PHP_SELF']);
+            //define('_PHP_FILE_',    rtrim(str_replace($_SERVER['HTTP_HOST'],'',$_temp[0].'.php'),'/'));
+            define('_PHP_FILE_',    rtrim($_SERVER['SCRIPT_NAME'],'/'));
         }else {
             define('_PHP_FILE_',    rtrim($_SERVER['SCRIPT_NAME'],'/'));
         }

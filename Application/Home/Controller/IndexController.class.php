@@ -46,6 +46,7 @@ class IndexController extends NavController {
 
     //首页
     public function index(){
+        echo U('Cart/lst');
         //echo 'abbbbbbbbbbbbbbbbbabbbbbbbbbbbbb';
         //验证高并发雪崩问题
         $file = uniqid();//基于以微秒计的当前时间,以字符串形式返回唯一标识符。
