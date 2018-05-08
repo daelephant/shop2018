@@ -16,6 +16,8 @@
     <!--引入公共的js-->
     <script type="text/javascript" src="/Public/Home/js/jquery-1.8.3.min.js"></script>
     <script type="text/javascript" src="/Public/Home/js/header.js"></script>
+
+    <!--<meta property="qc:admins" content="5277250600316116741516636"/>-->
 </head>
 <body>
 <!-- 顶部导航 start -->

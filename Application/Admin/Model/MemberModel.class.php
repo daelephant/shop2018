@@ -4,7 +4,7 @@ use Think\Model;
 class MemberModel extends Model
 {
     //添加和修改会员时使用的表单验证规则
-	protected $insertFields = array('username','password','cpassword','chkcode','must_click');
+	protected $insertFields = array('username','password','cpassword','chkcode','must_click','user_sex');
 	protected $updateFields = array('id','username','password','cpassword');
 	//注册时用到
 	protected $_validate = array(

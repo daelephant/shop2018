@@ -16,8 +16,6 @@
     <!--引入公共的js-->
     <script type="text/javascript" src="/Public/Home/js/jquery-1.8.3.min.js"></script>
     <script type="text/javascript" src="/Public/Home/js/header.js"></script>
-
-    <!--<meta property="qc:admins" content="5277250600316116741516636"/>-->
 </head>
 <body>
 <!-- 顶部导航 start -->
@@ -43,19 +41,8 @@
 <div style="clear:both;"></div>
 
 
-<script type="text/javascript">
-    var childWindow;
-    function toQzoneLogin()
-    {
-        childWindow = window.open("/Connectqq/example/oauth/index.php","TencentLogin","width=450,height=320,menubar=0,scrollbars=1, resizable=1,status=1,titlebar=0,toolbar=0,location=1");
-    }
-
-    function closeChildWindow()
-    {
-        childWindow.close();
-    }
-</script>
 <link rel="stylesheet" href="/Public/Home/style/login.css" type="text/css">
+
 	<!-- 页面头部 start -->
 	<div class="header w990 bc mt15">
 		<div class="logo w990">
@@ -65,33 +52,40 @@
 	<!-- 页面头部 end -->
 	
 	<!-- 登录主体部分start -->
-	<div class="login w990 bc mt10">
+	<div class="login w990 bc mt10 regist">
 		<div class="login_hd">
-			<h2>用户登录</h2>
+			<h2>用户注册</h2>
 			<b></b>
 		</div>
 		<div class="login_bd">
 			<div class="login_form fl">
-				<form action="/index.php/Home/Member/login.html" method="post">
+				<form action="/index.php/Home/Member/regist.html" method="post">
 					<ul>
 						<li>
 							<label for="">用户名：</label>
 							<input type="text" class="txt" name="username" />
+							<p>3-20位字符，可由中文、字母、数字和下划线组成</p>
 						</li>
 						<li>
 							<label for="">密码：</label>
 							<input type="password" class="txt" name="password" />
-							<a href="">忘记密码?</a>
+							<p>6-20位字符，可使用字母、数字和符号的组合，不建议使用纯数字、纯字母、纯符号</p>
+						</li>
+						<li>
+							<label for="">确认密码：</label>
+							<input type="password" class="txt" name="cpassword" />
+							<p> <span>请再次输入密码</p>
 						</li>
 						<li class="checkcode">
 							<label for="">验证码：</label>
 							<input type="text"  name="chkcode" />
 							<img style="cursor: pointer;" onclick="this.src='<?php echo U('chkcode'); ?>#'+Math.random();" src="<?php echo U('chkcode'); ?>" />
+
 							<span>看不清？<a href="">换一张</a></span>
 						</li>
 						<li>
-							<label for="">&nbsp;</label>
-							<input type="checkbox" class="chb"  /> 保存登录信息
+							<label for="">&nbsp;&nbsp;</label>
+							<input type="checkbox" name="must_click" class="chb" checked="checked" value="1" /> 我已阅读并同意《用户注册协议》
 						</li>
 						<li>
 							<label for="">&nbsp;</label>
@@ -100,26 +94,13 @@
 					</ul>
 				</form>
 
-				<div class="coagent mt15">
-					<dl>
-						<dt>使用合作网站登录商城：</dt>
-						<!--<dd class="qq"><a href="#" onclick='toLogin()'><span></span>QQ</a></dd>-->
-						<dd class="qq"><a onclick='toQzoneLogin()' href="javascript:void(0);"><span></span>QQ</a></dd>
-						<dd class="weibo"><a href=""><span></span>新浪微博</a></dd>
-						<dd class="yi"><a href=""><span></span>网易</a></dd>
-						<dd class="renren"><a href=""><span></span>人人</a></dd>
-						<dd class="qihu"><a href=""><span></span>奇虎360</a></dd>
-						<dd class=""><a href=""><span></span>百度</a></dd>
-						<dd class="douban"><a href=""><span></span>豆瓣</a></dd>
-					</dl>
-				</div>
+				
 			</div>
 			
-			<div class="guide fl">
-				<h3>还不是商城用户</h3>
-				<p>现在免费注册成为商城用户，便能立刻享受便宜又放心的购物乐趣，心动不如行动，赶紧加入吧!</p>
-
-				<a href="regist.html" class="reg_btn">免费注册 >></a>
+			<div class="mobile fl">
+				<h3>手机快速注册</h3>			
+				<p>中国大陆手机用户，编辑短信 “<strong>XX</strong>”发送到：</p>
+				<p><strong>1069099988</strong></p>
 			</div>
 
 		</div>

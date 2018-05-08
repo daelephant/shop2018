@@ -1,4 +1,16 @@
 <layout name="Common/layout" />
+<script type="text/javascript">
+    var childWindow;
+    function toQzoneLogin()
+    {
+        childWindow = window.open("/Connectqq/example/oauth/index.php","TencentLogin","width=450,height=320,menubar=0,scrollbars=1, resizable=1,status=1,titlebar=0,toolbar=0,location=1");
+    }
+
+    function closeChildWindow()
+    {
+        childWindow.close();
+    }
+</script>
 <link rel="stylesheet" href="__PUBLIC__/Home/style/login.css" type="text/css">
 	<!-- 页面头部 start -->
 	<div class="header w990 bc mt15">
@@ -47,7 +59,8 @@
 				<div class="coagent mt15">
 					<dl>
 						<dt>使用合作网站登录商城：</dt>
-						<dd class="qq"><a href=""><span></span>QQ</a></dd>
+						<!--<dd class="qq"><a href="#" onclick='toLogin()'><span></span>QQ</a></dd>-->
+						<dd class="qq"><a onclick='toQzoneLogin()' href="javascript:void(0);"><span></span>QQ</a></dd>
 						<dd class="weibo"><a href=""><span></span>新浪微博</a></dd>
 						<dd class="yi"><a href=""><span></span>网易</a></dd>
 						<dd class="renren"><a href=""><span></span>人人</a></dd>

@@ -1,0 +1,2 @@
+<?php die('forbidden'); ?>
+{"appid":"101476236","appkey":"e1163db3cbdcda060b4dcadc0a7f1312","callback":"http://shop.vipelephant.cn/index.php/Home/User/callback","scope":"get_user_info","errorReport":true,"storageType":"file","host":"localhost","user":"root","password":"root","database":"test"}
